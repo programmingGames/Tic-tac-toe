@@ -82,6 +82,7 @@ public class TTTClient {
         else{
             game.allActiveUser();
             game.sendMatchRequest();
+            game.waitOpponent();
             game.cardChoice(userId, game.getEnimyId());
         }
         //     // onde esta 1 futuramente tera o id do oponente

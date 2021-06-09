@@ -9,9 +9,12 @@ public class Game {
     private int player = 1; 
     private int userId = -1;
     private int userBoardReference = -1;
+    private int opponnentBoardReference =-1;
     private String matchInfo[] = {"","",""};
+    private int matchId = -1; // 
     private String enimyInfo[] = {"", ""};// to store the current enimy info 
-    private boolean multiPlayer = false; // is the user wants to play whit pc or whit someone
+    private int multiPlayer = 0; // is the user wants to play whit pc or whit someone (pc = 1, someone=2)
+    private boolean iRequest = false;
     private int level = 1; // the difficulty by playing with the computer
     private int myCard; // myCard = 1 -> means that the user will use "X",
                         //  and myCard = 2 means that the player will use "O"
@@ -27,24 +30,40 @@ public class Game {
         return Integer.parseInt(enimyInfo[0]);
     }
 
+    // waiting for opponent to enter in the match
+    public void waitOpponent() throws RemoteException{
+        boolean response=false;
+        System.out.println("[STATUS] waiting for opponnent");
+        do{
+            response = ttt.waitingOpponent(matchId);
+
+        }while(!response);
+        iRequest = true;
+    }
     // create a game request
     public void sendMatchRequest() throws RemoteException{
-        boolean request =  ttt.createRequest(userId, Integer.parseInt(enimyInfo[0]));
-        if(request){
+        int matchId =  ttt.createRequest(userId, Integer.parseInt(enimyInfo[0]));
+        if(matchId>0){
             System.out.println("[UPDATE] Request created");
+            iRequest = true;
         }
         else{
             System.out.println("[ERROR] Request already exist");
         }
     }
 
+    public void setMyCard() throws RemoteException{
+        player = ttt.myCard(matchId, iRequest);
+    }
     // to get all the request the user have
     public void getRequest() throws RemoteException{
-        System.out.println(ttt.getRequests(userId));
+        
         String requests = ttt.getRequests(userId);
+        System.out.println(requests);
         String allRequest[] = requests.split("\n");
+        
         if (allRequest.length>0){
-            String matchInfo[] = {"","", ""};
+            String requestInfo[] = {"","", ""};
             int nrActiveUsers = allRequest.length, i=1, choice = -1;
 
             do{
@@ -52,8 +71,8 @@ public class Game {
                 System.out.println("All match Requests for you: \n");
                 // to display all the user on the screen to be chosen the enimy
                 for (String request: allRequest){
-                    matchInfo = request.split(" ");
-                    System.out.println("\t < "+i+" > "+matchInfo[0]);
+                    requestInfo = request.split(" ");
+                    System.out.println("\t < "+i+" > "+requestInfo[0]);
                     i++;
                 }
                 System.out.print("\n  Your choice: ");
@@ -62,13 +81,15 @@ public class Game {
                     System.out.println("[ERROR] Invalide choice.");
 
             }while(choice>0&&choice>nrActiveUsers);
-            enimyInfo = matchInfo[choice-1].split(" ");// to take the enimy chosen.
-            System.out.println("\nEnimy chosen: "+enimyInfo[1]+"\n");
+            matchInfo = matchInfo[choice-1].split(" ");// to take the enimy chosen.
+            opponnentBoardReference = Integer.parseInt(matchInfo[4]);
+            multiPlayer=2;
+            iRequest = false;
+            System.out.println("\nEnimy chosen: "+matchInfo[0]+"\n");
         }
         else{
             System.out.println("[NOTIFICATION] No request avalable for you.");
         }
-        
     }
 
     // to get all User info
@@ -192,7 +213,7 @@ public class Game {
                 }
             }
             else{
-                if (!multiPlayer){
+                if (multiPlayer==1){
                     possibleMoves = ttt.getPossibleMoves(userBoardReference);
                     play = computer.makePlay(level, possibleMoves);
                     System.out.println(play);
@@ -202,9 +223,10 @@ public class Game {
                         play = 0;
                     }
                 }
-                else{
+                // else if(multiPlayer==2){
 
-                }   
+                // }
+
             }
         } while (play > 9 || play < 0);
         return play;
