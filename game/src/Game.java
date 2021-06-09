@@ -9,6 +9,7 @@ public class Game {
     private int player = 1; 
     private int userId = -1;
     private int userBoardReference = -1;
+    private String matchInfo[] = {"","",""};
     private String enimyInfo[] = {"", ""};// to store the current enimy info 
     private boolean multiPlayer = false; // is the user wants to play whit pc or whit someone
     private int level = 1; // the difficulty by playing with the computer
@@ -24,6 +25,44 @@ public class Game {
     // return the eminy id
     public int getEnimyId(){
         return Integer.parseInt(enimyInfo[0]);
+    }
+
+    // create a game request
+    public boolean sendMatchRequest() throws RemoteException{
+        return ttt.createRequest(userId, Integer.parseInt(enimyInfo[0]));
+    }
+    
+    // to get all the request the user have
+    public void getRequest() throws RemoteException{
+        System.out.println(ttt.getRequests(userId));
+        String requests = ttt.getRequests(userId);
+        String allRequest[] = requests.split("\n");
+        if (allRequest.length>1){
+            String matchInfo[] = {"","", ""};
+            int nrActiveUsers = allRequest.length, i=1, choice = -1;
+
+            do{
+                i=1; // to restart the counter
+                System.out.println("All match Requests for you: \n");
+                // to display all the user on the screen to be chosen the enimy
+                for (String request: allRequest){
+                    matchInfo = request.split(" ");
+                    System.out.println("\t < "+i+" > "+matchInfo[1]);
+                    i++;
+                }
+                System.out.print("\n  Your choice: ");
+                choice = keyboardSc.nextInt();
+                if(choice>0&&choice>nrActiveUsers)
+                    System.out.println("[ERROR] Invalide choice.");
+
+            }while(choice>0&&choice>nrActiveUsers);
+            enimyInfo = matchInfo[choice-1].split(" ");// to take the enimy chosen.
+            System.out.println("\nEnimy chosen: "+enimyInfo[1]+"\n");
+        }
+        else{
+            System.out.println("[NOTIFICATION] No request avalable for you.");
+        }
+        
     }
 
     // to get all User info
@@ -64,17 +103,17 @@ public class Game {
         int choice = -1;
         do {
             System.out.println("Chose or card to play: \n");
-            System.out.println("\t< 1 > Play whit Computer\n\t< 2 > Play whit someone");
+            System.out.println("\t< 1 > Play whit Computer\n\t< 2 > Play whit someone\n\t< 3 > requests");
             System.out.print("\n  Choice: ");
             choice= keyboardSc.nextInt();
             if (choice == 1)
                 multiPlayer = false;
-            else if (choice == 2)
+            else if (choice == 2 || choice == 3)
                 multiPlayer = true;
             else
                 System.out.println("[ERROR] choice not valide");
             
-        }while(choice <1 && choice >2);
+        }while(choice <1 && choice >3);
         return choice;
     }
 
