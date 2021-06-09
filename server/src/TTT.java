@@ -11,12 +11,12 @@ import java.util.LinkedList;
 
 public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService{
     private LinkedList<TTT.play> Plays = new LinkedList<TTT.play>();
-    private int idBoard=1;
+    private int idBoard=1, idMatch=1;
     // list of all the board
     private LinkedList<TTT.Board> allBoard =new LinkedList<TTT.Board>();
+    private LinkedList<Match> matches = new LinkedList<Match>();
+
     private static final long serialVersionUID = 4L;
-
-
 
     protected TTT() throws IOException {
 /*TODO*/
@@ -159,7 +159,33 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
                 }
             }
         }
-        // return the id of the user if autenticated and -1 if not
+
+        // return the result of the request for game
+        public boolean createRequest(int idClient, int idOpponent) {
+            Match match = new Match(idClient, idOpponent, getUserValue(idClient, "boardReference"), idMatch);
+            matches.add(match);
+            idMatch++;
+            return true;
+        }
+        // this method wait for the opponent to return his choice
+        public boolean acceptRequest(int idClient, boolean response){
+            if (response){
+
+            }
+
+            return false;
+        }
+        // return all the request for the user
+        public String getRequests(int idClient){
+            String allRequests="";
+            for (Match one: matches){
+                if(one.getIdOpponent()==idClient){
+                    allRequests=allRequests+getUserInfo(one.getIdClient())+"\n";
+                }
+            }
+            return allRequests;
+        }
+    // return the id of the user if autenticated and -1 if not
         public int validateUser(String userName, String userPasswd) {
             // json file connection
             JSONParser jsonParser = new JSONParser();

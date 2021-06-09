@@ -1,3 +1,4 @@
+import javax.lang.model.element.NestingKind;
 import java.rmi.*;
 public interface TTTinterface extends Remote {
     String currentBoard(int boardReference) throws RemoteException;
@@ -14,4 +15,7 @@ public interface TTTinterface extends Remote {
     String allActiveUser() throws RemoteException;
     void initializingApp() throws  RemoteException;
     char[] getPossibleMoves(int boardReference) throws  RemoteException;
+    boolean createRequest(int idClient, int idOpponent) throws RemoteException;
+    boolean acceptRequest(int idClient, boolean response) throws RemoteException;
+    String getRequests(int idClient) throws RemoteException;
 }

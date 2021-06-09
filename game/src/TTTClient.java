@@ -74,11 +74,13 @@ public class TTTClient {
         
         // choise whit card to use
         choice = game.multiplayerChoice();
-        if (choice==1||choice ==0)
+        if (choice==1)
             game.cardChoice(userId, -1);
-        // else
-        //     g.allActiveUser();
-        //     g.cardChoice(userId, 1);// onde esta 1 futuramente tera o id do oponente
+        else{
+            game.allActiveUser();
+            game.cardChoice(userId, game.getEnimyId());
+        }
+        //     // onde esta 1 futuramente tera o id do oponente
     
     
         

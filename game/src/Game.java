@@ -21,6 +21,11 @@ public class Game {
         ttt.initializingApp();
     }
 
+    // return the eminy id
+    public int getEnimyId(){
+        return Integer.parseInt(enimyInfo[0]);
+    }
+
     // to get all User info
     public String getAllUserInfo(int id) throws RemoteException{
         return ttt.getUserInfo(id);
@@ -48,7 +53,7 @@ public class Game {
 
         }while(choice>0&&choice>nrActiveUsers);
         enimyInfo = allUser[choice-1].split(" ");// to take the enimy chosen.
-        System.out.println("Enimy chosen: "+enimyInfo[1]);
+        System.out.println("\nEnimy chosen: "+enimyInfo[1]+"\n");
 
         // System.out.println(allUser[0]);
         // System.out.println(ttt.allActiveUser());// where i'm going to wock in how the play chose his oponnent
@@ -151,6 +156,9 @@ public class Game {
                         ttt.removeLastPlay(userBoardReference);
                         play = 0;
                     }
+                }
+                else{
+
                 }   
             }
         } while (play > 9 || play < 0);
