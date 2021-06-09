@@ -28,16 +28,22 @@ public class Game {
     }
 
     // create a game request
-    public boolean sendMatchRequest() throws RemoteException{
-        return ttt.createRequest(userId, Integer.parseInt(enimyInfo[0]));
+    public void sendMatchRequest() throws RemoteException{
+        boolean request =  ttt.createRequest(userId, Integer.parseInt(enimyInfo[0]));
+        if(request){
+            System.out.println("[UPDATE] Request created");
+        }
+        else{
+            System.out.println("[ERROR] Request already exist");
+        }
     }
-    
+
     // to get all the request the user have
     public void getRequest() throws RemoteException{
         System.out.println(ttt.getRequests(userId));
         String requests = ttt.getRequests(userId);
         String allRequest[] = requests.split("\n");
-        if (allRequest.length>1){
+        if (allRequest.length>0){
             String matchInfo[] = {"","", ""};
             int nrActiveUsers = allRequest.length, i=1, choice = -1;
 
@@ -47,7 +53,7 @@ public class Game {
                 // to display all the user on the screen to be chosen the enimy
                 for (String request: allRequest){
                     matchInfo = request.split(" ");
-                    System.out.println("\t < "+i+" > "+matchInfo[1]);
+                    System.out.println("\t < "+i+" > "+matchInfo[0]);
                     i++;
                 }
                 System.out.print("\n  Your choice: ");
