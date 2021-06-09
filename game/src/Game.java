@@ -10,7 +10,7 @@ public class Game {
     private int userId = -1;
     private int userBoardReference = -1;
     private int opponnentBoardReference =-1;
-    private String matchInfo[] = {"","",""};
+    private String matchInfo[] = {"","","", "", "", ""};
     private int matchId = -1; // 
     private String enimyInfo[] = {"", ""};// to store the current enimy info 
     private int multiPlayer = 0; // is the user wants to play whit pc or whit someone (pc = 1, someone=2)
@@ -42,7 +42,7 @@ public class Game {
     }
     // create a game request
     public void sendMatchRequest() throws RemoteException{
-        int matchId =  ttt.createRequest(userId, Integer.parseInt(enimyInfo[0]));
+        matchId =  ttt.createRequest(userId, Integer.parseInt(enimyInfo[0]));
         if(matchId>0){
             System.out.println("[UPDATE] Request created");
             iRequest = true;
@@ -81,8 +81,8 @@ public class Game {
                     System.out.println("[ERROR] Invalide choice.");
 
             }while(choice>0&&choice>nrActiveUsers);
-            matchInfo = matchInfo[choice-1].split(" ");// to take the enimy chosen.
-            opponnentBoardReference = Integer.parseInt(matchInfo[4]);
+            matchInfo = allRequest[choice-1].split(" ");// to take the enimy chosen.
+            opponnentBoardReference = Integer.parseInt(matchInfo[1]);
             multiPlayer=2;
             iRequest = false;
             System.out.println("\nEnimy chosen: "+matchInfo[0]+"\n");
@@ -134,9 +134,9 @@ public class Game {
             System.out.print("\n  Choice: ");
             choice= keyboardSc.nextInt();
             if (choice == 1)
-                multiPlayer = false;
+                multiPlayer = 1;
             else if (choice == 2 || choice == 3)
-                multiPlayer = true;
+                multiPlayer = 2;
             else
                 System.out.println("[ERROR] choice not valide");
             
