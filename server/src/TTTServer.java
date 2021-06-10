@@ -5,7 +5,7 @@ import java.rmi.registry.Registry;
 //
 public class TTTServer {
     public static void main(String args[]) throws IOException {
-        int registryPort = 3002;
+        int registryPort = 3001;
         System.out.println("Main OK");
 
         try {

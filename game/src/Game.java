@@ -44,10 +44,10 @@ public class Game {
     public void sendMatchRequest() throws RemoteException{
         System.out.println(Integer.parseInt(enimyInfo[0]));
         char mycard; 
-        if(player==1)
-            mycard = 'X';
-        else
+        if(myCard==1)
             mycard = 'O';
+        else
+            mycard = 'X';
 
         matchId =  ttt.createRequest(userId, Integer.parseInt(enimyInfo[0]),mycard);
         if(matchId>0){
@@ -60,7 +60,7 @@ public class Game {
     }
 
     public void setMyCard() throws RemoteException{
-        player = ttt.myCard(matchId, iRequest);
+        myCard = ttt.myCard(matchId, iRequest);
     }
     // to get all the request the user have
     public void getRequest() throws RemoteException{
@@ -95,10 +95,13 @@ public class Game {
             char card = ttt.acceptRequest(true, matchId);
 
             // setting the player card
-            if(card == 'X')
-                player = 1;
+            System.out.println(card);
+            if(Character.compare(card, 'X') == 0)
+            {   myCard = 1;
+                System.out.println("ok");}
             else
-                player = 0;
+            {    System.out.println("ok2");
+                myCard = 2;}
 
             multiPlayer=2;
             iRequest = false;
@@ -181,34 +184,37 @@ public class Game {
     public void cardChoice(int idPlayer)  throws RemoteException{
         do {
             System.out.println("Chose or card to play: \n");
-            System.out.println("\t< 0 > O\n\t< 1 > X");
+            System.out.println("\t< 1 > O\n\t< 2 > X");
             System.out.println("  Choice: ");
             myCard = keyboardSc.nextInt();
-            if(myCard <0 && myCard >1)
+            if(myCard <1 && myCard >2)
                 System.out.println("[ERROR] choice not valide.");
-        }while(myCard <0 && myCard >1);
-        if(multiPlayer==2){
+        }while(myCard <1 && myCard >2);
+        // if(multiPlayer==2){
 
-        }
-        else
-            ttt.updateUser(idPlayer, "myCard",myCard); 
+        // }
+        // else
+        ttt.updateUser(idPlayer, "myCard",myCard); 
     }
 
     public int readPlay() throws RemoteException{
         
         int play=0;
-        char possibleMoves[] = {1, 2, 3, 4,5 ,6 , 7, 8, 9};
+        char possibleMoves[] = {1, 2, 3, 4, 5 ,6 , 7, 8, 9};
         do {
             System.out.printf("\n  Player %d,\n  Please enter the number of the square ,"+ "\n  where you want to place your %c (or 0 to refresh the board): \n\tYour choice is: ", player, (player == 1) ? 'X' : 'O');
-
             if (player==myCard){
+                
                 play = keyboardSc.nextInt();
                 System.out.println(play);
                 if(play == 11){
                     System.out.println("foi um 11");
                     ttt.removeLastPlay(userBoardReference);
+                    
                     play = 0;
                 }
+                if(multiPlayer == 2)
+                    ttt.makeMyPlay(matchId, play);
             }
             else{
                 if (multiPlayer==1){
@@ -222,14 +228,15 @@ public class Game {
                     }
                 }
                 else if(multiPlayer==2){
-                    // do{
-                    //     play = computer.makePlay(level, possibleMoves);
-                    // }while();
+                    System.out.println("\n[NOTIFICATION] Waiting player to play ");
+                    do{
+                        play = ttt.waitingPlayerToPlay(matchId, userId);
+                    }while(play == -1);
                     
                     System.out.println(play);
                     if(play == 11){
                         System.out.println("foi um 11");
-                        ttt.removeLastPlay(userBoardReference);
+                        ttt.removeLastPlay(opponnentBoardReference);
                         play = 0;
                     }
                 }
@@ -245,12 +252,26 @@ public class Game {
         do {
             player = ++player % 2;
             System.out.println("vez de: "+player);
-            if (matchId>0){
+            if (matchId > 0 && !iRequest){
                 do {
                     System.out.println(ttt.currentBoard(opponnentBoardReference));
                     play = readPlay();
                     if (play != 0) {
                         playAccepted = ttt.play( --play / 3, play % 3, player, opponnentBoardReference);
+                        if (!playAccepted)
+                            System.out.println("Invalid play! Try again.");
+    
+                    } else
+                        playAccepted = false;
+    
+                } while (!playAccepted);
+            }
+            else if (matchId > 0 && iRequest){
+                do {
+                    System.out.println(ttt.currentBoard(userBoardReference));
+                    play = readPlay();
+                    if (play != 0) {
+                        playAccepted = ttt.play( --play / 3, play % 3, player, userBoardReference);
                         if (!playAccepted)
                             System.out.println("Invalid play! Try again.");
     

@@ -75,19 +75,19 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
         public boolean play(int row, int column, int player, int boardReference) {
 
             if (!(row >=0 && row <3 && column >= 0 && column < 3)) {
-                //System.out.println("1");
+                System.out.println("1");
                 return false;
             }
             if (allBoard.get(boardReference - 1).board[row][column] > '9') {
-                //System.out.println("2");
+                System.out.println("2");
                 return false;
             }
             if (player != allBoard.get(boardReference - 1).nextPlayer) {
-                //System.out.println("3");
+                System.out.println("3");
                 return false;
             }
             if (allBoard.get(boardReference - 1).numPlays == 9) {
-                //System.out.println("4");
+                System.out.println("4");
                 return false;
             }
 
@@ -174,14 +174,14 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
                 return 0;
         }
 
-        // Method that will wait for the opponnent to play
-        public int waitingPlayerToPlay(int idMatch, int idPlayer) {
-            int play=-1;
+        public void makeMyPlay(int idMatch, int play){
+            matches.get(idMatch-1).setPlay(play);
+        }
 
-            if (matches.get(idMatch).isOpponnentPlay()){
-                play = matches.get(idMatch).getPlay();
-                matches.get(idMatch).setOpponnentPlay(false);
-            }
+        // Method that will wait for the opponent to play
+        public int waitingPlayerToPlay(int idMatch, int idPlayer) {
+            int play = matches.get(idMatch-1).getPlay();
+            matches.get(idMatch-1).setPlay(-1);
             return play;
         }
 
@@ -190,9 +190,8 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
             boolean exist=false;
             char cards[];
 
-            if (myCard == 'X'){
+            if (Character.compare(myCard,'X')==0)
                 cards = new char[]{'X', 'O'};
-            }
             else
                 cards = new char[]{'O', 'X'};
 
@@ -209,6 +208,7 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
                 requestId = idMatch;
                 idMatch++;
             }
+            System.out.println(matches.get(requestId-1).getCards());
             return requestId;
         }
 

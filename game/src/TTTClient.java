@@ -16,7 +16,7 @@ public class TTTClient {
         boolean loggedIn = false;
 
         try{
-            tttService = (TTTService) Naming.lookup("rmi://" + "localhost" +":"+3002+"/TTTService");
+            tttService = (TTTService) Naming.lookup("rmi://" + "localhost" +":"+3001+"/TTTService");
             System.out.println("Found server");
             game = new Game(tttService);
 
@@ -78,13 +78,13 @@ public class TTTClient {
             game.cardChoice(userId);
         else if (choice == 3){
             game.getRequest();
+            // game.setMyCard();
         }
         else{
             game.allActiveUser();
-            game.sendMatchRequest();
             game.cardChoice(userId);
+            game.sendMatchRequest();
             game.waitOpponent();
-            
         }
         //     // onde esta 1 futuramente tera o id do oponente
     
