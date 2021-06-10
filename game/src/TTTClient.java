@@ -75,15 +75,16 @@ public class TTTClient {
         // choise whit card to use
         choice = game.multiplayerChoice();
         if (choice==1)
-            game.cardChoice(userId, -1);
+            game.cardChoice(userId);
         else if (choice == 3){
             game.getRequest();
         }
         else{
             game.allActiveUser();
             game.sendMatchRequest();
+            game.cardChoice(userId);
             game.waitOpponent();
-            game.cardChoice(userId, game.getEnimyId());
+            
         }
         //     // onde esta 1 futuramente tera o id do oponente
     

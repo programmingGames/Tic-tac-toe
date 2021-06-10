@@ -14,7 +14,10 @@ public interface TTTService extends Remote {
     String allActiveUser() throws RemoteException;
     void initializingApp() throws  RemoteException;
     char[] getPossibleMoves(int boardReference) throws  RemoteException;
-    boolean createRequest(int idClient, int idOpponent) throws RemoteException;
-    boolean acceptRequest(int idClient, boolean response) throws RemoteException;
+    int createRequest(int idClient, int idOpponent, char myCard) throws RemoteException;
+    char acceptRequest( boolean response, int idMatch) throws RemoteException;
     String getRequests(int idClient) throws RemoteException;
+    boolean waitingOpponent(int idMatch) throws RemoteException;
+    int waitingPlayerToPlay(int idMatch, int idPlayer) throws RemoteException;
+    int myCard(int idMatch, boolean opponnent) throws  RemoteException;
 }

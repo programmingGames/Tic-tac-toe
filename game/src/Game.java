@@ -42,7 +42,14 @@ public class Game {
     }
     // create a game request
     public void sendMatchRequest() throws RemoteException{
-        matchId =  ttt.createRequest(userId, Integer.parseInt(enimyInfo[0]));
+        System.out.println(Integer.parseInt(enimyInfo[0]));
+        char mycard; 
+        if(player==1)
+            mycard = 'X';
+        else
+            mycard = 'O';
+
+        matchId =  ttt.createRequest(userId, Integer.parseInt(enimyInfo[0]),mycard);
         if(matchId>0){
             System.out.println("[UPDATE] Request created");
             iRequest = true;
@@ -83,6 +90,16 @@ public class Game {
             }while(choice>0&&choice>nrActiveUsers);
             matchInfo = allRequest[choice-1].split(" ");// to take the enimy chosen.
             opponnentBoardReference = Integer.parseInt(matchInfo[1]);
+            System.out.println(allRequest[choice-1]);
+            matchId = Integer.parseInt(matchInfo[2]);
+            char card = ttt.acceptRequest(true, matchId);
+
+            // setting the player card
+            if(card == 'X')
+                player = 1;
+            else
+                player = 0;
+
             multiPlayer=2;
             iRequest = false;
             System.out.println("\nEnimy chosen: "+matchInfo[0]+"\n");
@@ -101,7 +118,7 @@ public class Game {
     public void allActiveUser() throws RemoteException{
         String allUser[] = ttt.allActiveUser().split("\n");
         String userInfo[] = {"", ""};
-        int nrActiveUsers = allUser.length, i=1, choice = -1;
+        int nrActiveUsers = allUser.length, i=1, choice = 0;
 
         do{
             i=1; // to restart the counter
@@ -133,8 +150,10 @@ public class Game {
             System.out.println("\t< 1 > Play whit Computer\n\t< 2 > Play whit someone\n\t< 3 > requests");
             System.out.print("\n  Choice: ");
             choice= keyboardSc.nextInt();
-            if (choice == 1)
+            if (choice == 1){
                 multiPlayer = 1;
+                matchId = -1;
+            }
             else if (choice == 2 || choice == 3)
                 multiPlayer = 2;
             else
@@ -159,45 +178,24 @@ public class Game {
     }
 
     // method to allow the user to chose what player he is.
-    public void cardChoice(int idPlayer,int idOpennet)  throws RemoteException{
-        int opennentChoice=-1;
-        if(idOpennet==-1){
-            do {
-                System.out.println("Chose or card to play: \n");
-                System.out.println("\t< 0 > O\n\t< 1 > X");
-                System.out.println("  Choice: ");
-                myCard = keyboardSc.nextInt();
-                if(myCard <0 && myCard >1)
-                    System.out.println("[ERROR] choice not valide.");
-            }while(myCard <0 && myCard >1);
+    public void cardChoice(int idPlayer)  throws RemoteException{
+        do {
+            System.out.println("Chose or card to play: \n");
+            System.out.println("\t< 0 > O\n\t< 1 > X");
+            System.out.println("  Choice: ");
+            myCard = keyboardSc.nextInt();
+            if(myCard <0 && myCard >1)
+                System.out.println("[ERROR] choice not valide.");
+        }while(myCard <0 && myCard >1);
+        if(multiPlayer==2){
+
         }
-        else if(idOpennet!=-1 && ttt.ableToChose(idPlayer, idOpennet)){
-            do {
-                System.out.println("Chose or card to play: ");
-                System.out.println("\t< 1 > X\n\t< 2 > O");
-                System.out.println("\tChoice: ");
-                myCard= keyboardSc.nextInt();
-                if(myCard <1 && myCard >2)
-                    System.out.println("[ERROR] choice not valide.");
-            }while(myCard <1 && myCard >2);
-        }
-        else{
-            System.out.println("Is upon the Enimy to chose the Card firts.\nPlease wait for it.");
-            while (opennentChoice!=-1){
-                opennentChoice = ttt.getUserValue(idOpennet, "myCard");
-                if (opennentChoice==1){
-                    myCard = 0;
-                }
-                else{
-                    myCard=1;
-                }
-                System.out.println("...");
-            }
-        }
-        ttt.updateUser(idPlayer, "myCard",myCard); 
+        else
+            ttt.updateUser(idPlayer, "myCard",myCard); 
     }
 
     public int readPlay() throws RemoteException{
+        
         int play=0;
         char possibleMoves[] = {1, 2, 3, 4,5 ,6 , 7, 8, 9};
         do {
@@ -223,9 +221,18 @@ public class Game {
                         play = 0;
                     }
                 }
-                // else if(multiPlayer==2){
-
-                // }
+                else if(multiPlayer==2){
+                    // do{
+                    //     play = computer.makePlay(level, possibleMoves);
+                    // }while();
+                    
+                    System.out.println(play);
+                    if(play == 11){
+                        System.out.println("foi um 11");
+                        ttt.removeLastPlay(userBoardReference);
+                        play = 0;
+                    }
+                }
 
             }
         } while (play > 9 || play < 0);
@@ -238,18 +245,34 @@ public class Game {
         do {
             player = ++player % 2;
             System.out.println("vez de: "+player);
-            do {
-                System.out.println(ttt.currentBoard(userBoardReference));
-                play = readPlay();
-                if (play != 0) {
-                    playAccepted = ttt.play( --play / 3, play % 3, player, userBoardReference);
-                    if (!playAccepted)
-                        System.out.println("Invalid play! Try again.");
-
-                } else
-                    playAccepted = false;
-
-            } while (!playAccepted);
+            if (matchId>0){
+                do {
+                    System.out.println(ttt.currentBoard(opponnentBoardReference));
+                    play = readPlay();
+                    if (play != 0) {
+                        playAccepted = ttt.play( --play / 3, play % 3, player, opponnentBoardReference);
+                        if (!playAccepted)
+                            System.out.println("Invalid play! Try again.");
+    
+                    } else
+                        playAccepted = false;
+    
+                } while (!playAccepted);
+            }
+            else{
+                do {
+                    System.out.println(ttt.currentBoard(userBoardReference));
+                    play = readPlay();
+                    if (play != 0) {
+                        playAccepted = ttt.play( --play / 3, play % 3, player, userBoardReference);
+                        if (!playAccepted)
+                            System.out.println("Invalid play! Try again.");
+    
+                    } else
+                        playAccepted = false;
+    
+                } while (!playAccepted);
+            }
             winner = ttt.checkWinner(userBoardReference);
         } while (winner == -1);
         ttt.restart(userBoardReference, userId);

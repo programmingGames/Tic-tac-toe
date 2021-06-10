@@ -160,28 +160,83 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
             }
         }
 
-        // return the result of the request for game
-        public boolean createRequest(int idClient, int idOpponent) {
-            Match match = new Match(idClient, idOpponent, getUserValue(idClient, "boardReference"), idMatch);
-            matches.add(match);
-            idMatch++;
-            return true;
-        }
-        // this method wait for the opponent to return his choice
-        public boolean acceptRequest(int idClient, boolean response){
-            if (response){
+        public int myCard(int idMatch, boolean opponnent) {
+            int index;
+            if (opponnent)
+                index = 1;
+            else
+                index = 0;
 
+            Match match = matches.get(idMatch);
+            if (match.getCards()[index] == 'X')
+                return 1;
+            else
+                return 0;
+        }
+
+        // Method that will wait for the opponnent to play
+        public int waitingPlayerToPlay(int idMatch, int idPlayer) {
+            int play=-1;
+
+            if (matches.get(idMatch).isOpponnentPlay()){
+                play = matches.get(idMatch).getPlay();
+                matches.get(idMatch).setOpponnentPlay(false);
             }
-
-            return false;
+            return play;
         }
+
+        // return the result of the request for game
+        public int createRequest(int idClient, int idOpponent, char myCard) {
+            boolean exist=false;
+            char cards[];
+
+            if (myCard == 'X'){
+                cards = new char[]{'X', 'O'};
+            }
+            else
+                cards = new char[]{'O', 'X'};
+
+            int requestId = -1;
+            for (Match match: matches){
+                if(match.getIdOpponent()==idOpponent && match.getIdClient() == idClient){
+                    exist = true;
+                }
+            }
+            if (!exist){
+                Match match = new Match(idClient, idOpponent, getUserValue(idClient, "boardReference"), idMatch);
+                match.setCards(cards);
+                matches.add(match);
+                requestId = idMatch;
+                idMatch++;
+            }
+            return requestId;
+        }
+
+        // Client waiting to play
+        public boolean waitingOpponent(int idMatch){
+            return matches.get(idMatch-1).isAccepted();
+        }
+
+        // this method wait for the opponent to return his choice
+        public char acceptRequest( boolean response,int idMatch){
+
+            char card='n';
+            if(response){
+                matches.get(idMatch-1).setAccepted(true);
+                card = matches.get(idMatch-1).getCards()[1];
+            }
+            return card;
+        }
+
         // return all the request for the user
         public String getRequests(int idClient){
             String allRequests="";
-            for (Match one: matches){
-                if(one.getIdOpponent()==idClient){
-                    allRequests=allRequests+getUserInfo(one.getIdClient())+"\n";
+            int i =1;
+            for (Match match: matches){
+                if(match.getIdOpponent()==idClient){
+                    allRequests=allRequests+getUserInfo(match.getIdClient()).split(" ")[0]+" "+match.getIdBoardReference()+" "+i+"\n";
                 }
+                i++;
             }
             return allRequests;
         }
