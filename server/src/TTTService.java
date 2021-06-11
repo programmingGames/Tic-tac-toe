@@ -20,5 +20,6 @@ public interface TTTService extends Remote {
     boolean waitingOpponent(int idMatch) throws RemoteException;
     int waitingPlayerToPlay(int idMatch, int idPlayer) throws RemoteException;
     void makeMyPlay(int idMatch, int play) throws RemoteException;
+    void setPlayToDefault(int idMatch) throws  RemoteException;
     int myCard(int idMatch, boolean opponnent) throws  RemoteException;
 }

@@ -181,8 +181,10 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
         // Method that will wait for the opponent to play
         public int waitingPlayerToPlay(int idMatch, int idPlayer) {
             int play = matches.get(idMatch-1).getPlay();
-            matches.get(idMatch-1).setPlay(-1);
             return play;
+        }
+        public void setPlayToDefault(int idMatch){
+            matches.get(idMatch-1).setPlay(-1);
         }
 
         // return the result of the request for game

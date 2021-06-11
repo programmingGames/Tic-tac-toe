@@ -69,25 +69,29 @@ public class Game {
         System.out.println(requests);
         String allRequest[] = requests.split("\n");
         
-        if (allRequest.length>0){
+        if (!requests.equals("")){
             String requestInfo[] = {"","", ""};
-            int nrActiveUsers = allRequest.length, i=1, choice = -1;
+            int nrActiveUsers, i=1, choice = -1;
+
+            
+            i=1; // to restart the counter
+            System.out.println("All match Requests for you: \n");
+            // to display all the user on the screen to be chosen the enimy
+            for (String request: allRequest){
+                requestInfo = request.split(" ");
+                System.out.println("\t < "+i+" > "+requestInfo[0]);
+                i++;
+            }
+            nrActiveUsers = i;
 
             do{
-                i=1; // to restart the counter
-                System.out.println("All match Requests for you: \n");
-                // to display all the user on the screen to be chosen the enimy
-                for (String request: allRequest){
-                    requestInfo = request.split(" ");
-                    System.out.println("\t < "+i+" > "+requestInfo[0]);
-                    i++;
-                }
+                
                 System.out.print("\n  Your choice: ");
                 choice = keyboardSc.nextInt();
-                if(choice>0&&choice>nrActiveUsers)
+                if(choice<0 || choice > nrActiveUsers)
                     System.out.println("[ERROR] Invalide choice.");
 
-            }while(choice>0&&choice>nrActiveUsers);
+            }while(choice< 0 || choice > nrActiveUsers);
             matchInfo = allRequest[choice-1].split(" ");// to take the enimy chosen.
             opponnentBoardReference = Integer.parseInt(matchInfo[1]);
             System.out.println(allRequest[choice-1]);
@@ -98,10 +102,15 @@ public class Game {
             System.out.println(card);
             if(Character.compare(card, 'X') == 0)
             {   myCard = 1;
-                System.out.println("ok");}
+                player = 0;
+                System.out.println("ok");
+            }
             else
-            {    System.out.println("ok2");
-                myCard = 2;}
+            {    
+                player = 1;
+                System.out.println("ok2");
+                myCard = 0;
+            }
 
             multiPlayer=2;
             iRequest = false;
@@ -156,6 +165,7 @@ public class Game {
             if (choice == 1){
                 multiPlayer = 1;
                 matchId = -1;
+                player = 1;
             }
             else if (choice == 2 || choice == 3)
                 multiPlayer = 2;
@@ -213,8 +223,11 @@ public class Game {
                     
                     play = 0;
                 }
-                if(multiPlayer == 2)
+                if(multiPlayer == 2){
+                    System.out.println("i play: "+play);
                     ttt.makeMyPlay(matchId, play);
+                }
+                
             }
             else{
                 if (multiPlayer==1){
@@ -232,6 +245,7 @@ public class Game {
                     do{
                         play = ttt.waitingPlayerToPlay(matchId, userId);
                     }while(play == -1);
+                    ttt.setPlayToDefault(matchId);
                     
                     System.out.println(play);
                     if(play == 11){
@@ -243,6 +257,9 @@ public class Game {
 
             }
         } while (play > 9 || play < 0);
+
+        
+        System.out.println(multiPlayer);
         return play;
     }
 
@@ -251,6 +268,7 @@ public class Game {
         boolean playAccepted;
         do {
             player = ++player % 2;
+            
             System.out.println("vez de: "+player);
             if (matchId > 0 && !iRequest){
                 do {
@@ -265,6 +283,7 @@ public class Game {
                         playAccepted = false;
     
                 } while (!playAccepted);
+                winner = ttt.checkWinner(opponnentBoardReference);
             }
             else if (matchId > 0 && iRequest){
                 do {
@@ -279,6 +298,7 @@ public class Game {
                         playAccepted = false;
     
                 } while (!playAccepted);
+                winner = ttt.checkWinner(userBoardReference);
             }
             else{
                 do {
@@ -291,10 +311,11 @@ public class Game {
     
                     } else
                         playAccepted = false;
-    
+                        
                 } while (!playAccepted);
+                winner = ttt.checkWinner(userBoardReference);
             }
-            winner = ttt.checkWinner(userBoardReference);
+            
         } while (winner == -1);
         ttt.restart(userBoardReference, userId);
     }
