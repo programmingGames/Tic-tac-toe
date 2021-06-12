@@ -45,6 +45,7 @@ public class TTTClient {
 
     static boolean TTTGame (boolean loggedIn) throws RemoteException{
         int choice=0;
+        boolean request=false;
 
         // 
         if(!loggedIn){
@@ -74,10 +75,12 @@ public class TTTClient {
         
         // choise whit card to use
         choice = game.multiplayerChoice();
-        if (choice==1)
+        if (choice==1){
             game.cardChoice(userId);
+            game.setMyBoard();
+        }
         else if (choice == 3){
-            game.getRequest();
+            request=game.getRequest();
             // game.setMyCard();
         }
         else{
@@ -90,10 +93,12 @@ public class TTTClient {
     
     
         
-        if(loggedIn){
+        if((loggedIn && choice != 3)||(loggedIn && choice == 3 && request)){
             game.playGame();
             game.congratulate();
         }
+        else
+            System.out.println("[NOTIFICATION] There is no game for you");
         return loggedIn;
     }
 }

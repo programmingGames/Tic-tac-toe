@@ -11,6 +11,7 @@ public class TTTServer {
         try {
             TTTService tttGame =  new TTT();
             System.out.println("After create");
+            //tttGame.initializingApp();
             Registry reg = LocateRegistry.createRegistry(registryPort);
             System.out.println("Local Registry OK");
             reg.rebind("TTTService", tttGame);
@@ -19,6 +20,7 @@ public class TTTServer {
         } catch(Exception e) {
             System.out.println("TTT server main " + e.getMessage());
         }
+
         System.out.println("Activity Details: \n");
     }
 }

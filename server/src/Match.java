@@ -20,6 +20,8 @@ public class Match {
         return play;
     }
 
+    public void setPlayDefault(){ this.play=-1; }
+
     public void setPlay(int play) {
         this.play = play;
     }

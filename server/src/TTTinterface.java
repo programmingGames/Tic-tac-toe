@@ -16,7 +16,8 @@ public interface TTTinterface extends Remote {
     void initializingApp() throws  RemoteException;
     char[] getPossibleMoves(int boardReference) throws  RemoteException;
     int createRequest(int idClient, int idOpponent, char myCard) throws RemoteException;
-    char acceptRequest( boolean response, int idMatch) throws RemoteException;
+    void deleteMatch(int idMatch,  int userId) throws  RemoteException;
+    char acceptRequest(  int idMatch) throws RemoteException;
     String getRequests(int idClient) throws RemoteException;
     boolean waitingOpponent(int idMatch) throws RemoteException;
     int waitingPlayerToPlay(int idMatch, int idPlayer) throws RemoteException;
