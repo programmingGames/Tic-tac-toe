@@ -31,7 +31,7 @@ public class PlayGame extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         NEWGame = new javax.swing.JButton();
-        SignUp = new javax.swing.JButton();
+        Request = new javax.swing.JButton();
         quit = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         LabelLogin = new javax.swing.JLabel();
@@ -69,18 +69,18 @@ public class PlayGame extends javax.swing.JFrame {
             }
         });
 
-        SignUp.setBackground(new java.awt.Color(37, 132, 222));
-        SignUp.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        SignUp.setForeground(new java.awt.Color(0, 0, 0));
-        SignUp.setText("REQUESTS");
-        SignUp.addMouseListener(new java.awt.event.MouseAdapter() {
+        Request.setBackground(new java.awt.Color(37, 132, 222));
+        Request.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        Request.setForeground(new java.awt.Color(0, 0, 0));
+        Request.setText("REQUESTS");
+        Request.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SignUpMouseClicked(evt);
+                RequestMouseClicked(evt);
             }
         });
-        SignUp.addActionListener(new java.awt.event.ActionListener() {
+        Request.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SignUpActionPerformed(evt);
+                RequestActionPerformed(evt);
             }
         });
 
@@ -108,7 +108,7 @@ public class PlayGame extends javax.swing.JFrame {
                                 .addGap(65, 65, 65)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(quit, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(SignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Request, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(NEWGame, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(66, Short.MAX_VALUE))
         );
@@ -118,7 +118,7 @@ public class PlayGame extends javax.swing.JFrame {
                                 .addContainerGap(46, Short.MAX_VALUE)
                                 .addComponent(NEWGame, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(35, 35, 35)
-                                .addComponent(SignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Request, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(38, 38, 38)
                                 .addComponent(quit, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(50, 50, 50)
@@ -194,17 +194,17 @@ public class PlayGame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
-    private void SignUpMouseClicked(java.awt.event.MouseEvent evt) {
+    private void RequestMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        RegisterFrom rgf = new RegisterFrom();
-        rgf.setVisible(true);
-        rgf.pack();
-        rgf.setLocationRelativeTo(null);
-        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Request req = new Request();
+        req.setVisible(true);
+        req.pack();
+        req.setLocationRelativeTo(null);
+        req.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
     }
 
-    private void SignUpActionPerformed(java.awt.event.ActionEvent evt) {
+    private void RequestActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
@@ -264,7 +264,7 @@ public class PlayGame extends javax.swing.JFrame {
     // Variables declaration - do not modify
     private javax.swing.JLabel LabelLogin;
     private javax.swing.JButton NEWGame;
-    private javax.swing.JButton SignUp;
+    private javax.swing.JButton Request;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

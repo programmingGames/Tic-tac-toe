@@ -8,12 +8,12 @@ import javax.swing.JFrame;
  *
  * @author rafael
  */
-public class QuitGame extends javax.swing.JFrame {
+public class CardNotification extends javax.swing.JFrame {
 
     /**
-     * Creates new form QuitGame
+     * Creates new form CardNotification
      */
-    public QuitGame() {
+    public CardNotification() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -32,9 +32,10 @@ public class QuitGame extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        QUITYES = new javax.swing.JButton();
-        quitNO = new javax.swing.JButton();
+        quit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        CONTINUE = new javax.swing.JButton();
+        CardNotification = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -50,17 +51,17 @@ public class QuitGame extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(118, 118, 118)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap(122, Short.MAX_VALUE)
                                 .addComponent(LabelLogin)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(110, 110, 110))
         );
         jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap(16, Short.MAX_VALUE)
                                 .addComponent(LabelLogin)
-                                .addContainerGap(16, Short.MAX_VALUE))
+                                .addContainerGap())
         );
 
         jPanel3.setBackground(new java.awt.Color(43, 43, 43));
@@ -71,75 +72,82 @@ public class QuitGame extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
                 jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 440, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
                 jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGap(0, 43, Short.MAX_VALUE)
         );
 
-        QUITYES.setBackground(new java.awt.Color(37, 132, 222));
-        QUITYES.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        QUITYES.setForeground(new java.awt.Color(0, 0, 0));
-        QUITYES.setText("YES");
-        QUITYES.addMouseListener(new java.awt.event.MouseAdapter() {
+        quit.setBackground(new java.awt.Color(255, 10, 10));
+        quit.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        quit.setForeground(new java.awt.Color(0, 0, 0));
+        quit.setText("QUIT");
+        quit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                QUITYESMouseClicked(evt);
+                quitMouseClicked(evt);
             }
         });
-        QUITYES.addActionListener(new java.awt.event.ActionListener() {
+        quit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                QUITYESActionPerformed(evt);
-            }
-        });
-
-        quitNO.setBackground(new java.awt.Color(255, 10, 10));
-        quitNO.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        quitNO.setForeground(new java.awt.Color(0, 0, 0));
-        quitNO.setText("NO");
-        quitNO.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                quitNOMouseClicked(evt);
-            }
-        });
-        quitNO.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quitNOActionPerformed(evt);
+                quitActionPerformed(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 22)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(5, 90, 255));
-        jLabel1.setText("Do you realy wanna exit the Game");
+        jLabel1.setText("You are using this Card");
+
+        CONTINUE.setBackground(new java.awt.Color(37, 137, 222));
+        CONTINUE.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        CONTINUE.setForeground(new java.awt.Color(0, 0, 0));
+        CONTINUE.setText("CONTINUE");
+        CONTINUE.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CONTINUEMouseClicked(evt);
+            }
+        });
+        CONTINUE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CONTINUEActionPerformed(evt);
+            }
+        });
+
+        CardNotification.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
                 jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(66, 66, 66)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(CONTINUE, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(quit, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1)
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addGap(22, 22, 22)
-                                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addComponent(quitNO, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(QUITYES, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(41, 41, 41))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                                .addComponent(jLabel1)
+                                                .addGap(93, 93, 93))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                                .addComponent(CardNotification)
+                                                .addGap(181, 181, 181))))
         );
         jPanel3Layout.setVerticalGroup(
                 jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
+                                .addGap(28, 28, 28)
                                 .addComponent(jLabel1)
-                                .addGap(48, 48, 48)
-                                .addComponent(QUITYES, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(43, 43, 43)
-                                .addComponent(quitNO, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                                .addGap(47, 47, 47)
+                                .addComponent(CardNotification)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                                .addComponent(CONTINUE, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(quit, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -147,9 +155,7 @@ public class QuitGame extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
                 jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 1, Short.MAX_VALUE))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
                 jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,37 +176,40 @@ public class QuitGame extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>
 
-    private void QUITYESMouseClicked(java.awt.event.MouseEvent evt) {
-        // TODO add your handling code here:
-        System.exit(0);
-
-    }
-
-    private void QUITYESActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-        System.exit(0);
-    }
-
-    private void quitNOMouseClicked(java.awt.event.MouseEvent evt) {
+    private void quitMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void quitNOActionPerformed(java.awt.event.ActionEvent evt) {
+    private void quitActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        MainMenu mm = new MainMenu();
-        mm.setVisible(true);
-        mm.pack();
-        mm.setLocationRelativeTo(null);
-        mm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        QuitGame qg = new QuitGame();
+        qg.setVisible(true);
+        qg.pack();
+        qg.setLocationRelativeTo(null);
+        qg.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
+    }
 
+    private void CONTINUEMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        System.exit(0);
 
+    }
+
+    private void CONTINUEActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+        Match mth = new Match();
+        mth.setVisible(true);
+        mth.pack();
+        mth.setLocationRelativeTo(null);
+        mth.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
     }
 
     /**
@@ -220,32 +229,33 @@ public class QuitGame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QuitGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CardNotification.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QuitGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CardNotification.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QuitGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CardNotification.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QuitGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CardNotification.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new QuitGame().setVisible(true);
+                new CardNotification().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify
+    private javax.swing.JButton CONTINUE;
+    private javax.swing.JLabel CardNotification;
     private javax.swing.JLabel LabelLogin;
-    private javax.swing.JButton QUITYES;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JButton quitNO;
+    private javax.swing.JButton quit;
     // End of variables declaration
 }

@@ -194,11 +194,11 @@ public class NewGame extends javax.swing.JFrame {
 
     private void COMPUTERMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        login lgf = new login();
-        lgf.setVisible(true);
-        lgf.pack();
-        lgf.setLocationRelativeTo(null);
-        lgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        CardChoice cdc = new CardChoice();
+        cdc.setVisible(true);
+        cdc.pack();
+        cdc.setLocationRelativeTo(null);
+        cdc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
     }
 
@@ -208,11 +208,11 @@ public class NewGame extends javax.swing.JFrame {
 
     private void FRIENDSMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        RegisterFrom rgf = new RegisterFrom();
-        rgf.setVisible(true);
-        rgf.pack();
-        rgf.setLocationRelativeTo(null);
-        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Friends fes = new Friends();
+        fes.setVisible(true);
+        fes.pack();
+        fes.setLocationRelativeTo(null);
+        fes.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
     }
 
