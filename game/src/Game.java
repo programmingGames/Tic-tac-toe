@@ -43,29 +43,29 @@ public class Game {
         }while(!response);
         iRequest = true;
     }
+
     // create a game request
     public void sendMatchRequest() throws RemoteException{
-        System.out.println(Integer.parseInt(enimyInfo[0]));
         char mycard; 
         if(myCard==1)
             mycard = 'O';
         else
             mycard = 'X';
-
+    
         matchId =  ttt.createRequest(userId, Integer.parseInt(enimyInfo[0]),mycard);
         if(matchId>0){
             System.out.println("[UPDATE] Request created");
             iRequest = true;
+            this.multiPlayer = 2;
         }
         else{
             System.out.println("[ERROR] Request already exist");
         }
-        this.multiPlayer = 2;
-    }
+        System.out.println("Board: "+userBoardReference);
+        System.out.println("Match: "+matchId);
 
-    public void setMyCard() throws RemoteException{
-        myCard = ttt.myCard(matchId, iRequest);
     }
+    
     // to get all the request the user have
     public boolean getRequest() throws RemoteException{
         
@@ -99,7 +99,7 @@ public class Game {
             matchInfo = allRequest[choice-1].split(" ");// to take the enimy chosen.
             userBoardReference = Integer.parseInt(matchInfo[1]);
             System.out.println(allRequest[choice-1]);
-            matchId = Integer.parseInt(matchInfo[2])-1;
+            matchId = Integer.parseInt(matchInfo[2]);
 
             char card = ttt.acceptRequest( matchId);
 
@@ -115,6 +115,8 @@ public class Game {
             multiPlayer=2;
             iRequest = false;
             System.out.println("\nEnimy chosen: "+matchInfo[0]+"\n");
+            System.out.println("Board: "+userBoardReference);
+            System.out.println("Match: "+matchId);
             return true;
         }
         else{
@@ -130,7 +132,7 @@ public class Game {
 
     // public show all active user
     public void allActiveUser() throws RemoteException{
-        String allUser[] = ttt.allActiveUser().split("\n");
+        String allUser[] = ttt.allActiveUser(userId).split("\n");
         String userInfo[] = {"", ""};
         int nrActiveUsers = allUser.length, i=1, choice = 0;
 
@@ -150,10 +152,10 @@ public class Game {
 
         }while(choice>0&&choice>nrActiveUsers);
         enimyInfo = allUser[choice-1].split(" ");// to take the enimy chosen.
-        System.out.println("\nEnimy chosen: "+enimyInfo[1]+"\n");
+        System.out.println("\nEnimy chosen: "+enimyInfo[0]+"\n");
 
         // System.out.println(allUser[0]);
-        // System.out.println(ttt.allActiveUser());// where i'm going to wock in how the play chose his oponnent
+        // System.out.println(ttt.allActiveUser());
     }
 
     // to allow the user to chose if he wants to playe whit the pc or whit someone else
@@ -205,6 +207,7 @@ public class Game {
         ttt.updateUser(idPlayer, "myCard",myCard); 
     }
 
+    // 
     public int readPlay() throws RemoteException{
         
         int play=0;
@@ -283,11 +286,15 @@ public class Game {
             
         } while (winner == -1);
         ttt.restart(userBoardReference, userId);
-        // ttt.deleteMatch(matchId, userId);
+        ttt.endMatch(matchId); // ending the match
+
         if (multiPlayer == 2){
             iRequest = false;
+            multiPlayer = 0;
+            userBoardReference = ttt.getUserValue(userId, "boardReference");
             matchId = -1; // 
-            multiPlayer = 0; 
+
+            
         }
         this.player = 1;
         

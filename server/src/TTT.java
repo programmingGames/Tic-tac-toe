@@ -2,10 +2,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import javax.sound.midi.SysexMessage;
 import java.io.FileReader;
 import java.rmi.server.UnicastRemoteObject;
-import java.rmi.server.RemoteServer;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.rmi.RemoteException;
@@ -147,7 +145,6 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
            };
            System.out.println("   [BOARD_RESET] User: "+getUserInfo(id).split(" ")[0]+"; Id: "+id+"; Board Reference: "+boardReference);
            allBoard.get(boardReference - 1).board = boardReset;
-           //System.out.println("Board reseted.");
             allBoard.get(boardReference - 1).nextPlayer = 0;
             allBoard.get(boardReference - 1).numPlays = 0;
         }
@@ -178,6 +175,7 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
                 return 0;
         }
 
+        // Method to allow the player to store his play on the data base
         public void makeMyPlay(int idMatch, int play){
             for (Match match: matches){
                 if(match.getIdMatch()==idMatch){
@@ -221,7 +219,7 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
             }
             int requestId = -1;
             for (Match match: matches){
-                if(match.getIdOpponent()==idOpponent && match.getIdClient() == idClient){
+                if(match.getIdOpponent()==idOpponent && match.getIdClient() == idClient && !match.isMatchIsFinished()){
                     exist = true;
                 }
             }
@@ -237,6 +235,14 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
             return requestId;
         }
 
+        // Method to end the match
+        public void endMatch(int idMatch) {
+            for (Match match : matches) {
+                if (match.getIdMatch() == idMatch)
+                    match.setMatchIsFinished(true);
+            }
+        }
+
         // to delete the match from the list of matches
         public void deleteMatch(int idMatch, int id){
             int index = 0; boolean inList=false;
@@ -244,10 +250,10 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
                 for (Match match : matches) {
                     if (match.getIdMatch() == idMatch)
                         inList = true;
-                    else
+                    if(!inList)
                         index++;
                 }
-                System.out.println(index);
+                //System.out.println(index);
                 if (inList)
                     System.out.println("   [MATCH_END] User: " + getUserInfo(id).split(" ")[0] + " end multiplayer match");
                 matches.remove(index);
@@ -283,14 +289,15 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
             String allRequests="";
             int i =1;
             for (Match match: matches){
-                if(match.getIdOpponent()==idClient){
-                    allRequests=allRequests+getUserInfo(match.getIdClient()).split(" ")[0]+" "+match.getIdBoardReference()+" "+i+"\n";
+                if(match.getIdOpponent()==idClient && !match.isMatchIsFinished()){
+                    allRequests=allRequests+getUserInfo(match.getIdClient()).split(" ")[0]+" "+match.getIdBoardReference()+" "+
+                            match.getIdMatch()+"\n";
                 }
                 i++;
             }
             return allRequests;
         }
-    // return the id of the user if autenticated and -1 if not
+        // return the id of the user if autenticated and -1 if not
         public int validateUser(String userName, String userPasswd) {
             // json file connection
             JSONParser jsonParser = new JSONParser();
@@ -335,6 +342,8 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
             }
             return "";
         }
+
+        // Method to get a random number in a interval
         public int getRandomNumber(int min, int max) throws RemoteException{
             return (int) ((Math.random() * (max - min)) + min);
         }
@@ -391,25 +400,26 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
             idBoard ++;// to increment the id to the next board
         }
 
-    public void initializingApp() throws RemoteException {
-        JSONParser jsonParser = new JSONParser();
-        JSONArray userList = new JSONArray();
+        // Method that will be called when some one try to log in the app
+        public void initializingApp() throws RemoteException {
+            JSONParser jsonParser = new JSONParser();
+            JSONArray userList = new JSONArray();
 
         // getting all the previous user in the json file
-        try(FileReader reader = new FileReader("users.json")){
-            Object obj = jsonParser.parse(reader);
-            JSONArray usersList = (JSONArray) obj;
-            JSONObject userObj = new JSONObject();
+            try(FileReader reader = new FileReader("users.json")){
+                Object obj = jsonParser.parse(reader);
+                JSONArray usersList = (JSONArray) obj;
+                JSONObject userObj = new JSONObject();
 
             // to make all the board's for the existent player's/user's
-            for(Object userObjs : usersList){
-                userObj = (JSONObject) userObjs ;
-                ((JSONObject) userObjs).put("boardReference", idBoard);
-                addingBoard();
-                userList.add(userObj);
-            }
-        }catch(Exception e){
-            System.out.println(e);
+                for(Object userObjs : usersList){
+                    userObj = (JSONObject) userObjs ;
+                    ((JSONObject) userObjs).put("boardReference", idBoard);
+                    addingBoard();
+                    userList.add(userObj);
+                }
+            }catch(Exception e){
+                System.out.println(e);
         }
 
         try(FileWriter file = new FileWriter("users.json")){
@@ -421,26 +431,26 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
         System.out.println("   [REFRESH] All user data set up to date.");
     }
 
-    // to update user info
-    public boolean updateUser(int id,String campo, int value){
-        JSONParser jsonParser = new JSONParser();
-        JSONArray userList = new JSONArray();
+        // to update user info
+        public boolean updateUser(int id,String campo, int value){
+            JSONParser jsonParser = new JSONParser();
+            JSONArray userList = new JSONArray();
 
-        // getting all the previous user in the json file
-        try(FileReader reader = new FileReader("users.json")){
-            Object obj = jsonParser.parse(reader);
-            JSONArray usersList = (JSONArray) obj;
-            JSONObject userObj = new JSONObject();
+            // getting all the previous user in the json file
+            try(FileReader reader = new FileReader("users.json")){
+                Object obj = jsonParser.parse(reader);
+                JSONArray usersList = (JSONArray) obj;
+                JSONObject userObj = new JSONObject();
 
-            for(Object userObjs : usersList){
-                userObj = (JSONObject) userObjs ;
-                if(Integer.parseInt(userObj.get("id").toString())==id) {
-                    ((JSONObject) userObjs).put(campo, value);
+                for(Object userObjs : usersList){
+                    userObj = (JSONObject) userObjs ;
+                    if(Integer.parseInt(userObj.get("id").toString())==id) {
+                        ((JSONObject) userObjs).put(campo, value);
+                    }
+                    userList.add(userObj);
                 }
-                userList.add(userObj);
-            }
-        }catch(Exception e){
-            System.out.println(e);
+            }catch(Exception e){
+                System.out.println(e);
             return false;
         }
 
@@ -516,7 +526,8 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
             return -1;
         }
 
-        public String allActiveUser(){
+        // Method that provide all the active user
+        public String allActiveUser(int id){
             String activeUser= "";
             JSONParser jsonParser = new JSONParser();
 
@@ -527,7 +538,7 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
 
                 for(Object user : usersList){
                     userObj = (JSONObject) user ;
-                    if(Integer.parseInt(userObj.get("state").toString())==1){
+                    if(Integer.parseInt(userObj.get("state").toString())==1 && Integer.parseInt(userObj.get("id").toString())!=id){
                         activeUser=activeUser+userObj.get("id")+" "+userObj.get("nome")+"\n";
                     }
                 }

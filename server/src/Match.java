@@ -2,8 +2,7 @@ public class Match {
     private int idClient, idOpponent, idBoardReference, idMatch;
     private boolean accepted;
     private int play=-1;
-    private boolean clientPlay = false;
-    private boolean opponnentPlay=false;
+    private boolean matchIsFinished;
     private char[] cards = {'d', 'd'};
 
     public Match(int idClient, int idOpponent, int idBoardReference, int idMatch){
@@ -12,8 +11,15 @@ public class Match {
         this.idClient = idClient;
         this.idMatch = idMatch;
         this.accepted=false;
-        this.clientPlay = false;
-        this.opponnentPlay=false;
+        this.matchIsFinished = false;
+    }
+
+    public boolean isMatchIsFinished() {
+        return matchIsFinished;
+    }
+
+    public void setMatchIsFinished(boolean matchIsFinished) {
+        this.matchIsFinished = matchIsFinished;
     }
 
     public int getPlay() {
@@ -24,22 +30,6 @@ public class Match {
 
     public void setPlay(int play) {
         this.play = play;
-    }
-
-    public boolean isClientPlay() {
-        return clientPlay;
-    }
-
-    public void setClientPlay(boolean clientPlay) {
-        this.clientPlay = clientPlay;
-    }
-
-    public boolean isOpponnentPlay() {
-        return opponnentPlay;
-    }
-
-    public void setOpponnentPlay(boolean opponnentPlay) {
-        this.opponnentPlay = opponnentPlay;
     }
 
     public boolean isAccepted() {

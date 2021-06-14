@@ -12,11 +12,12 @@ public interface TTTinterface extends Remote {
     int addUser(String user, String passwd) throws RemoteException;
     boolean updateUser(int id, String campo, int value) throws RemoteException;
     boolean ableToChose(int idUser,int idOpennet) throws RemoteException;
-    String allActiveUser() throws RemoteException;
+    String allActiveUser(int id) throws RemoteException;
     void initializingApp() throws  RemoteException;
     char[] getPossibleMoves(int boardReference) throws  RemoteException;
     int createRequest(int idClient, int idOpponent, char myCard) throws RemoteException;
     void deleteMatch(int idMatch,  int userId) throws  RemoteException;
+    void endMatch(int idMatch) throws  RemoteException;
     char acceptRequest(  int idMatch) throws RemoteException;
     String getRequests(int idClient) throws RemoteException;
     boolean waitingOpponent(int idMatch) throws RemoteException;
