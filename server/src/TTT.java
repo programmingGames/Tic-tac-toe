@@ -1,7 +1,6 @@
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
 import java.io.FileReader;
 import java.rmi.server.UnicastRemoteObject;
 import java.io.FileWriter;
@@ -271,7 +270,7 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
         }
 
         // this method wait for the opponent to return his choice
-        public char acceptRequest( int idMatch){
+        public char acceptRequest(int idMatch){
             for (Match match: matches){
                 if(match.getIdMatch()==idMatch){
                     match.setAccepted(true);
@@ -297,6 +296,7 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
             }
             return allRequests;
         }
+
         // return the id of the user if autenticated and -1 if not
         public int validateUser(String userName, String userPasswd) {
             // json file connection
@@ -347,6 +347,7 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
         public int getRandomNumber(int min, int max) throws RemoteException{
             return (int) ((Math.random() * (max - min)) + min);
         }
+
         // Add new user to the json file
         public int addUser(String user, String passwd) throws RemoteException {
             int id = 1;
@@ -384,7 +385,7 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
             userList.add(newUser);
             try(FileWriter file = new FileWriter("users.json")){
                 file.write(userList.toString());
-                System.out.println("   [SIGN_UP] User: "+user+" - "+id+1);
+                System.out.println("   [SIGN_UP] User: "+user+"; Id:"+id+1);
                 file.flush();
                 return id+1;
             }catch (Exception e){
@@ -462,44 +463,6 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
             System.out.println(e);
         }
         return false;
-        }
-
-        // method to determinate the if the user is abel to chose the card
-        public boolean ableToChose(int id,int idOpennet){
-            int userNrWins=0, opennetNrWins=0;
-            JSONParser jsonParser = new JSONParser();
-            JSONArray userList = new JSONArray();
-
-            // getting all the previous user in the json file
-            try(FileReader reader = new FileReader("users.json")){
-                Object obj = jsonParser.parse(reader);
-                JSONArray usersList = (JSONArray) obj;
-                JSONObject userObj = new JSONObject();
-
-                for(Object userObjs : usersList){
-                    userObj = (JSONObject) userObjs ;
-                    if(Integer.parseInt(userObj.get("id").toString())==id) {
-                        userNrWins = Integer.parseInt(userObj.get("nrVitorias").toString());;
-                    }
-                    else if(Integer.parseInt(userObj.get("id").toString())==idOpennet){
-                        opennetNrWins = Integer.parseInt(userObj.get("nrVitorias").toString());
-                    }
-                }
-
-            }catch(Exception e){
-                System.out.println(e);
-                return false;
-            }
-            // verify if the user that is asking to play has more oe equals nr victory, and if
-            // so he has to chose the card that he will use to play, if not the opennent that is th
-            // one how chose
-            if(userNrWins>=opennetNrWins){
-                return true;
-            }
-            else if (userNrWins<opennetNrWins){
-                return false;
-            }
-            return false;
         }
 
         // method that will return a specifyd value

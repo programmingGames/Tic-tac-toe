@@ -10,7 +10,6 @@ public interface TTTService extends Remote {
     int validateUser(String user, String passwd) throws RemoteException;
     int addUser(String user, String passwd) throws RemoteException;
     boolean updateUser(int id, String campo, int value) throws RemoteException;
-    boolean ableToChose(int id, int idOpennet) throws RemoteException;
     String allActiveUser(int id) throws RemoteException;
     void initializingApp() throws  RemoteException;
     char[] getPossibleMoves(int boardReference) throws  RemoteException;

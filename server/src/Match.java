@@ -1,3 +1,4 @@
+// Class related to an match
 public class Match {
     private int idClient, idOpponent, idBoardReference, idMatch;
     private boolean accepted;

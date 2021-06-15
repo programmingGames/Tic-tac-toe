@@ -57,17 +57,4 @@ public class Menu {
         String userInfo[] = {user, passwd};
         return userInfo;
     }
-
-    // method that will allow the use to
-    // public int playChoice(){
-    //     int esc=0;
-    //     do{
-    //         System.out.println("\n ------ TTT ------");
-    //         System.out.println("\n Escolha: ");
-    //         System.out.println("\n\t< 1 > Play whit Computer \n\t< 2 > Play whit someone");
-    //         System.out.println("\n Escolha: ");
-    //         esc = keyboardSc.nextInt();
-    //     }while(esc<1&&esc>2);
-    //     return esc;
-    // }
 }
