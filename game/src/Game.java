@@ -9,9 +9,11 @@ public class Game {
     private int player = 1; 
     private int userId = -1;
     private int userBoardReference = -1;
-    private String matchInfo[] = {"","",""};
+    private String matchInfo[] = {"","","", "", "", ""};
+    private int matchId = -1; // the id of the multiplayer macth going on
     private String enimyInfo[] = {"", ""};// to store the current enimy info 
-    private boolean multiPlayer = false; // is the user wants to play whit pc or whit someone
+    private int multiPlayer = 0; // is the user wants to play whit pc or whit someone (pc = 1, someone=2)
+    private boolean iRequest = false;
     private int level = 1; // the difficulty by playing with the computer
     private int myCard; // myCard = 1 -> means that the user will use "X",
                         //  and myCard = 2 means that the player will use "O"
@@ -27,48 +29,100 @@ public class Game {
         return Integer.parseInt(enimyInfo[0]);
     }
 
+    public void setMyBoard() throws RemoteException{
+        this.userBoardReference = ttt.getUserValue(userId, "boardReference");
+    }
+
+    // waiting for opponent to enter in the match
+    public void waitOpponent() throws RemoteException{
+        boolean response=false;
+        System.out.println("[STATUS] waiting for opponnent");
+        do{
+            response = ttt.waitingOpponent(matchId);
+
+        }while(!response);
+        iRequest = true;
+    }
+
     // create a game request
     public void sendMatchRequest() throws RemoteException{
-        boolean request =  ttt.createRequest(userId, Integer.parseInt(enimyInfo[0]));
-        if(request){
+        char mycard; 
+        if(myCard==1)
+            mycard = 'O';
+        else
+            mycard = 'X';
+    
+        matchId =  ttt.createRequest(userId, Integer.parseInt(enimyInfo[0]),mycard);
+        if(matchId>0){
             System.out.println("[UPDATE] Request created");
+            iRequest = true;
+            this.multiPlayer = 2;
         }
         else{
             System.out.println("[ERROR] Request already exist");
         }
-    }
+        System.out.println("Board: "+userBoardReference);
+        System.out.println("Match: "+matchId);
 
+    }
+    
     // to get all the request the user have
-    public void getRequest() throws RemoteException{
-        System.out.println(ttt.getRequests(userId));
+    public boolean getRequest() throws RemoteException{
+        
         String requests = ttt.getRequests(userId);
+        System.out.println(requests);
         String allRequest[] = requests.split("\n");
-        if (allRequest.length>0){
-            String matchInfo[] = {"","", ""};
-            int nrActiveUsers = allRequest.length, i=1, choice = -1;
+        
+        if (!requests.equals("")){
+            String requestInfo[] = {"","", ""};
+            int nrActiveUsers, i=1, choice = -1;
+
+            
+            i=1; // to restart the counter
+            System.out.println("All match Requests for you: \n");
+            // to display all the user on the screen to be chosen the enimy
+            for (String request: allRequest){
+                requestInfo = request.split(" ");
+                System.out.println("\t < "+i+" > "+requestInfo[0]);
+                i++;
+            }
+            nrActiveUsers = i;
 
             do{
-                i=1; // to restart the counter
-                System.out.println("All match Requests for you: \n");
-                // to display all the user on the screen to be chosen the enimy
-                for (String request: allRequest){
-                    matchInfo = request.split(" ");
-                    System.out.println("\t < "+i+" > "+matchInfo[0]);
-                    i++;
-                }
+                
                 System.out.print("\n  Your choice: ");
                 choice = keyboardSc.nextInt();
-                if(choice>0&&choice>nrActiveUsers)
+                if(choice<0 || choice > nrActiveUsers)
                     System.out.println("[ERROR] Invalide choice.");
 
-            }while(choice>0&&choice>nrActiveUsers);
-            enimyInfo = matchInfo[choice-1].split(" ");// to take the enimy chosen.
-            System.out.println("\nEnimy chosen: "+enimyInfo[1]+"\n");
+            }while(choice< 0 || choice > nrActiveUsers);
+            matchInfo = allRequest[choice-1].split(" ");// to take the enimy chosen.
+            userBoardReference = Integer.parseInt(matchInfo[1]);
+            System.out.println(allRequest[choice-1]);
+            matchId = Integer.parseInt(matchInfo[2]);
+
+            char card = ttt.acceptRequest( matchId);
+
+            // setting the player card
+            System.out.println(card);
+            if(Character.compare(card, 'X') == 0){
+                this.myCard = 0;
+            }
+            else{    
+                this.myCard = 1;
+            }
+
+            multiPlayer=2;
+            iRequest = false;
+            System.out.println("\nEnimy chosen: "+matchInfo[0]+"\n");
+            System.out.println("Board: "+userBoardReference);
+            System.out.println("Match: "+matchId);
+            return true;
         }
         else{
             System.out.println("[NOTIFICATION] No request avalable for you.");
+            return false;
         }
-        
     }
 
     // to get all User info
@@ -78,9 +132,9 @@ public class Game {
 
     // public show all active user
     public void allActiveUser() throws RemoteException{
-        String allUser[] = ttt.allActiveUser().split("\n");
+        String allUser[] = ttt.allActiveUser(userId).split("\n");
         String userInfo[] = {"", ""};
-        int nrActiveUsers = allUser.length, i=1, choice = -1;
+        int nrActiveUsers = allUser.length, i=1, choice = 0;
 
         do{
             i=1; // to restart the counter
@@ -98,10 +152,10 @@ public class Game {
 
         }while(choice>0&&choice>nrActiveUsers);
         enimyInfo = allUser[choice-1].split(" ");// to take the enimy chosen.
-        System.out.println("\nEnimy chosen: "+enimyInfo[1]+"\n");
+        System.out.println("\nEnimy chosen: "+enimyInfo[0]+"\n");
 
         // System.out.println(allUser[0]);
-        // System.out.println(ttt.allActiveUser());// where i'm going to wock in how the play chose his oponnent
+        // System.out.println(ttt.allActiveUser());
     }
 
     // to allow the user to chose if he wants to playe whit the pc or whit someone else
@@ -112,10 +166,13 @@ public class Game {
             System.out.println("\t< 1 > Play whit Computer\n\t< 2 > Play whit someone\n\t< 3 > requests");
             System.out.print("\n  Choice: ");
             choice= keyboardSc.nextInt();
-            if (choice == 1)
-                multiPlayer = false;
+            if (choice == 1){
+                multiPlayer = 1;
+                matchId = -1;
+                player = 1;
+            }
             else if (choice == 2 || choice == 3)
-                multiPlayer = true;
+                multiPlayer = 2;
             else
                 System.out.println("[ERROR] choice not valide");
             
@@ -138,51 +195,29 @@ public class Game {
     }
 
     // method to allow the user to chose what player he is.
-    public void cardChoice(int idPlayer,int idOpennet)  throws RemoteException{
-        int opennentChoice=-1;
-        if(idOpennet==-1){
-            do {
-                System.out.println("Chose or card to play: \n");
-                System.out.println("\t< 0 > O\n\t< 1 > X");
-                System.out.println("  Choice: ");
-                myCard = keyboardSc.nextInt();
-                if(myCard <0 && myCard >1)
-                    System.out.println("[ERROR] choice not valide.");
-            }while(myCard <0 && myCard >1);
-        }
-        else if(idOpennet!=-1 && ttt.ableToChose(idPlayer, idOpennet)){
-            do {
-                System.out.println("Chose or card to play: ");
-                System.out.println("\t< 1 > X\n\t< 2 > O");
-                System.out.println("\tChoice: ");
-                myCard= keyboardSc.nextInt();
-                if(myCard <1 && myCard >2)
-                    System.out.println("[ERROR] choice not valide.");
-            }while(myCard <1 && myCard >2);
-        }
-        else{
-            System.out.println("Is upon the Enimy to chose the Card firts.\nPlease wait for it.");
-            while (opennentChoice!=-1){
-                opennentChoice = ttt.getUserValue(idOpennet, "myCard");
-                if (opennentChoice==1){
-                    myCard = 0;
-                }
-                else{
-                    myCard=1;
-                }
-                System.out.println("...");
-            }
-        }
+    public void cardChoice(int idPlayer)  throws RemoteException{
+        do {
+            System.out.println("Chose or card to play: \n");
+            System.out.println("\t< 0 > O\n\t< 1 > X");
+            System.out.print("  Choice: ");
+            myCard = keyboardSc.nextInt();
+            if(myCard < 0 && myCard >1)
+                System.out.println("[ERROR] choice not valide.");
+        }while(myCard < 0 && myCard > 1);
         ttt.updateUser(idPlayer, "myCard",myCard); 
     }
 
+    // 
     public int readPlay() throws RemoteException{
+        
         int play=0;
-        char possibleMoves[] = {1, 2, 3, 4,5 ,6 , 7, 8, 9};
+        String pause;
+        char possibleMoves[] = {1, 2, 3, 4, 5 ,6 , 7, 8, 9};
         do {
-            System.out.printf("\n  Player %d,\n  Please enter the number of the square ,"+ "\n  where you want to place your %c (or 0 to refresh the board): \n\tYour choice is: ", player, (player == 1) ? 'X' : 'O');
 
-            if (player==myCard){
+            System.out.printf("\n  Player %d,\n  Please enter the number of the square ,"+ "\n  where you want to place your %c (or 0 to refresh the board): \n\tYour choice is: ", player, (player == 1) ? 'X' : 'O');
+            if (player==this.myCard){
+                
                 play = keyboardSc.nextInt();
                 System.out.println(play);
                 if(play == 11){
@@ -190,9 +225,14 @@ public class Game {
                     ttt.removeLastPlay(userBoardReference);
                     play = 0;
                 }
+                if(multiPlayer == 2){
+                    System.out.println("iewrgwjer play: "+play);
+                    ttt.makeMyPlay(matchId, play);
+                }
+                
             }
             else{
-                if (!multiPlayer){
+                if (multiPlayer==1){
                     possibleMoves = ttt.getPossibleMoves(userBoardReference);
                     play = computer.makePlay(level, possibleMoves);
                     System.out.println(play);
@@ -202,11 +242,24 @@ public class Game {
                         play = 0;
                     }
                 }
-                else{
+                else if(multiPlayer==2){
+                    System.out.println("\n[NOTIFICATION] Waiting player to play ");
+                    do{
+                        play = ttt.waitingPlayerToPlay(matchId, userId);
+                    }while(play <= 0);
+                    
+                    System.out.println(play);
+                    if(play == 11){
+                        System.out.println("foi um 11");
+                        ttt.removeLastPlay(userBoardReference);
+                        play = 0;
+                    }
+                }
 
-                }   
             }
+
         } while (play > 9 || play < 0);
+
         return play;
     }
 
@@ -215,28 +268,62 @@ public class Game {
         boolean playAccepted;
         do {
             player = ++player % 2;
-            System.out.println("vez de: "+player);
-            do {
-                System.out.println(ttt.currentBoard(userBoardReference));
-                play = readPlay();
-                if (play != 0) {
-                    playAccepted = ttt.play( --play / 3, play % 3, player, userBoardReference);
-                    if (!playAccepted)
-                        System.out.println("Invalid play! Try again.");
-
-                } else
-                    playAccepted = false;
-
-            } while (!playAccepted);
+            
+            // System.out.println("vez de: "+player+" macthID: "+matchId);
+                do {
+                    System.out.println(ttt.currentBoard(userBoardReference));
+                    play = readPlay();
+                    if (play != 0) {
+                        playAccepted = ttt.play( --play / 3, play % 3, player, userBoardReference);
+                        if (!playAccepted)
+                            System.out.println("Invalid play! Try again.");
+    
+                    } else
+                        playAccepted = false;
+                        
+                } while (!playAccepted);
             winner = ttt.checkWinner(userBoardReference);
+            
         } while (winner == -1);
         ttt.restart(userBoardReference, userId);
+        ttt.endMatch(matchId); // ending the match
+
+        if (multiPlayer == 2){
+            iRequest = false;
+            multiPlayer = 0;
+            userBoardReference = ttt.getUserValue(userId, "boardReference");
+            matchId = -1; // 
+
+            
+        }
+        this.player = 1;
+        
     }
 
     public void congratulate() throws RemoteException{
-        if (winner == 2)
-            System.out.printf("\nHow boring, it is a draw\n");
+        if (winner == 2){
+            System.out.printf("\n--------------------------------------");
+            System.out.printf("\n--------------------------------------\n");
+            System.out.printf("\n            There is a tie            \n");
+            System.out.printf("\n--------------------------------------");
+            System.out.printf("\n--------------------------------------\n\n");
+        }
+       
         else
-            System.out.printf("\nCongratulations, player %d, YOU ARE THE WINNER!\n",winner);
+            System.out.println("\tGame result: \n");
+            if (winner == this.myCard){
+                System.out.printf("\n--------------------------------------");
+                System.out.printf("\n--------------------------------------\n");
+                System.out.printf("\n           You are the Winner         \n");
+                System.out.printf("\n--------------------------------------");
+                System.out.printf("\n--------------------------------------\n");
+            }
+            else{
+                System.out.printf("\n--------------------------------------");
+                System.out.printf("\n--------------------------------------\n");
+                System.out.printf("\n               You lose               \n");
+                System.out.printf("\n--------------------------------------");
+                System.out.printf("\n--------------------------------------\n\n");
+            }
     }
 }

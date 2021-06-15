@@ -1,3 +1,5 @@
+import com.sun.tools.javac.Main;
+
 import java.rmi.*;
 import java.util.Locale;
 import java.util.Scanner;
@@ -8,6 +10,7 @@ public class TTTClient {
     public static int userId=0;
     public static Game game = null;
     public static Menu menu = new Menu();
+    public static MainMenu mainMenu = new MainMenu();
     
 
     public static void main(String args[]) throws Exception {
@@ -16,7 +19,7 @@ public class TTTClient {
         boolean loggedIn = false;
 
         try{
-            tttService = (TTTService) Naming.lookup("rmi://" + "localhost" +":"+3002+"/TTTService");
+            tttService = (TTTService) Naming.lookup("rmi://" + "localhost" +":"+3001+"/TTTService");
             System.out.println("Found server");
             game = new Game(tttService);
 
@@ -25,6 +28,7 @@ public class TTTClient {
 
         Scanner input = new Scanner(System.in);
         while(run) {
+            //mainMenu.startApp();
             loggedIn = TTTGame(loggedIn);
             System.out.println("Do you wish to play again? (y/n): ");
             String answer = input.nextLine();
@@ -45,6 +49,7 @@ public class TTTClient {
 
     static boolean TTTGame (boolean loggedIn) throws RemoteException{
         int choice=0;
+        boolean request=false;
 
         // 
         if(!loggedIn){
@@ -74,24 +79,28 @@ public class TTTClient {
         
         // choise whit card to use
         choice = game.multiplayerChoice();
-        if (choice==1)
-            game.cardChoice(userId, -1);
+        if (choice==1){
+            game.cardChoice(userId);
+            game.setMyBoard();
+        }
         else if (choice == 3){
-            game.getRequest();
+            request=game.getRequest();
+            // game.setMyCard();
         }
         else{
             game.allActiveUser();
+            game.cardChoice(userId);
             game.sendMatchRequest();
-            game.cardChoice(userId, game.getEnimyId());
+            game.waitOpponent();
         }
         //     // onde esta 1 futuramente tera o id do oponente
-    
-    
         
-        if(loggedIn){
+        if((loggedIn && choice != 3)||(loggedIn && choice == 3 && request)){
             game.playGame();
             game.congratulate();
         }
+        else
+            System.out.println("[NOTIFICATION] There is no game for you");
         return loggedIn;
     }
 }
