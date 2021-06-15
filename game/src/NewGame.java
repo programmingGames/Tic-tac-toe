@@ -194,7 +194,7 @@ public class NewGame extends javax.swing.JFrame {
 
     private void COMPUTERMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        CardChoice cdc = new CardChoice();
+        ComputerLevel cdc = new ComputerLevel();
         cdc.setVisible(true);
         cdc.pack();
         cdc.setLocationRelativeTo(null);
