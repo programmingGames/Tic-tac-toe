@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97fb8d8d-2ef5-4103-ade2-01af40e430e6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/CardChoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CardChoice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CardNotification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CardNotification.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Friends.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Friends.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Match.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NewGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NewGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PlayGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PlayGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/QuitGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/QuitGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RegisterFrom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RegisterFrom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Request.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cross/cross.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/cross/cross.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +13,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1tzUn2qO0obgxvXhRD8FLQcVYRE" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -45,17 +37,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainMenu" />
@@ -71,6 +52,7 @@
       <option name="presentableId" value="Default" />
       <updated>1623771655952</updated>
       <workItem from="1623771670750" duration="1110000" />
+      <workItem from="1623776008458" duration="108000" />
     </task>
     <servers />
   </component>

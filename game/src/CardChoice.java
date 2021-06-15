@@ -93,7 +93,7 @@ public class CardChoice extends javax.swing.JFrame {
         });
 
         CardCircle.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        CardCircle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png"))); // NOI18N
+        CardCircle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/circle.png"))); // NOI18N
         CardCircle.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 CardCircleMouseClicked(evt);
@@ -189,20 +189,6 @@ public class CardChoice extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
-    private void CardCrossMouseClicked(java.awt.event.MouseEvent evt) {
-        // TODO add your handling code here:
-        Match mth = new Match();
-        mth.setVisible(true);
-        mth.pack();
-        mth.setLocationRelativeTo(null);
-        mth.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
-    }
-
-    private void CardCrossActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
     private void quitMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
     }
@@ -214,6 +200,20 @@ public class CardChoice extends javax.swing.JFrame {
         qg.pack();
         qg.setLocationRelativeTo(null);
         qg.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }
+
+    private void CardCrossActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void CardCrossMouseClicked(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        Match mth = new Match();
+        mth.setVisible(true);
+        mth.pack();
+        mth.setLocationRelativeTo(null);
+        mth.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
     }
 
@@ -229,12 +229,6 @@ public class CardChoice extends javax.swing.JFrame {
 
     private void CardCircleMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        RegisterFrom rgf = new RegisterFrom();
-        rgf.setVisible(true);
-        rgf.pack();
-        rgf.setLocationRelativeTo(null);
-        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
     }
 
     /**

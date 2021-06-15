@@ -172,11 +172,11 @@ public class Friends extends javax.swing.JFrame {
 
     private void Friend1ChooseMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        CardNotification cnn = new CardNotification();
-        cnn.setVisible(true);
-        cnn.pack();
-        cnn.setLocationRelativeTo(null);
-        cnn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        WaitingOpponnent wot = new WaitingOpponnent();
+        wot.setVisible(true);
+        wot.pack();
+        wot.setLocationRelativeTo(null);
+        wot.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
     }
 
