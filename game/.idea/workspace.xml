@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/src/CardChoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CardChoice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CardNotification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CardNotification.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Friends.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Friends.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Match.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/NewGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NewGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PlayGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PlayGame.java" afterDir="false" />
@@ -32,6 +31,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -70,7 +70,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1623771655952</updated>
-      <workItem from="1623771670750" duration="667000" />
+      <workItem from="1623771670750" duration="1110000" />
     </task>
     <servers />
   </component>
