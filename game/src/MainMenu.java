@@ -9,12 +9,12 @@ import javax.swing.JFrame;
  * @author rafael
  */
 public class MainMenu extends javax.swing.JFrame {
-    private Game game;
-
+    Game game;
     /**
      * Creates new form MainMenu
      */
-    public MainMenu() {
+    public MainMenu(Game game) {
+        this.game = game;
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -185,30 +185,27 @@ public class MainMenu extends javax.swing.JFrame {
     }
 
     private void SignUpActionPerformed(java.awt.event.ActionEvent evt) {
-
     }
 
     private void LoginMouseClicked(java.awt.event.MouseEvent evt) {
-        /* TODO add your handling code here: */
-        login lgf = new login(this.game);
+        // TODO add your handling code here:
+        login lgf = new login(game);
         lgf.setVisible(true);
         lgf.pack();
         lgf.setLocationRelativeTo(null);
         lgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
 
-
     }
 
     private void SignUpMouseClicked(java.awt.event.MouseEvent evt) {
-        /* TODO add your handling code here:*/
+        /* TODO add your handling code here:  */
         RegisterFrom rgf = new RegisterFrom(this.game);
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
         rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
-
 
     }
 
@@ -228,6 +225,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     public void startApp(Game game) {
         this.game = game;
+        System.out.println("[ADDRESS] Main Menu");
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -254,7 +252,7 @@ public class MainMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainMenu().setVisible(true);
+                new MainMenu(game).setVisible(true);
             }
         });
     }

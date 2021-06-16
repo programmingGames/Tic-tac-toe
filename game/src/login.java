@@ -1,4 +1,4 @@
-
+import java.rmi.RemoteException;
 import javax.swing.JFrame;
 
 /*
@@ -18,6 +18,7 @@ public class login extends javax.swing.JFrame {
      */
     public login(Game game) {
         this.game = game;
+        System.out.println("[ADDRESS] Login");
         initComponents();
         this.setLocationRelativeTo(null); //coloca a janela no meio da tela
     }
@@ -115,7 +116,11 @@ public class login extends javax.swing.JFrame {
         Login.setText("LOGIN");
         Login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginActionPerformed(evt);
+                try {
+                    LoginActionPerformed(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -215,26 +220,32 @@ public class login extends javax.swing.JFrame {
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        System.out.println(jTextField1.getText());
     }
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        System.out.println(jPasswordField1.getPassword());
-
     }
 
-    private void LoginActionPerformed(java.awt.event.ActionEvent evt) {
+    private void LoginActionPerformed(java.awt.event.ActionEvent evt) throws RemoteException {
         // TODO add your handling code here:
+        int id=-1, i =0;
+        String passWd="";
+
         // game.
-        System.out.println(jTextField1.getText());
-        System.out.println(jPasswordField1.getPassword());
-        PlayGame pq = new PlayGame();
-        pq.setVisible(true);
-        pq.pack();
-        pq.setLocationRelativeTo(null);
-        pq.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
+        char[] pass = jPasswordField1.getPassword();
+        for (; i <= pass.length-1; i++){
+            passWd=passWd+pass[i];
+        }
+
+        id = this.game.validate(jTextField1.getText(),passWd);
+        if (id != -1){
+            PlayGame home = new PlayGame(this.game);
+            home.setVisible(true);
+            home.pack();
+            home.setLocationRelativeTo(null);
+            home.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();
+        }
 
     }
 
@@ -251,16 +262,17 @@ public class login extends javax.swing.JFrame {
 
     private void LabelRegisterMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        RegisterFrom rgf = new RegisterFrom(this.game);
+       /* RegisterFrom rgf = new RegisterFrom();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
         rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
+        this.dispose();*/
 
     }
 
     private void QUITGAMEMouseClicked(java.awt.event.MouseEvent evt) {
+        // Craido sem querer
         QuitGame qg = new QuitGame();
         qg.setVisible(true);
         qg.pack();
@@ -269,7 +281,9 @@ public class login extends javax.swing.JFrame {
         this.dispose();
     }
 
-    public static void startLogin(Game game) {
+
+    public void startLogin(Game game) {
+        this.game = game;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

@@ -34,8 +34,8 @@ public class CardNotification extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         quit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        CONTINUE = new javax.swing.JButton();
-        CardNotification = new javax.swing.JLabel();
+        CrossNotification = new javax.swing.JLabel();
+        Continue = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -52,7 +52,7 @@ public class CardNotification extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addContainerGap(122, Short.MAX_VALUE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(LabelLogin)
                                 .addGap(110, 110, 110))
         );
@@ -76,7 +76,7 @@ public class CardNotification extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
                 jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 43, Short.MAX_VALUE)
+                        .addGap(0, 46, Short.MAX_VALUE)
         );
 
         quit.setBackground(new java.awt.Color(255, 10, 10));
@@ -96,24 +96,29 @@ public class CardNotification extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 22)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(5, 90, 255));
-        jLabel1.setText("You are using this Card");
+        jLabel1.setText("Your card is");
 
-        CONTINUE.setBackground(new java.awt.Color(37, 137, 222));
-        CONTINUE.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        CONTINUE.setForeground(new java.awt.Color(0, 0, 0));
-        CONTINUE.setText("CONTINUE");
-        CONTINUE.addMouseListener(new java.awt.event.MouseAdapter() {
+        CrossNotification.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross -Big.png"))); // NOI18N
+        CrossNotification.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                CrossNotificationComponentAdded(evt);
+            }
+        });
+
+        Continue.setBackground(new java.awt.Color(37, 132, 222));
+        Continue.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        Continue.setForeground(new java.awt.Color(0, 0, 0));
+        Continue.setText("CONTINUE");
+        Continue.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CONTINUEMouseClicked(evt);
+                ContinueMouseClicked(evt);
             }
         });
-        CONTINUE.addActionListener(new java.awt.event.ActionListener() {
+        Continue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CONTINUEActionPerformed(evt);
+                ContinueActionPerformed(evt);
             }
         });
-
-        CardNotification.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -122,32 +127,29 @@ public class CardNotification extends javax.swing.JFrame {
                         .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(66, 66, 66)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(CONTINUE, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(Continue, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(quit, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap(60, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                                .addComponent(jLabel1)
-                                                .addGap(93, 93, 93))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                                .addComponent(CardNotification)
-                                                .addGap(181, 181, 181))))
+                                        .addComponent(jLabel1)
+                                        .addComponent(CrossNotification))
+                                .addGap(139, 139, 139))
         );
         jPanel3Layout.setVerticalGroup(
                 jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(28, 28, 28)
                                 .addComponent(jLabel1)
-                                .addGap(47, 47, 47)
-                                .addComponent(CardNotification)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-                                .addComponent(CONTINUE, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(quit, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
+                                .addGap(33, 33, 33)
+                                .addComponent(CrossNotification)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                                .addComponent(Continue, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(quit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35)
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -196,20 +198,22 @@ public class CardNotification extends javax.swing.JFrame {
         this.dispose();
     }
 
-    private void CONTINUEMouseClicked(java.awt.event.MouseEvent evt) {
+    private void CrossNotificationComponentAdded(java.awt.event.ContainerEvent evt) {
         // TODO add your handling code here:
-        System.exit(0);
-
     }
 
-    private void CONTINUEActionPerformed(java.awt.event.ActionEvent evt) {
+    private void ContinueMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        Match mth = new Match();
+        /*Match mth = new Match();
         mth.setVisible(true);
         mth.pack();
         mth.setLocationRelativeTo(null);
         mth.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
+        this.dispose();*/
+    }
+
+    private void ContinueActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
     }
 
     /**
@@ -248,8 +252,8 @@ public class CardNotification extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify
-    private javax.swing.JButton CONTINUE;
-    private javax.swing.JLabel CardNotification;
+    private javax.swing.JButton Continue;
+    private javax.swing.JLabel CrossNotification;
     private javax.swing.JLabel LabelLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

@@ -4,16 +4,19 @@
  * and open the template in the editor.
  */
 import javax.swing.JFrame;
+import java.rmi.RemoteException;
 /**
  *
  * @author rafael
  */
 public class CardChoice extends javax.swing.JFrame {
-
+    Game game;
     /**
      * Creates new form CardChoice
      */
-    public CardChoice() {
+    public CardChoice(Game game) {
+        this.game = game;
+        System.out.println("[ADDRESS] Card Choice");
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -83,7 +86,11 @@ public class CardChoice extends javax.swing.JFrame {
         CardCross.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png"))); // NOI18N
         CardCross.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CardCrossMouseClicked(evt);
+                try {
+                    CardCrossMouseClicked(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
         CardCross.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +100,7 @@ public class CardChoice extends javax.swing.JFrame {
         });
 
         CardCircle.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        CardCircle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png"))); // NOI18N
+        CardCircle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/circle.png"))); // NOI18N
         CardCircle.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 CardCircleMouseClicked(evt);
@@ -101,7 +108,11 @@ public class CardChoice extends javax.swing.JFrame {
         });
         CardCircle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CardCircleActionPerformed(evt);
+                try {
+                    CardCircleActionPerformed(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -189,20 +200,6 @@ public class CardChoice extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
-    private void CardCrossMouseClicked(java.awt.event.MouseEvent evt) {
-        // TODO add your handling code here:
-        Match mth = new Match();
-        mth.setVisible(true);
-        mth.pack();
-        mth.setLocationRelativeTo(null);
-        mth.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
-    }
-
-    private void CardCrossActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
     private void quitMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
     }
@@ -217,9 +214,25 @@ public class CardChoice extends javax.swing.JFrame {
         this.dispose();
     }
 
-    private void CardCircleActionPerformed(java.awt.event.ActionEvent evt) {
+    private void CardCrossActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        Match mth = new Match();
+    }
+
+    private void CardCrossMouseClicked(java.awt.event.MouseEvent evt) throws  RemoteException{
+        // TODO add your handling code here:
+        this.game.setcardChoice(1);
+        Match mth = new Match(this.game);
+        mth.setVisible(true);
+        mth.pack();
+        mth.setLocationRelativeTo(null);
+        mth.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }
+
+    private void CardCircleActionPerformed(java.awt.event.ActionEvent evt) throws  RemoteException{
+        // TODO add your handling code here:
+        this.game.setcardChoice(0);
+        Match mth = new Match(this.game);
         mth.setVisible(true);
         mth.pack();
         mth.setLocationRelativeTo(null);
@@ -229,18 +242,11 @@ public class CardChoice extends javax.swing.JFrame {
 
     private void CardCircleMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        /*RegisterFrom rgf = new RegisterFrom();
-        rgf.setVisible(true);
-        rgf.pack();
-        rgf.setLocationRelativeTo(null);
-        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();*/
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+
+    public void main(Game game) {
+        this.game = game;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -267,7 +273,7 @@ public class CardChoice extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CardChoice().setVisible(true);
+                new CardChoice(game).setVisible(true);
             }
         });
     }

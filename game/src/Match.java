@@ -4,20 +4,32 @@
  * and open the template in the editor.
  */
 
+import java.rmi.RemoteException;
+
 /**
  *
  * @author rafael
  */
 public class Match extends javax.swing.JFrame {
-
+    private Game game;
+    private String card;
     /**
      * Creates new form Match
      */
-    public Match() {
+    public Match(Game game) throws RemoteException{
+        this.game = game;
+        this.setCardImageName();
+        this.matchControl();
         initComponents();
         this.setLocationRelativeTo(null);
     }
-
+    public void setCardImageName() throws RemoteException {
+        int player = this.game.getPlayer();
+        if(player==1)
+            this.card = "cross.png";
+        else
+            this.card = "circle.png";
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -329,7 +341,7 @@ public class Match extends javax.swing.JFrame {
 
     private void Button1MouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        Button1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png")));
+        Button1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
     }
 
     private void Button5ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -338,42 +350,42 @@ public class Match extends javax.swing.JFrame {
 
     private void Button2MouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        Button2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png")));
+        Button2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
     }
 
     private void Button3MouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        Button3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png")));
+        Button3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
     }
 
     private void Button4MouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        Button4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png")));
+        Button4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
     }
 
     private void Button5MouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        Button5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png")));
+        Button5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
     }
 
     private void Button6MouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        Button6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png")));
+        Button6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
     }
 
     private void Button7MouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        Button7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png")));
+        Button7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
     }
 
     private void Button8MouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        Button8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png")));
+        Button8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
     }
 
     private void Button9MouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        Button9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png")));
+        Button9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
     }
 
     private void YourTurnAncestorAdded(javax.swing.event.AncestorEvent evt) {
@@ -412,10 +424,14 @@ public class Match extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+    public void matchControl() throws RemoteException {
+        this.game.playGame();
+        int[] values = game.play();
+
+    }
+
+    public void startMatch(Game game)  {
+        this.game = game;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -443,7 +459,11 @@ public class Match extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Match().setVisible(true);
+                try {
+                    new Match(game).setVisible(true);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
