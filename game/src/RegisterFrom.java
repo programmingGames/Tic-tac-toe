@@ -12,11 +12,12 @@ import javax.swing.JFrame;
  * @author rafael
  */
 public class RegisterFrom extends javax.swing.JFrame {
-
+    private Game game;
     /**
      * Creates new form RegisterFrom
      */
-    public RegisterFrom() {
+    public RegisterFrom(Game game) {
+        this.game = game;
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -231,7 +232,7 @@ public class RegisterFrom extends javax.swing.JFrame {
 
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        login lgf = new login();
+        login lgf = new login(this.game);
         lgf.setVisible(true);
         lgf.pack();
         lgf.setLocationRelativeTo(null);
@@ -257,10 +258,8 @@ public class RegisterFrom extends javax.swing.JFrame {
         this.dispose();
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+
+    public static void startRegister(Game game) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -287,7 +286,7 @@ public class RegisterFrom extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegisterFrom().setVisible(true);
+                new RegisterFrom(game).setVisible(true);
             }
         });
     }

@@ -27,6 +27,8 @@ public class TTTClient {
         catch(Exception e) {System.out.println("[Exception]:" + e.getMessage());System.exit(0);}
 
         Scanner input = new Scanner(System.in);
+        mainMenu.startApp(game);
+        /*
         while(run) {
             //mainMenu.startApp();
             loggedIn = TTTGame(loggedIn);
@@ -34,27 +36,19 @@ public class TTTClient {
             String answer = input.nextLine();
             if (answer.toLowerCase(Locale.ROOT).equals("n"))
                 run = false;
-        }
-    }
-    public void menusChoice(){
-        int esc = 0;
-        System.out.println("\n ------ TTT ------");
-        System.out.println("\n Escolha: ");
-        esc = keyboardSc.nextInt();
-        switch (esc){
-            case 0:
-
-        }
+        }*/
     }
 
     static boolean TTTGame (boolean loggedIn) throws RemoteException{
         int choice=0, gameLevel=0;
         boolean request=false;
-
+        //mainMenu.startApp();
         // 
         if(!loggedIn){
             // login painel
-            choice = menu.loginPainel();
+            //choice = mainMenu.getEsc();
+            //choice = menu.loginPainel(choice);
+
             if (choice==1){
                 do{
                     menu.login();
@@ -77,7 +71,7 @@ public class TTTClient {
         }
         // System.out.println(g.getAllUserInfo(userId));
         
-        // choise whit card to use
+        // choice whit card to use
         choice = game.multiplayerChoice();
         if (choice==1){
             gameLevel = menu.levelChoice();
@@ -94,7 +88,6 @@ public class TTTClient {
             game.sendMatchRequest();
             game.waitOpponent();
         }
-        //     // onde esta 1 futuramente tera o id do oponente
         
         if((loggedIn && choice != 3)||(loggedIn && choice == 3 && request)){
             game.playGame();

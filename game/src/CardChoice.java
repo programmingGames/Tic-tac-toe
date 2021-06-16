@@ -229,12 +229,12 @@ public class CardChoice extends javax.swing.JFrame {
 
     private void CardCircleMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        RegisterFrom rgf = new RegisterFrom();
+        /*RegisterFrom rgf = new RegisterFrom();
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
         rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
+        this.dispose();*/
     }
 
     /**

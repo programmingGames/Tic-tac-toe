@@ -9,7 +9,7 @@ import javax.swing.JFrame;
  * @author rafael
  */
 public class MainMenu extends javax.swing.JFrame {
-    private int esc=-1;
+    private Game game;
 
     /**
      * Creates new form MainMenu
@@ -182,38 +182,33 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>
 
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {
-        this.esc = 1;
     }
 
     private void SignUpActionPerformed(java.awt.event.ActionEvent evt) {
-        this.esc = 2;
+
     }
 
     private void LoginMouseClicked(java.awt.event.MouseEvent evt) {
-        /* TODO add your handling code here:
-        login lgf = new login();
+        /* TODO add your handling code here: */
+        login lgf = new login(this.game);
         lgf.setVisible(true);
         lgf.pack();
         lgf.setLocationRelativeTo(null);
         lgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
-        */
-        this.esc = 1;
-        System.out.println(esc);
+
 
     }
 
     private void SignUpMouseClicked(java.awt.event.MouseEvent evt) {
-        /* TODO add your handling code here:
-        RegisterFrom rgf = new RegisterFrom();
+        /* TODO add your handling code here:*/
+        RegisterFrom rgf = new RegisterFrom(this.game);
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
         rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
-        */
-        this.esc = 2;
-        System.out.println(esc);
+
 
     }
 
@@ -228,11 +223,11 @@ public class MainMenu extends javax.swing.JFrame {
         qg.pack();
         qg.setLocationRelativeTo(null);
         qg.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.esc = 2;
         this.dispose();
     }
 
-    public int startApp() {
+    public void startApp(Game game) {
+        this.game = game;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -262,7 +257,6 @@ public class MainMenu extends javax.swing.JFrame {
                 new MainMenu().setVisible(true);
             }
         });
-        return esc;
     }
 
     // Variables declaration - do not modify

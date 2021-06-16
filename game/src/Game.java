@@ -8,6 +8,7 @@ public class Game {
     private int winner = 0;
     private int player = 1; 
     private int userId = -1;
+    priva
     private int userBoardReference = -1;
     private String matchInfo[] = {"","","", "", "", ""};
     private int matchId = -1; // the id of the multiplayer macth going on
