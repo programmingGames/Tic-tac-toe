@@ -48,12 +48,12 @@ public class TTTClient {
     }
 
     static boolean TTTGame (boolean loggedIn) throws RemoteException{
-        int choice=0;
+        int choice=0, gameLevel=0;
         boolean request=false;
 
         // 
         if(!loggedIn){
-            // login painell
+            // login painel
             choice = menu.loginPainel();
             if (choice==1){
                 do{
@@ -80,6 +80,7 @@ public class TTTClient {
         // choise whit card to use
         choice = game.multiplayerChoice();
         if (choice==1){
+            gameLevel = menu.levelChoice();
             game.cardChoice(userId);
             game.setMyBoard();
         }

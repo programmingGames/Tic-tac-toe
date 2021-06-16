@@ -17,6 +17,7 @@ public class Menu {
             esc = keyboardSc.nextInt();
 
         }while(esc<1 && esc>2);
+
         return esc;
     }
     // allow the user to enter his info
@@ -56,5 +57,19 @@ public class Menu {
     public String[] getUserInfo(){
         String userInfo[] = {user, passwd};
         return userInfo;
+    }
+    public int levelChoice(){
+        int esc=0;
+        do{
+            System.out.println("\n ------ TTT ------");
+            System.out.println("\n Chose your game level: ");
+            System.out.println("\n\t< 1 > Easy \n\t< 2 > normal \n\t< 3 > Hard");
+            System.out.print("\n Choice: ");
+            esc = keyboardSc.nextInt();
+            if(esc < 1 && esc > 3){
+                System.out.println("\n[ERROR] invalid choice)");
+            }
+        }while(esc < 1 && esc > 3);
+        return esc;
     }
 }

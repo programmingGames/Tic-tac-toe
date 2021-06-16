@@ -301,29 +301,30 @@ public class Game {
     }
 
     public void congratulate() throws RemoteException{
+        System.out.println("\tGame result: \n");
         if (winner == 2){
             System.out.printf("\n--------------------------------------");
             System.out.printf("\n--------------------------------------\n");
             System.out.printf("\n            There is a tie            \n");
             System.out.printf("\n--------------------------------------");
             System.out.printf("\n--------------------------------------\n\n");
+            ttt.updateUser(userId, "nrEmpates", ttt.getUserValue(userId,"nrEmpates")+1);
         }
-       
-        else
-            System.out.println("\tGame result: \n");
-            if (winner == this.myCard){
+        else if (winner == this.myCard){
                 System.out.printf("\n--------------------------------------");
                 System.out.printf("\n--------------------------------------\n");
                 System.out.printf("\n           You are the Winner         \n");
                 System.out.printf("\n--------------------------------------");
                 System.out.printf("\n--------------------------------------\n");
-            }
-            else{
+                ttt.updateUser(userId, "nrVitorias", ttt.getUserValue(userId,"nrVitorias")+1);
+        }
+        else{
                 System.out.printf("\n--------------------------------------");
                 System.out.printf("\n--------------------------------------\n");
                 System.out.printf("\n               You lose               \n");
                 System.out.printf("\n--------------------------------------");
                 System.out.printf("\n--------------------------------------\n\n");
+                ttt.updateUser(userId, "nrDerrotas", ttt.getUserValue(userId,"nrDerrotas")+1);
             }
     }
 }

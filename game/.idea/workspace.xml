@@ -3,6 +3,25 @@
   <component name="ChangeListManager">
     <list default="true" id="97fb8d8d-2ef5-4103-ade2-01af40e430e6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/MainMenu$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/MainMenu$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/MainMenu$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/MainMenu$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/MainMenu$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/MainMenu$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/MainMenu$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/MainMenu$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/MainMenu$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/MainMenu$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/MainMenu$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/MainMenu$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/MainMenu$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/MainMenu$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/MainMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/MainMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Menu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TTTClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TTTClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/out/production/server/Match.class" beforeDir="false" afterPath="$PROJECT_DIR$/../server/out/production/server/Match.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/out/production/server/TTT.class" beforeDir="false" afterPath="$PROJECT_DIR$/../server/out/production/server/TTT.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/Match.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/TTT.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/TTT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/../server/users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +48,18 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.TTTClient">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MainMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MainMenu" />
       <module name="game" />
@@ -39,6 +69,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TTTClient" />
         <item itemvalue="Application.MainMenu" />
       </list>
     </recent_temporary>
