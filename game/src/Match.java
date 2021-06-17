@@ -368,7 +368,7 @@ public class Match extends javax.swing.JFrame {
 
     private void Button8MouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        Button8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png")));
+        Button8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/circle.png")));
     }
 
     private void Button9MouseClicked(java.awt.event.MouseEvent evt) {

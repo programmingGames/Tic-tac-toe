@@ -5,12 +5,13 @@ import java.rmi.registry.Registry;
 //
 public class TTTServer {
     public static void main(String args[]) throws IOException {
-        int registryPort = 3002;
+        int registryPort = 3001;
         System.out.println("Main OK");
 
         try {
             TTTService tttGame =  new TTT();
             System.out.println("After create");
+            //tttGame.initializingApp();
             Registry reg = LocateRegistry.createRegistry(registryPort);
             System.out.println("Local Registry OK");
             reg.rebind("TTTService", tttGame);
@@ -19,6 +20,7 @@ public class TTTServer {
         } catch(Exception e) {
             System.out.println("TTT server main " + e.getMessage());
         }
+
         System.out.println("Activity Details: \n");
     }
 }

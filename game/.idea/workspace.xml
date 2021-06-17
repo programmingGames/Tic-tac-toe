@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97fb8d8d-2ef5-4103-ade2-01af40e430e6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../server/src/server.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/TTTServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/TTTServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +54,7 @@
       <updated>1623771655952</updated>
       <workItem from="1623771670750" duration="1110000" />
       <workItem from="1623776008458" duration="108000" />
+      <workItem from="1623853879560" duration="194000" />
     </task>
     <servers />
   </component>
