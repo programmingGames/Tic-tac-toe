@@ -394,11 +394,12 @@ public class Match extends javax.swing.JFrame {
         if(!this.isMe && !this.weHaveAWinner())
             matchControl();
         else if (this.weHaveAWinner()){
+            this.game.restartBoard();
             if(this.winner == 2){
                 /* tei class */
             }
             else if(this.winner == this.game.getMyCard()){
-                Winner win = new Winner();
+                Winner win = new Winner(this.game);
                 win.setVisible(true);
                 win.pack();
                 win.setLocationRelativeTo(null);
@@ -406,7 +407,7 @@ public class Match extends javax.swing.JFrame {
                 this.dispose();
             }
             else{
-                Lose ls = new Lose();
+                Lose ls = new Lose(this.game);
                 ls.setVisible(true);
                 ls.pack();
                 ls.setLocationRelativeTo(null);

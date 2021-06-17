@@ -9,11 +9,12 @@ import javax.swing.JFrame;
  * @author rafael
  */
 public class Lose extends javax.swing.JFrame {
-
+    Game game;
     /**
      * Creates new form Lose
      */
-    public Lose() {
+    public Lose(Game game) {
+        this.game = game;
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -68,7 +69,7 @@ public class Lose extends javax.swing.JFrame {
         quit.setBackground(new java.awt.Color(255, 10, 10));
         quit.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         quit.setForeground(new java.awt.Color(0, 0, 0));
-        quit.setText("QUIT");
+        quit.setText("Continue");
         quit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 quitMouseClicked(evt);
@@ -168,7 +169,7 @@ public class Lose extends javax.swing.JFrame {
 
     private void quitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitActionPerformed
         // TODO add your handling code here:
-        QuitGame qg = new QuitGame();
+        PlayGame qg = new PlayGame(this.game);
         qg.setVisible(true);
         qg.pack();
         qg.setLocationRelativeTo(null);
@@ -176,10 +177,9 @@ public class Lose extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_quitActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+
+    public void lose(Game game) {
+        this.game = game;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -206,7 +206,7 @@ public class Lose extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Lose().setVisible(true);
+                new Lose(game).setVisible(true);
             }
         });
     }

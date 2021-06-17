@@ -2,33 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97fb8d8d-2ef5-4103-ade2-01af40e430e6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/out/production/game/Friends.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Friends.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/game/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game/Match$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Match$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game/Match$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Match$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game/Match$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Match$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game/Match$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Match$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game/Match$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Match$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game/Match$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Match$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game/Match$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Match$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game/Match$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Match$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game/Match$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Match$17.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game/Match$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Match$18.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game/Match$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Match$19.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game/Match$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Match$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/game/Match$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Match$20.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game/Match$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Match$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game/Match$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Match$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game/Match$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Match$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game/Match$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Match$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game/Match$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Match$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game/Match$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Match$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game/Match$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Match$9.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/game/Match.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Match.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Computer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Computer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Friends.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Friends.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Lose.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lose.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Match.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Winner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Winner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/../server/users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -63,6 +44,7 @@
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RunManager" selected="Application.TTTClient">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
@@ -85,16 +67,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TTTClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="TTTClient" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="TTTClient" />
       <module name="game" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TTTClient_1" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="TTTClient" />
+      <module name="game" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.TTTClient" />
+      <item itemvalue="Application.TTTClient_1" />
+      <item itemvalue="Application.MainMenu" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TTTClient" />
         <item itemvalue="Application.MainMenu" />
       </list>
     </recent_temporary>
@@ -128,6 +121,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/game$TTTClient.ic" NAME="TTTClient Coverage Results" MODIFIED="1623952475216" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/game$TTTClient.ic" NAME="TTTClient Coverage Results" MODIFIED="1623961977286" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

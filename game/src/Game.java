@@ -295,6 +295,7 @@ public class Game {
 
     public void restartBoard() throws RemoteException{
         ttt.restart(userBoardReference, userId);
+        this.player = 1;
     }
 
     public int getComputerPlay() throws  RemoteException{
@@ -308,31 +309,6 @@ public class Game {
             accepted =  ttt.play( --play / 3, play % 3, player, userBoardReference);
         System.out.println(ttt.currentBoard(userBoardReference));
         return accepted;
-
-
-
-
-            //winner = ttt.checkWinner(userBoardReference);
-
-        //ttt.restart(userBoardReference, userId);
-
-        /*if (multiPlayer == 2){
-            ttt.endMatch(matchId); // ending the match
-            iRequest = false;
-            multiPlayer = 0;
-            userBoardReference = ttt.getUserValue(userId, "boardReference");
-            matchId = -1; //
-
-        }
-        this.player = 1;*/
-        //int ac;
-        //if (playAccepted)
-          //  ac=1;
-        //else
-          //  ac=0;
-
-        //return new int[]{ac, winner};
-
     }
 
     public int getWinner() throws  RemoteException{
