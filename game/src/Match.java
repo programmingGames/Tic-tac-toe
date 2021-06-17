@@ -4,20 +4,45 @@
  * and open the template in the editor.
  */
 
+import javax.swing.*;
+import java.rmi.RemoteException;
+
 /**
  *
  * @author rafael
  */
 public class Match extends javax.swing.JFrame {
+    private Game game;
+    private int winner;
+    private boolean isMe;
+    private boolean[] buttonPressed = {false, false, false, false, false, false, false, false, false};
+    private String card;
 
     /**
      * Creates new form Match
      */
-    public Match() {
+    public Match(Game game) throws RemoteException{
+        this.game = game;
+
+        this.setCardImageName();
         initComponents();
+        this.verifyNext();
         this.setLocationRelativeTo(null);
     }
+    public void setIsMe() throws RemoteException{
+        if(this.game.getMyCard()==this.game.getPlayer())
+            this.isMe = true;
+        else
+            this.isMe = false;
+    }
 
+    public void setCardImageName() throws RemoteException {
+        int player = this.game.getPlayer();
+        if(player==1)
+            this.card = "cross.png";
+        else
+            this.card = "circle.png";
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -77,7 +102,11 @@ public class Match extends javax.swing.JFrame {
 
         Button1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Button1MouseClicked(evt);
+                try {
+                    Button1MouseClicked(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
         Button1.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +117,11 @@ public class Match extends javax.swing.JFrame {
 
         Button2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Button2MouseClicked(evt);
+                try {
+                    Button2MouseClicked(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
         Button2.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +132,11 @@ public class Match extends javax.swing.JFrame {
 
         Button3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Button3MouseClicked(evt);
+                try {
+                    Button3MouseClicked(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
         Button3.addActionListener(new java.awt.event.ActionListener() {
@@ -110,7 +147,11 @@ public class Match extends javax.swing.JFrame {
 
         Button4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Button4MouseClicked(evt);
+                try {
+                    Button4MouseClicked(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
         Button4.addActionListener(new java.awt.event.ActionListener() {
@@ -121,7 +162,11 @@ public class Match extends javax.swing.JFrame {
 
         Button5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Button5MouseClicked(evt);
+                try {
+                    Button5MouseClicked(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
         Button5.addActionListener(new java.awt.event.ActionListener() {
@@ -132,7 +177,11 @@ public class Match extends javax.swing.JFrame {
 
         Button6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Button6MouseClicked(evt);
+                try {
+                    Button6MouseClicked(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
         Button6.addActionListener(new java.awt.event.ActionListener() {
@@ -143,19 +192,31 @@ public class Match extends javax.swing.JFrame {
 
         Button7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Button7MouseClicked(evt);
+                try {
+                    Button7MouseClicked(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         Button8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Button8MouseClicked(evt);
+                try {
+                    Button8MouseClicked(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         Button9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Button9MouseClicked(evt);
+                try {
+                    Button9MouseClicked(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
         Button9.addActionListener(new java.awt.event.ActionListener() {
@@ -327,53 +388,176 @@ public class Match extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
-    private void Button1MouseClicked(java.awt.event.MouseEvent evt) {
+    private void verifyNext() throws  RemoteException{
+        this.game.setPlayer();
+        this.setIsMe();
+        if(!this.isMe && !this.weHaveAWinner())
+            matchControl();
+        else if (this.weHaveAWinner()){
+            if(this.winner == 2){
+                /* tei class */
+            }
+            else if(this.winner == this.game.getMyCard()){
+                Winner win = new Winner();
+                win.setVisible(true);
+                win.pack();
+                win.setLocationRelativeTo(null);
+                win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                this.dispose();
+            }
+            else{
+                Lose ls = new Lose();
+                ls.setVisible(true);
+                ls.pack();
+                ls.setLocationRelativeTo(null);
+                ls.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                this.dispose();
+            }
+        }
+    }
+    private boolean weHaveAWinner() throws RemoteException{
+        this.winner = this.game.getWinner();
+        if (this.winner==-1)
+            return false;
+        return true;
+    }
+    private void Button1MouseClicked(java.awt.event.MouseEvent evt) throws RemoteException{
         // TODO add your handling code here:
-        Button1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png")));
+        boolean playAccepted;
+        if(!this.buttonPressed[0]){
+            playAccepted = this.game.play(1);
+            if (playAccepted){
+                this.setCardImageName();
+                Button1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
+                System.out.println("Button: 1");
+                this.buttonPressed[0]=true;
+                this.verifyNext();
+            }
+        }
     }
 
     private void Button5ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void Button2MouseClicked(java.awt.event.MouseEvent evt) {
+    private void Button2MouseClicked(java.awt.event.MouseEvent evt) throws RemoteException{
         // TODO add your handling code here:
-        Button2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png")));
+        boolean playAccepted;
+        if(!this.buttonPressed[1]){
+            playAccepted = this.game.play(2);
+            if (playAccepted){
+                this.setCardImageName();
+                Button2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
+                System.out.println("Button: 2");
+                this.buttonPressed[1]=true;
+                this.verifyNext();
+            }
+        }
     }
 
-    private void Button3MouseClicked(java.awt.event.MouseEvent evt) {
+    private void Button3MouseClicked(java.awt.event.MouseEvent evt) throws  RemoteException{
         // TODO add your handling code here:
-        Button3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png")));
+        boolean playAccepted;
+        if(!this.buttonPressed[2]){
+            playAccepted = this.game.play(3);
+            if (playAccepted){
+                this.setCardImageName();
+                Button3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
+                System.out.println("Button: 3");
+                this.buttonPressed[2]=true;
+                this.verifyNext();
+            }
+        }
     }
 
-    private void Button4MouseClicked(java.awt.event.MouseEvent evt) {
+    private void Button4MouseClicked(java.awt.event.MouseEvent evt) throws RemoteException{
         // TODO add your handling code here:
-        Button4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png")));
+        boolean playAccepted;
+        if(!this.buttonPressed[3]){
+            playAccepted = this.game.play(4);
+            if (playAccepted){
+                this.setCardImageName();
+                Button4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
+                System.out.println("Button: 4");
+                this.buttonPressed[3]=true;
+                this.verifyNext();
+            }
+        }
     }
 
-    private void Button5MouseClicked(java.awt.event.MouseEvent evt) {
+    private void Button5MouseClicked(java.awt.event.MouseEvent evt) throws RemoteException{
         // TODO add your handling code here:
-        Button5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png")));
+        boolean playAccepted;
+        if(!this.buttonPressed[4]){
+            playAccepted = this.game.play(5);
+            if(playAccepted){
+                this.setCardImageName();
+                Button5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
+                System.out.println("Button: 5");
+                this.buttonPressed[4]=true;
+                this.verifyNext();
+            }
+        }
     }
 
-    private void Button6MouseClicked(java.awt.event.MouseEvent evt) {
+    private void Button6MouseClicked(java.awt.event.MouseEvent evt) throws RemoteException{
         // TODO add your handling code here:
-        Button6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png")));
+        boolean playAccepted;
+        if(!this.buttonPressed[5]){
+            playAccepted = this.game.play(6);
+            if(playAccepted){
+                this.setCardImageName();
+                Button6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
+                System.out.println("Button: 6");
+                this.buttonPressed[5]=true;
+                this.verifyNext();
+            }
+        }
     }
 
-    private void Button7MouseClicked(java.awt.event.MouseEvent evt) {
+    private void Button7MouseClicked(java.awt.event.MouseEvent evt) throws RemoteException{
         // TODO add your handling code here:
-        Button7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png")));
+        boolean playAccepted;
+        if(!this.buttonPressed[6]){
+            playAccepted = this.game.play(7);
+            if (playAccepted){
+                this.setCardImageName();
+                Button7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
+                System.out.println("Button: 7");
+                this.buttonPressed[6]=true;
+                this.verifyNext();
+            }
+        }
     }
 
-    private void Button8MouseClicked(java.awt.event.MouseEvent evt) {
+    private void Button8MouseClicked(java.awt.event.MouseEvent evt) throws RemoteException{
         // TODO add your handling code here:
-        Button8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png")));
+        boolean playAccepted;
+        if(!this.buttonPressed[7]){
+            playAccepted = this.game.play(8);
+            if (playAccepted){
+                this.setCardImageName();
+                Button8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
+                System.out.println("Button: 8");
+                this.buttonPressed[7]=true;
+                this.verifyNext();
+            }
+        }
     }
 
-    private void Button9MouseClicked(java.awt.event.MouseEvent evt) {
+    private void Button9MouseClicked(java.awt.event.MouseEvent evt) throws  RemoteException{
         // TODO add your handling code here:
-        Button9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross.png")));
+        boolean playAccepted;
+        if(!this.buttonPressed[8]){
+            playAccepted = this.game.play(9);
+            if(playAccepted){
+                this.setCardImageName();
+                Button9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
+                System.out.println("Button: 9");
+                this.buttonPressed[8]=true;
+                this.verifyNext();
+            }
+        }
     }
 
     private void YourTurnAncestorAdded(javax.swing.event.AncestorEvent evt) {
@@ -412,10 +596,61 @@ public class Match extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+    public void opponentPlay(int play) throws RemoteException {
+        switch(play) {
+            case 1:
+                this.Button1MouseClicked(null);
+                break;
+            case 2:
+                this.Button2MouseClicked(null);
+                break;
+            case 3:
+                this.Button3MouseClicked(null);
+                break;
+            case 4:
+                this.Button4MouseClicked(null);
+                break;
+            case 5:
+                this.Button5MouseClicked(null);
+                break;
+            case 6:
+                this.Button6MouseClicked(null);
+                break;
+            case 7:
+                this.Button7MouseClicked(null);
+                break;
+            case 8:
+                this.Button8MouseClicked(null);
+                break;
+            case 9:
+                this.Button9MouseClicked(null);
+                break;
+        }
+    }
+
+    public void matchControl() throws RemoteException {
+        int computerPlay=0;boolean valid;
+        if(this.game.getMultiPlayer()==1){
+            do{
+                valid=true;
+                computerPlay = this.game.getComputerPlay();
+                if(this.buttonPressed[computerPlay-1])
+                    valid = false;
+                if(computerPlay>9)
+                    valid = false;
+                if(computerPlay<1)
+                    valid = false;
+                System.out.println("Computer: "+computerPlay);
+            }while(!valid);
+            System.out.println("Computer: "+computerPlay);
+            this.opponentPlay(computerPlay);
+        }
+        System.out.println(this.isMe);
+
+    }
+
+    public void startMatch(Game game)  {
+        this.game = game;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -443,7 +678,11 @@ public class Match extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Match().setVisible(true);
+                try {
+                    new Match(game).setVisible(true);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

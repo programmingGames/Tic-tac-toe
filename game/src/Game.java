@@ -10,7 +10,8 @@ public class Game {
     private int userId = -1;
     private int userBoardReference = -1;
     private String matchInfo[] = {"","","", "", "", ""};
-    private int matchId = -1; // the id of the multiplayer macth going on
+    private String user, passwd;
+    private int matchId = -1; // the id of the multiplayer match going on
     private String enimyInfo[] = {"", ""};// to store the current enimy info 
     private int multiPlayer = 0; // is the user wants to play whit pc or whit someone (pc = 1, someone=2)
     private boolean iRequest = false;
@@ -130,6 +131,19 @@ public class Game {
         return ttt.getUserInfo(id);
     }
 
+    // to get all the active users
+    public String[] getAllActiveUser() throws  RemoteException{
+        return ttt.allActiveUser(userId).split("\n");
+    }
+
+    public String[] getEnimyInfo() {
+        return enimyInfo;
+    }
+
+    public void setEnimyInfo(String[] enimyInfo) {
+        this.enimyInfo = enimyInfo;
+    }
+
     // public show all active user
     public void allActiveUser() throws RemoteException{
         String allUser[] = ttt.allActiveUser(userId).split("\n");
@@ -158,7 +172,8 @@ public class Game {
         // System.out.println(ttt.allActiveUser());
     }
 
-    // to allow the user to chose if he wants to playe whit the pc or whit someone else
+
+    // to allow the user to chose if he wants to play whit the pc or whit someone else
     public int multiplayerChoice()throws RemoteException{
         int choice = -1;
         do {
@@ -195,16 +210,31 @@ public class Game {
     }
 
     // method to allow the user to chose what player he is.
-    public void cardChoice(int idPlayer)  throws RemoteException{
-        do {
-            System.out.println("Chose or card to play: \n");
-            System.out.println("\t< 0 > O\n\t< 1 > X");
-            System.out.print("  Choice: ");
-            myCard = keyboardSc.nextInt();
-            if(myCard < 0 && myCard >1)
-                System.out.println("[ERROR] choice not valide.");
-        }while(myCard < 0 && myCard > 1);
-        ttt.updateUser(idPlayer, "myCard",myCard); 
+    public void setcardChoice(int card)  throws RemoteException{
+        this.myCard = card;
+        System.out.println(userId);
+        ttt.updateUser(userId, "myCard",myCard);
+    }
+
+    public int getMultiPlayer() {
+        return multiPlayer;
+    }
+
+    public void setMultiPlayer(int multiPlayer) {
+        this.multiPlayer = multiPlayer;
+    }
+
+
+    // method to get the player.
+    public int getPlayer()  throws RemoteException{
+        return this.player ;
+    }
+    public void setPlayer(){
+        this.player = ++this.player % 2;
+    }
+
+    public int getMyCard(){
+        return this.myCard;
     }
 
     // 
@@ -263,6 +293,52 @@ public class Game {
         return play;
     }
 
+    public void restartBoard() throws RemoteException{
+        ttt.restart(userBoardReference, userId);
+    }
+
+    public int getComputerPlay() throws  RemoteException{
+        char possibleMoves[] = {1, 2, 3, 4, 5 ,6 , 7, 8, 9};
+        possibleMoves = ttt.getPossibleMoves(userBoardReference);
+        return computer.makePlay(level, possibleMoves);
+    }
+
+    public boolean play(int play) throws RemoteException{
+        boolean accepted;
+            accepted =  ttt.play( --play / 3, play % 3, player, userBoardReference);
+        System.out.println(ttt.currentBoard(userBoardReference));
+        return accepted;
+
+
+
+
+            //winner = ttt.checkWinner(userBoardReference);
+
+        //ttt.restart(userBoardReference, userId);
+
+        /*if (multiPlayer == 2){
+            ttt.endMatch(matchId); // ending the match
+            iRequest = false;
+            multiPlayer = 0;
+            userBoardReference = ttt.getUserValue(userId, "boardReference");
+            matchId = -1; //
+
+        }
+        this.player = 1;*/
+        //int ac;
+        //if (playAccepted)
+          //  ac=1;
+        //else
+          //  ac=0;
+
+        //return new int[]{ac, winner};
+
+    }
+
+    public int getWinner() throws  RemoteException{
+        return ttt.checkWinner(userBoardReference);
+    }
+
     public void playGame() throws RemoteException{
         int play;
         boolean playAccepted;
@@ -286,44 +362,53 @@ public class Game {
             
         } while (winner == -1);
         ttt.restart(userBoardReference, userId);
-        ttt.endMatch(matchId); // ending the match
 
         if (multiPlayer == 2){
+            ttt.endMatch(matchId); // ending the match
             iRequest = false;
             multiPlayer = 0;
             userBoardReference = ttt.getUserValue(userId, "boardReference");
             matchId = -1; // 
 
-            
         }
         this.player = 1;
-        
+        congratulate();
     }
 
     public void congratulate() throws RemoteException{
+        System.out.println("\tGame result: \n");
         if (winner == 2){
             System.out.printf("\n--------------------------------------");
             System.out.printf("\n--------------------------------------\n");
             System.out.printf("\n            There is a tie            \n");
             System.out.printf("\n--------------------------------------");
             System.out.printf("\n--------------------------------------\n\n");
+            ttt.updateUser(userId, "nrEmpates", ttt.getUserValue(userId,"nrEmpates")+1);
         }
-       
-        else
-            System.out.println("\tGame result: \n");
-            if (winner == this.myCard){
+        else if (winner == this.myCard){
                 System.out.printf("\n--------------------------------------");
                 System.out.printf("\n--------------------------------------\n");
                 System.out.printf("\n           You are the Winner         \n");
                 System.out.printf("\n--------------------------------------");
                 System.out.printf("\n--------------------------------------\n");
-            }
-            else{
+                ttt.updateUser(userId, "nrVitorias", ttt.getUserValue(userId,"nrVitorias")+1);
+        }
+        else{
                 System.out.printf("\n--------------------------------------");
                 System.out.printf("\n--------------------------------------\n");
                 System.out.printf("\n               You lose               \n");
                 System.out.printf("\n--------------------------------------");
                 System.out.printf("\n--------------------------------------\n\n");
+                ttt.updateUser(userId, "nrDerrotas", ttt.getUserValue(userId,"nrDerrotas")+1);
             }
+    }
+
+    // method to get the user input
+    public String[] getUserInfo(){
+        String userInfo[] = {user, passwd};
+        return userInfo;
+    }
+    public void levelChoice(int level){
+        this.level = level;
     }
 }

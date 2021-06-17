@@ -2,7 +2,7 @@ import java.rmi.RemoteException;
 
 public class Computer {
 
-    public int RandomRange(int min, int max){
+    public int randomRange(int min, int max){
         return (int) ((Math.random() * (max - min)) + min);
     }
 
@@ -14,7 +14,7 @@ public class Computer {
         boolean go = true;
         int option = 100;
         while(go){
-            option = RandomRange(1, 9);
+            option = randomRange(1, 9);
             Character c1 = possibleMoves[option-1];
             Character c2 = 'O'; Character c3 = 'X';
             go = c1.equals(c2) || c1.equals(c3);
@@ -23,9 +23,9 @@ public class Computer {
     }
 
     public int makePlay(int level, char[] possibleMoves) throws RemoteException{
-        if (level==1) {
-            return RandomMove(possibleMoves);
-        }
-        return getBestMoves(possibleMoves);
+        //if (level==1) {
+        return randomRange(1,10);
+        //}
+        //return getBestMoves(possibleMoves);
     }
 }

@@ -9,11 +9,13 @@ import javax.swing.JFrame;
  * @author rafael
  */
 public class ComputerLevel extends javax.swing.JFrame {
-
+    private Game game;
     /**
      * Creates new form ComputerLevel
      */
-    public ComputerLevel() {
+    public ComputerLevel(Game game) {
+        this.game = game;
+        System.out.println("[ADDRESS] Computer Level");
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -212,7 +214,8 @@ public class ComputerLevel extends javax.swing.JFrame {
 
     private void LevelEasyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LevelEasyMouseClicked
         // TODO add your handling code here:
-        CardChoice cdc = new CardChoice();
+        this.game.levelChoice(1);
+        CardChoice cdc = new CardChoice(game);
         cdc.setVisible(true);
         cdc.pack();
         cdc.setLocationRelativeTo(null);
@@ -222,7 +225,8 @@ public class ComputerLevel extends javax.swing.JFrame {
 
     private void LevelEasyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LevelEasyActionPerformed
         // TODO add your handling code here:
-        CardChoice cdc = new CardChoice();
+        this.game.levelChoice(2);
+        CardChoice cdc = new CardChoice(this.game);
         cdc.setVisible(true);
         cdc.pack();
         cdc.setLocationRelativeTo(null);
@@ -232,7 +236,8 @@ public class ComputerLevel extends javax.swing.JFrame {
 
     private void LevelNormalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LevelNormalMouseClicked
         // TODO add your handling code here:
-        CardChoice cdc = new CardChoice();
+        this.game.levelChoice(3);
+        CardChoice cdc = new CardChoice(this.game);
         cdc.setVisible(true);
         cdc.pack();
         cdc.setLocationRelativeTo(null);
@@ -266,10 +271,8 @@ public class ComputerLevel extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_LevelHardActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+    public void startComputerLevel(Game game ) {
+        this.game = game;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -296,7 +299,7 @@ public class ComputerLevel extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ComputerLevel().setVisible(true);
+                new ComputerLevel(game).setVisible(true);
             }
         });
     }

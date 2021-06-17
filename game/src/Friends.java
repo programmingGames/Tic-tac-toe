@@ -3,17 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import javax.swing.JFrame;
+import java.awt.*;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import javax.swing.*;
+
 /**
  *
  * @author rafael
  */
 public class Friends extends javax.swing.JFrame {
+    ButtonGroup friendActive = new ButtonGroup();
+    Game game;
+    private ArrayList<JButton> friends = new ArrayList<JButton>();
+    private ArrayList<String> friendsInfo = new ArrayList<String>();
+
 
     /**
      * Creates new form Friends
      */
-    public Friends() {
+    public Friends(Game game) throws RemoteException {
+        this.game = game;
+        this.createAllButtons();
+        System.out.println("[ADDRESS] Friends");
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -35,6 +47,7 @@ public class Friends extends javax.swing.JFrame {
         Friend1Choose = new javax.swing.JButton();
         quit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -77,19 +90,25 @@ public class Friends extends javax.swing.JFrame {
                 jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGap(0, 43, Short.MAX_VALUE)
         );
+        int i=0;
+        for( JButton button: this.friends){
+            button.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+            button.setText(this.friendsInfo.get(i).split(" ")[0]);
+            //System.out.println(this.friendsInfo.get(i));
+            int finalI = i;
+            button.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    Friend1ChooseMouseClicked(evt, finalI);
+                }
+            });
+            button.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    Friend1ChooseActionPerformed(evt);
+                }
+            });
 
-        Friend1Choose.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        Friend1Choose.setText("Friends1");
-        Friend1Choose.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Friend1ChooseMouseClicked(evt);
-            }
-        });
-        Friend1Choose.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Friend1ChooseActionPerformed(evt);
-            }
-        });
+            i++;
+        }
 
         quit.setBackground(new java.awt.Color(255, 10, 10));
         quit.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
@@ -112,6 +131,7 @@ public class Friends extends javax.swing.JFrame {
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
+
         jPanel12Layout.setHorizontalGroup(
                 jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -122,7 +142,12 @@ public class Friends extends javax.swing.JFrame {
                         .addGroup(jPanel12Layout.createSequentialGroup()
                                 .addGap(66, 66, 66)
                                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(Friend1Choose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(this.friends.get(0), javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(this.friends.get(1), javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(this.friends.get(2), javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(this.friends.get(3), javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(this.friends.get(4), javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(this.friends.get(5), javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(quit, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))
                                 .addContainerGap(64, Short.MAX_VALUE))
         );
@@ -132,10 +157,21 @@ public class Friends extends javax.swing.JFrame {
                                 .addGap(28, 28, 28)
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(Friend1Choose, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
+                                .addComponent(this.friends.get(0), javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(this.friends.get(1), javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(this.friends.get(2), javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(this.friends.get(3), javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(this.friends.get(4), javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(this.friends.get(5), javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                                 .addComponent(quit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)
+                                .addGap(10, 10, 10)
                                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -170,8 +206,22 @@ public class Friends extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
-    private void Friend1ChooseMouseClicked(java.awt.event.MouseEvent evt) {
+    // method to make all the buttons
+    private void createAllButtons() throws RuntimeException, RemoteException {
+        String[] users = this.game.getAllActiveUser();
+        String userInfo[] = {"", ""};
+        for (String user: users){
+            userInfo = user.split(" ");
+            Friend1Choose = new JButton();
+            this.friends.add(Friend1Choose);
+            this.friendsInfo.add(userInfo[1]+" "+userInfo[0]);
+        }
+
+    }
+
+    private void Friend1ChooseMouseClicked(java.awt.event.MouseEvent evt, int i) {
         // TODO add your handling code here:
+        System.out.println("User "+this.friendsInfo.get(i).split(" ")[0]);
         WaitingOpponnent wot = new WaitingOpponnent();
         wot.setVisible(true);
         wot.pack();
@@ -198,10 +248,8 @@ public class Friends extends javax.swing.JFrame {
         this.dispose();
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+    public  void playWhitFriend(Game game) {
+        this.game = game;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -228,7 +276,11 @@ public class Friends extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Friends().setVisible(true);
+                try {
+                    new Friends(game).setVisible(true);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

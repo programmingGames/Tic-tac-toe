@@ -9,8 +9,6 @@ public class TTTClient {
     public static String user[]={"",""};
     public static int userId=0;
     public static Game game = null;
-    public static Menu menu = new Menu();
-    public static MainMenu mainMenu = new MainMenu();
     
 
     public static void main(String args[]) throws Exception {
@@ -27,38 +25,30 @@ public class TTTClient {
         catch(Exception e) {System.out.println("[Exception]:" + e.getMessage());System.exit(0);}
 
         Scanner input = new Scanner(System.in);
-        while(run) {
+        MainMenu mainMenu = new MainMenu(game);
+        mainMenu.startApp(game);
+        /*while(run) {
             //mainMenu.startApp();
             loggedIn = TTTGame(loggedIn);
             System.out.println("Do you wish to play again? (y/n): ");
             String answer = input.nextLine();
             if (answer.toLowerCase(Locale.ROOT).equals("n"))
                 run = false;
-        }
-    }
-    public void menusChoice(){
-        int esc = 0;
-        System.out.println("\n ------ TTT ------");
-        System.out.println("\n Escolha: ");
-        esc = keyboardSc.nextInt();
-        switch (esc){
-            case 0:
-
-        }
+        }*/
     }
 
-    static boolean TTTGame (boolean loggedIn) throws RemoteException{
-        int choice=0;
+    /*static boolean TTTGame (boolean loggedIn) throws RemoteException{
+        int choice=0, gameLevel=0;
         boolean request=false;
 
         // 
         if(!loggedIn){
-            // login painell
-            choice = menu.loginPainel();
+            // login painel
+            choice = game.loginPainel();
             if (choice==1){
                 do{
-                    menu.login();
-                    user = menu.getUserInfo();
+                    game.login();
+                    user = game.getUserInfo();
                     userId =game.validate(user[0], user[1]);
                     if(userId==-1){
                         System.out.println("[ERROR] User not Found.");
@@ -69,8 +59,8 @@ public class TTTClient {
                 loggedIn = true;
             }
             else{
-                menu.signUp();
-                user = menu.getUserInfo();
+                game.signUp();
+                user = game.getUserInfo();
                 userId = game.addUser(user[0], user[1]);
                 loggedIn = true;
             }
@@ -80,6 +70,7 @@ public class TTTClient {
         // choise whit card to use
         choice = game.multiplayerChoice();
         if (choice==1){
+            gameLevel = game.levelChoice();
             game.cardChoice(userId);
             game.setMyBoard();
         }
@@ -102,5 +93,5 @@ public class TTTClient {
         else
             System.out.println("[NOTIFICATION] There is no game for you");
         return loggedIn;
-    }
+    }*/
 }

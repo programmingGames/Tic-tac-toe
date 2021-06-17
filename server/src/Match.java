@@ -40,6 +40,7 @@ public class Match {
     public void setAccepted(boolean accepted) {
         this.accepted = accepted;
     }
+
     public char[] getCards() {
         return cards;
     }
@@ -71,6 +72,7 @@ public class Match {
     public void setIdOpponent(int idOpponent) {
         this.idOpponent = idOpponent;
     }
+
     public int getIdMatch() {
         return idMatch;
     }

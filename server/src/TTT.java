@@ -58,7 +58,7 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
         }
 
         public String currentBoard(int boardReference) {
-            String s = "\n\n\t\t " +
+            return "\n\n\t\t " +
                     allBoard.get(boardReference - 1).board[0][0]+" | " +
                     allBoard.get(boardReference - 1).board[0][1]+" | " +
                     allBoard.get(boardReference - 1).board[0][2]+" " +
@@ -70,7 +70,6 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
                     allBoard.get(boardReference - 1).board[2][0]+" | " +
                     allBoard.get(boardReference - 1).board[2][1]+" | " +
                     allBoard.get(boardReference - 1).board[2][2] + " \n";
-            return s;
         }
         public boolean play(int row, int column, int player, int boardReference) {
 
@@ -286,13 +285,11 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
         // return all the request for the user
         public String getRequests(int idClient){
             String allRequests="";
-            int i =1;
             for (Match match: matches){
                 if(match.getIdOpponent()==idClient && !match.isMatchIsFinished()){
                     allRequests=allRequests+getUserInfo(match.getIdClient()).split(" ")[0]+" "+match.getIdBoardReference()+" "+
                             match.getIdMatch()+"\n";
                 }
-                i++;
             }
             return allRequests;
         }
@@ -348,9 +345,31 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
             return (int) ((Math.random() * (max - min)) + min);
         }
 
-        // Add new user to the json file
-        public int addUser(String user, String passwd) throws RemoteException {
-            int id = 1;
+    // Method that will check if the user already exist
+    public boolean thereIsAEqualUser(String username){
+        JSONParser jsonParser = new JSONParser();
+
+        try(FileReader reader = new FileReader("users.json")){
+            Object obj = jsonParser.parse(reader);
+            JSONArray usersList = (JSONArray) obj;
+            JSONObject userObj = new JSONObject();
+
+            for(Object user : usersList){
+                userObj = (JSONObject) user ;
+                if(userObj.get("nome").equals(username)){
+                    return true;
+                }
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    // Add new user to the json file
+    public int addUser(String user, String passwd) throws RemoteException {
+        int id = 1;
+        if(!thereIsAEqualUser(user)){
             JSONParser jsonParser = new JSONParser();
             JSONArray userList = new JSONArray();
 
@@ -393,6 +412,8 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
                 return -1;
             }
         }
+        return -1;
+    }
 
         // method to add a new board on the list of bord
         public void addingBoard(){

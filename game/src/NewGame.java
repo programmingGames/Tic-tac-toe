@@ -4,16 +4,21 @@
  * and open the template in the editor.
  */
 import javax.swing.JFrame;
+import java.rmi.RemoteException;
+
 /**
  *
  * @author rafael
  */
 public class NewGame extends javax.swing.JFrame {
+    private Game game;
 
     /**
      * Creates new form NewGame
      */
-    public NewGame() {
+    public NewGame(Game game) {
+        this.game = game;
+        System.out.println("[ADDRESS] New Game");
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -100,7 +105,11 @@ public class NewGame extends javax.swing.JFrame {
         FRIENDS.setText("FRIEND");
         FRIENDS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                FRIENDSMouseClicked(evt);
+                try {
+                    FRIENDSMouseClicked(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
         FRIENDS.addActionListener(new java.awt.event.ActionListener() {
@@ -194,7 +203,8 @@ public class NewGame extends javax.swing.JFrame {
 
     private void COMPUTERMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        ComputerLevel cdc = new ComputerLevel();
+        this.game.setMultiPlayer(1);
+        ComputerLevel cdc = new ComputerLevel(this.game);
         cdc.setVisible(true);
         cdc.pack();
         cdc.setLocationRelativeTo(null);
@@ -206,9 +216,9 @@ public class NewGame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
-    private void FRIENDSMouseClicked(java.awt.event.MouseEvent evt) {
+    private void FRIENDSMouseClicked(java.awt.event.MouseEvent evt) throws RemoteException {
         // TODO add your handling code here:
-        Friends fes = new Friends();
+        Friends fes = new Friends(this.game);
         fes.setVisible(true);
         fes.pack();
         fes.setLocationRelativeTo(null);
@@ -234,10 +244,8 @@ public class NewGame extends javax.swing.JFrame {
         this.dispose();
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+    public void startNewGame(Game game) {
+        this.game = game;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -264,7 +272,7 @@ public class NewGame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewGame().setVisible(true);
+                new NewGame(game).setVisible(true);
             }
         });
     }

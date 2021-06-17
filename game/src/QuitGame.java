@@ -193,13 +193,13 @@ public class QuitGame extends javax.swing.JFrame {
 
     private void quitNOActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        MainMenu mm = new MainMenu();
+        /*MainMenu mm = new MainMenu();
         mm.setVisible(true);
         mm.pack();
         mm.setLocationRelativeTo(null);
         mm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
-
+        */
 
     }
 

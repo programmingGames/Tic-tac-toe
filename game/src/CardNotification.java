@@ -204,12 +204,12 @@ public class CardNotification extends javax.swing.JFrame {
 
     private void ContinueMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-        Match mth = new Match();
+        /*Match mth = new Match();
         mth.setVisible(true);
         mth.pack();
         mth.setLocationRelativeTo(null);
         mth.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
+        this.dispose();*/
     }
 
     private void ContinueActionPerformed(java.awt.event.ActionEvent evt) {
