@@ -12,12 +12,12 @@ import javax.swing.*;
  *
  * @author rafael
  */
+
 public class Friends extends javax.swing.JFrame {
     Game game;
     private ArrayList<JButton> friends = new ArrayList<JButton>();
     private ArrayList<String> friendsInfo = new ArrayList<String>();
     private int remaining;
-
 
     /**
      * Creates new form Friends
@@ -29,6 +29,7 @@ public class Friends extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -100,7 +101,7 @@ public class Friends extends javax.swing.JFrame {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
                     try {
                         Friend1ChooseMouseClicked(evt, finalI);
-                    } catch (RemoteException e) {
+                    } catch (RemoteException | InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
@@ -228,7 +229,7 @@ public class Friends extends javax.swing.JFrame {
         }
     }
 
-    private void Friend1ChooseMouseClicked(java.awt.event.MouseEvent evt, int i) throws RemoteException {
+    private void Friend1ChooseMouseClicked(java.awt.event.MouseEvent evt, int i) throws RemoteException, InterruptedException {
         if (i < 6-this.remaining) {
             // TODO add your handling code here:
             String[] enemyInfo = {this.friendsInfo.get(i).split(" ")[1],this.friendsInfo.get(i).split(" ")[0]};
@@ -243,7 +244,6 @@ public class Friends extends javax.swing.JFrame {
                 wot.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 this.dispose();
             }
-            //wot.waitOpponent();
         }
     }
 

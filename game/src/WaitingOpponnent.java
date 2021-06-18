@@ -6,18 +6,44 @@
 import javax.swing.JFrame;
 import java.rmi.RemoteException;
 
+class GlobalVals{
+    static boolean response=false;
+}
 /**
  *
  * @author rafael
  */
-public class WaitingOpponnent extends javax.swing.JFrame {
+public class WaitingOpponnent extends javax.swing.JFrame  {
     Game game;
-    boolean response;
+    protected boolean response;
 
+    static class Multi extends Thread {
+        Game game;
+        public Multi(Game game){
+            this.game = game;
+        }
+        public void runWait() throws RemoteException, InterruptedException {
+            boolean accept = false;
+            do{
+                System.out.println("Waiting");
+                accept = this.game.waitOpponent();
+            }while(!accept);
+            GlobalVals.response = true;
+        }
+
+        @Override
+        public void run() {
+            try {
+                this.runWait();
+            } catch (RemoteException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     /**
      * Creates new form WaitingOpponnent
      */
-    public WaitingOpponnent(Game game) throws RemoteException {
+    public WaitingOpponnent(Game game) throws RemoteException, InterruptedException {
         this.game = game;
         this.initComponents();
         this.response = false;
@@ -219,13 +245,15 @@ public class WaitingOpponnent extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_quitActionPerformed
 
-    public void control() throws RemoteException {
-        if(!this.response){
-            this.waitOpponent();
-            this.quitMouseClicked(null);
-        }
-        else
+    public void control() throws RemoteException, InterruptedException {
+        Multi waitPlayer = new Multi(this.game);
+        Thread t1 = new Thread(waitPlayer);
+        t1.start();
+        //this.response = waitPlayer.run();
+        if(GlobalVals.response)
             this.goToMatch();
+        else
+            control();
     }
     public void main(Game game) throws RemoteException {
         this.game = game;
@@ -257,7 +285,7 @@ public class WaitingOpponnent extends javax.swing.JFrame {
             public void run() {
                 try {
                     new WaitingOpponnent(game).setVisible(true);
-                } catch (RemoteException e) {
+                } catch (RemoteException | InterruptedException e) {
                     e.printStackTrace();
                 }
             }

@@ -4,18 +4,30 @@
  * and open the template in the editor.
  */
 import javax.swing.JFrame;
+import java.rmi.RemoteException;
+
 /**
  *
  * @author rafael
  */
 public class CardNotification extends javax.swing.JFrame {
-
+    Game game;
+    String card;
     /**
      * Creates new form CardNotification
      */
-    public CardNotification() {
+    public CardNotification(Game game) {
+        this.game = game;
+        this.getMyCard();
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+    private void getMyCard(){
+        int myCard = this.game.getMyCard();
+        if(myCard == 1)
+            this.card = "cross -Big.png";
+        else
+            this.card = "circle -Big.png";
     }
 
     /**
@@ -98,7 +110,7 @@ public class CardNotification extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(5, 90, 255));
         jLabel1.setText("Your card is");
 
-        CrossNotification.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/cross -Big.png"))); // NOI18N
+        CrossNotification.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card))); // NOI18N
         CrossNotification.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
                 CrossNotificationComponentAdded(evt);
@@ -111,12 +123,20 @@ public class CardNotification extends javax.swing.JFrame {
         Continue.setText("CONTINUE");
         Continue.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ContinueMouseClicked(evt);
+                try {
+                    ContinueMouseClicked(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
         Continue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ContinueActionPerformed(evt);
+                try {
+                    ContinueActionPerformed(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -202,24 +222,29 @@ public class CardNotification extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
-    private void ContinueMouseClicked(java.awt.event.MouseEvent evt) {
+    private void ContinueMouseClicked(java.awt.event.MouseEvent evt) throws RemoteException {
         // TODO add your handling code here:
-        /*Match mth = new Match();
+        Match mth = new Match(this.game);
         mth.setVisible(true);
         mth.pack();
         mth.setLocationRelativeTo(null);
         mth.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();*/
+        this.dispose();
     }
 
-    private void ContinueActionPerformed(java.awt.event.ActionEvent evt) {
+    private void ContinueActionPerformed(java.awt.event.ActionEvent evt) throws RemoteException{
         // TODO add your handling code here:
+        Match mth = new Match(this.game);
+        mth.setVisible(true);
+        mth.pack();
+        mth.setLocationRelativeTo(null);
+        mth.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+
+    public void main(Game game) {
+        this.game = game;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -246,7 +271,7 @@ public class CardNotification extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CardNotification().setVisible(true);
+                new CardNotification(game).setVisible(true);
             }
         });
     }

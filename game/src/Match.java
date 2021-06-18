@@ -637,7 +637,7 @@ public class Match extends javax.swing.JFrame {
     }
 
     public void matchControl() throws RemoteException {
-        int computerPlay=0;boolean valid;
+        int computerPlay=0,opponentPlay=0;boolean valid;
         if(this.game.getMultiPlayer()==1){
             do{
                 valid=true;
@@ -652,6 +652,24 @@ public class Match extends javax.swing.JFrame {
             }while(!valid);
             System.out.println("Computer: "+computerPlay);
             this.opponentPlay(computerPlay);
+        }
+        else if (this.game.getMultiPlayer()==2){
+            do{
+                valid=true;
+                opponentPlay = this.game.getOpponentPlay();
+                if (opponentPlay == -1)
+                    valid = false;
+                if(valid) {
+                    if (this.buttonPressed[opponentPlay - 1])
+                        valid = false;
+                }
+                if(opponentPlay>9)
+                    valid = false;
+                if(opponentPlay<1)
+                    valid = false;
+            }while(!valid);
+            System.out.println("Opponent: "+opponentPlay);
+            this.opponentPlay(opponentPlay);
         }
         System.out.println(this.isMe);
 

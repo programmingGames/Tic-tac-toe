@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.Scanner;
 import java.rmi.RemoteException;
 
@@ -59,7 +60,34 @@ public class Game {
         System.out.println("Board: "+this.userBoardReference);
         System.out.println("Match: "+this.matchId);
     }
-    
+
+    public String[] getAllMatchRequest() throws RemoteException{
+        return ttt.getRequests(this.userId).split("\n");
+    }
+
+    public void acceptRequest(String enemy) throws RemoteException{
+        matchInfo = enemy.split(" ");// to take the enimy chosen.
+        userBoardReference = Integer.parseInt(matchInfo[1]);
+        System.out.println(enemy);
+        matchId = Integer.parseInt(matchInfo[2]);
+
+        char card = ttt.acceptRequest(matchId);
+
+        // setting the player card
+        System.out.println(card);
+        if(Character.compare(card, 'X') == 0){
+            this.myCard = 0;
+        }
+        else{
+            this.myCard = 1;
+        }
+
+        multiPlayer=2;
+        iRequest = false;
+        System.out.println("\nEnimy chosen: "+matchInfo[0]+"\n");
+        System.out.println("Board: "+userBoardReference);
+        System.out.println("Match: "+matchId);
+    }
     // to get all the request the user have
     public boolean getRequest() throws RemoteException{
         
@@ -234,6 +262,9 @@ public class Game {
         return this.myCard;
     }
 
+    public int getOpponentPlay() throws RemoteException {
+        return ttt.waitingPlayerToPlay(this.matchId, this.userId);
+    }
     // 
     public int readPlay() throws RemoteException{
         

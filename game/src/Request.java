@@ -96,7 +96,11 @@ public class Request extends javax.swing.JFrame {
             int finalI = i;
             button.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    Request1MouseClicked(evt, finalI);
+                    try {
+                        Request1MouseClicked(evt, finalI);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
             button.addActionListener(new java.awt.event.ActionListener() {
@@ -216,13 +220,15 @@ public class Request extends javax.swing.JFrame {
     }// </editor-fold>
 
     private void createAllButtons() throws RemoteException {
-        String[] users = this.game.getAllActiveUser();
-        String userInfo[] = {"", ""};
-        for (String user: users){
-            userInfo = user.split(" ");
-            Request1 = new JButton();
-            this.friends.add(Request1);
-            this.friendsInfo.add(userInfo[1]+" "+userInfo[0]);
+        String[] requests = this.game.getAllMatchRequest();
+        String match[] = {"", "", "", "", ""};
+        if(requests.length > 0){
+            for (String request: requests){
+                match = request.split(" ");
+                Request1 = new JButton();
+                this.friends.add(Request1);
+                this.friendsInfo.add(match[0]+" "+match[1]+" "+match[2]);
+            }
         }
         this.remaining = 6-this.friends.toArray().length;
         for (int i=0; i<this.remaining; i++){
@@ -232,10 +238,15 @@ public class Request extends javax.swing.JFrame {
         }
     }
 
-    private void Request1MouseClicked(MouseEvent evt, int finalI) {
+    private void Request1MouseClicked(MouseEvent evt, int finalI)throws RemoteException {
         if (finalI < 6-this.remaining) {
-            String[] enemyInfo = {this.friendsInfo.get(finalI).split(" ")[1],this.friendsInfo.get(finalI).split(" ")[0]};
-            System.out.println("User " + enemyInfo[0]);
+            this.game.acceptRequest(this.friendsInfo.get(finalI));
+            CardNotification nge = new CardNotification(this.game);
+            nge.setVisible(true);
+            nge.pack();
+            nge.setLocationRelativeTo(null);
+            nge.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();
         }
 
         // TODO add your handling code here:
