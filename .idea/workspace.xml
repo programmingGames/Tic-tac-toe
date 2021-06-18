@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3f499987-317f-4bd7-aea9-d1c9399b7ee6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/game/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/Friends$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/Friends$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/Friends.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/Friends.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/Match$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/Match$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/Match$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/Match$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/Match$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/Match$11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/Match$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/Match$12.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/Match$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/Match$13.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/Match$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/Match$14.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/Match$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/Match$15.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/Match$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/Match$16.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/Match$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/Match$17.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/Match$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/Match$18.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/Match$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/Match$19.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/Match$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/Match$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/Match$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/Match$20.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/Match$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/Match$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/Match$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/Match$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/Match$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/Match$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/Match$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/Match$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/Match$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/Match$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/Match$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/Match$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/Match$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/Match$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/Match.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/Match.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/WaitingOpponnent$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/WaitingOpponnent$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/WaitingOpponnent$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/WaitingOpponnent$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/WaitingOpponnent$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/WaitingOpponnent$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/out/production/game/WaitingOpponnent.class" beforeDir="false" afterPath="$PROJECT_DIR$/game/out/production/game/WaitingOpponnent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/src/Friends.java" beforeDir="false" afterPath="$PROJECT_DIR$/game/src/Friends.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/src/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/game/src/Match.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game/src/WaitingOpponnent.java" beforeDir="false" afterPath="$PROJECT_DIR$/game/src/WaitingOpponnent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/users.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1u7TuLpIzG2oAb9WaZR5dDqZ0J6" />
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3f499987-317f-4bd7-aea9-d1c9399b7ee6" name="Default Changelist" comment="" />
+      <created>1624015854361</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1624015854361</updated>
+    </task>
+    <servers />
+  </component>
+</project>

@@ -243,6 +243,7 @@ public class Friends extends javax.swing.JFrame {
             wot.setLocationRelativeTo(null);
             wot.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.dispose();
+            //wot.waitOpponent();
         }
     }
 

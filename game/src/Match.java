@@ -23,7 +23,6 @@ public class Match extends javax.swing.JFrame {
      */
     public Match(Game game) throws RemoteException{
         this.game = game;
-
         this.setCardImageName();
         initComponents();
         this.verifyNext();

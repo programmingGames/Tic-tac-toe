@@ -12,23 +12,30 @@ import java.rmi.RemoteException;
  */
 public class WaitingOpponnent extends javax.swing.JFrame {
     Game game;
+    boolean response;
+
     /**
      * Creates new form WaitingOpponnent
      */
     public WaitingOpponnent(Game game) throws RemoteException {
         this.game = game;
+        this.initComponents();
+        this.response = false;
         System.out.println("[ADDRESS] Waiting Opponent");
-        initComponents();
         this.setLocationRelativeTo(null);
-        //this.waitOpponent();
+        this.control();
     }
 
     public void waitOpponent() throws RemoteException {
-        boolean response=false;
+        //boolean response=false;
         // System.out.println("[STATUS] waiting for opponent");
-        do{
-            response = game.waitOpponent();
-        }while(!response);
+        //do{
+            this.response = game.waitOpponent();
+
+        //}while(!response);
+
+    }
+    private  void goToMatch() throws RemoteException {
         Match mth = new Match(this.game);
         mth.setVisible(true);
         mth.pack();
@@ -44,8 +51,7 @@ public class WaitingOpponnent extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-
+    public void initComponents() throws RemoteException {
         jPanel1 = new javax.swing.JPanel();
         LabelLogin = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -91,7 +97,11 @@ public class WaitingOpponnent extends javax.swing.JFrame {
         quit.setText("Cancel");
         quit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                quitMouseClicked(evt);
+                try {
+                    quitMouseClicked(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
         quit.addActionListener(new java.awt.event.ActionListener() {
@@ -191,11 +201,10 @@ public class WaitingOpponnent extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void quitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quitMouseClicked
+    private void quitMouseClicked(java.awt.event.MouseEvent evt) throws RemoteException {//GEN-FIRST:event_quitMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_quitMouseClicked
 
@@ -210,7 +219,14 @@ public class WaitingOpponnent extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_quitActionPerformed
 
-    public void main(Game game) {
+    public void control() throws RemoteException {
+        if(!this.response){
+            this.waitOpponent();
+        }
+        else
+            this.goToMatch();
+    }
+    public void main(Game game) throws RemoteException {
         this.game = game;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -245,6 +261,7 @@ public class WaitingOpponnent extends javax.swing.JFrame {
                 }
             }
         });
+        this.waitOpponent();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -258,4 +275,5 @@ public class WaitingOpponnent extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JButton quit;
     // End of variables declaration//GEN-END:variables
+
 }
