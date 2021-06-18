@@ -4,18 +4,37 @@
  * and open the template in the editor.
  */
 import javax.swing.JFrame;
+import java.rmi.RemoteException;
+
 /**
  *
  * @author rafael
  */
 public class WaitingOpponnent extends javax.swing.JFrame {
-
+    Game game;
     /**
      * Creates new form WaitingOpponnent
      */
-    public WaitingOpponnent() {
+    public WaitingOpponnent(Game game) throws RemoteException {
+        this.game = game;
+        System.out.println("[ADDRESS] Waiting Opponent");
         initComponents();
         this.setLocationRelativeTo(null);
+        //this.waitOpponent();
+    }
+
+    public void waitOpponent() throws RemoteException {
+        boolean response=false;
+        // System.out.println("[STATUS] waiting for opponent");
+        do{
+            response = game.waitOpponent();
+        }while(!response);
+        Match mth = new Match(this.game);
+        mth.setVisible(true);
+        mth.pack();
+        mth.setLocationRelativeTo(null);
+        mth.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
     }
 
     /**
@@ -69,7 +88,7 @@ public class WaitingOpponnent extends javax.swing.JFrame {
         quit.setBackground(new java.awt.Color(255, 10, 10));
         quit.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         quit.setForeground(new java.awt.Color(0, 0, 0));
-        quit.setText("QUIT");
+        quit.setText("Cancel");
         quit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 quitMouseClicked(evt);
@@ -77,7 +96,11 @@ public class WaitingOpponnent extends javax.swing.JFrame {
         });
         quit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quitActionPerformed(evt);
+                try {
+                    quitActionPerformed(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -176,9 +199,10 @@ public class WaitingOpponnent extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_quitMouseClicked
 
-    private void quitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitActionPerformed
+    private void quitActionPerformed(java.awt.event.ActionEvent evt) throws RemoteException {//GEN-FIRST:event_quitActionPerformed
         // TODO add your handling code here:
-        QuitGame qg = new QuitGame();
+        this.game.setMultiplayerInfoToDefault();
+        PlayGame qg = new PlayGame(this.game);
         qg.setVisible(true);
         qg.pack();
         qg.setLocationRelativeTo(null);
@@ -186,10 +210,8 @@ public class WaitingOpponnent extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_quitActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+    public void main(Game game) {
+        this.game = game;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -216,7 +238,11 @@ public class WaitingOpponnent extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new WaitingOpponnent().setVisible(true);
+                try {
+                    new WaitingOpponnent(game).setVisible(true);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

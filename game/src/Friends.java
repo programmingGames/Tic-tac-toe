@@ -17,6 +17,7 @@ public class Friends extends javax.swing.JFrame {
     Game game;
     private ArrayList<JButton> friends = new ArrayList<JButton>();
     private ArrayList<String> friendsInfo = new ArrayList<String>();
+    private int remaining;
 
 
     /**
@@ -98,7 +99,11 @@ public class Friends extends javax.swing.JFrame {
             int finalI = i;
             button.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    Friend1ChooseMouseClicked(evt, finalI);
+                    try {
+                        Friend1ChooseMouseClicked(evt, finalI);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
             button.addActionListener(new java.awt.event.ActionListener() {
@@ -216,18 +221,29 @@ public class Friends extends javax.swing.JFrame {
             this.friends.add(Friend1Choose);
             this.friendsInfo.add(userInfo[1]+" "+userInfo[0]);
         }
+        this.remaining = 6-this.friends.toArray().length;
+        for (int i=0; i<this.remaining; i++){
+            Friend1Choose = new JButton();
+            this.friends.add(Friend1Choose);
+            this.friendsInfo.add("");
+        }
 
     }
 
-    private void Friend1ChooseMouseClicked(java.awt.event.MouseEvent evt, int i) {
-        // TODO add your handling code here:
-        System.out.println("User "+this.friendsInfo.get(i).split(" ")[0]);
-        WaitingOpponnent wot = new WaitingOpponnent();
-        wot.setVisible(true);
-        wot.pack();
-        wot.setLocationRelativeTo(null);
-        wot.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
+    private void Friend1ChooseMouseClicked(java.awt.event.MouseEvent evt, int i) throws RemoteException {
+        if (i < 6-this.remaining) {
+            // TODO add your handling code here:
+            String[] enemyInfo = {this.friendsInfo.get(i).split(" ")[1],this.friendsInfo.get(i).split(" ")[0]};
+            System.out.println("User " + enemyInfo[0]);
+            this.game.setEnimyInfo(enemyInfo);
+            this.game.sendMatchRequest();
+            WaitingOpponnent wot = new WaitingOpponnent(this.game);
+            wot.setVisible(true);
+            wot.pack();
+            wot.setLocationRelativeTo(null);
+            wot.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();
+        }
     }
 
     private void Friend1ChooseActionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,7 +256,7 @@ public class Friends extends javax.swing.JFrame {
 
     private void quitActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        QuitGame qg = new QuitGame();
+        PlayGame qg = new PlayGame(this.game);
         qg.setVisible(true);
         qg.pack();
         qg.setLocationRelativeTo(null);

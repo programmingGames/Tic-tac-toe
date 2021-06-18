@@ -11,11 +11,13 @@ import java.rmi.RemoteException;
  */
 public class CardChoice extends javax.swing.JFrame {
     Game game;
+    String goTo;
     /**
      * Creates new form CardChoice
      */
-    public CardChoice(Game game) {
+    public CardChoice(Game game, String go) {
         this.game = game;
+        this.goTo = go;
         System.out.println("[ADDRESS] Card Choice");
         initComponents();
         this.setLocationRelativeTo(null);
@@ -221,23 +223,43 @@ public class CardChoice extends javax.swing.JFrame {
     private void CardCrossMouseClicked(java.awt.event.MouseEvent evt) throws  RemoteException{
         // TODO add your handling code here:
         this.game.setcardChoice(1);
-        Match mth = new Match(this.game);
-        mth.setVisible(true);
-        mth.pack();
-        mth.setLocationRelativeTo(null);
-        mth.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
+        if(this.goTo.equals("Match")){
+            Match mth = new Match(this.game);
+            mth.setVisible(true);
+            mth.pack();
+            mth.setLocationRelativeTo(null);
+            mth.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();
+        }
+        else if (this.goTo.equals("Friends")){
+            Friends mth = new Friends(this.game);
+            mth.setVisible(true);
+            mth.pack();
+            mth.setLocationRelativeTo(null);
+            mth.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();
+        }
     }
 
     private void CardCircleActionPerformed(java.awt.event.ActionEvent evt) throws  RemoteException{
         // TODO add your handling code here:
         this.game.setcardChoice(0);
-        Match mth = new Match(this.game);
-        mth.setVisible(true);
-        mth.pack();
-        mth.setLocationRelativeTo(null);
-        mth.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
+        if(this.goTo.equals("Match")){
+            Match mth = new Match(this.game);
+            mth.setVisible(true);
+            mth.pack();
+            mth.setLocationRelativeTo(null);
+            mth.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();
+        }
+        else if (this.goTo.equals("Friends")){
+            Friends mth = new Friends(this.game);
+            mth.setVisible(true);
+            mth.pack();
+            mth.setLocationRelativeTo(null);
+            mth.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();
+        }
     }
 
     private void CardCircleMouseClicked(java.awt.event.MouseEvent evt) {
@@ -245,8 +267,9 @@ public class CardChoice extends javax.swing.JFrame {
     }
 
 
-    public void main(Game game) {
+    public void main(Game game, String go) {
         this.game = game;
+        this.goTo = go;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -273,7 +296,7 @@ public class CardChoice extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CardChoice(game).setVisible(true);
+                new CardChoice(game, go).setVisible(true);
             }
         });
     }

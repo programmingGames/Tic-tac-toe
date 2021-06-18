@@ -35,36 +35,29 @@ public class Game {
     }
 
     // waiting for opponent to enter in the match
-    public void waitOpponent() throws RemoteException{
-        boolean response=false;
-        System.out.println("[STATUS] waiting for opponnent");
-        do{
-            response = ttt.waitingOpponent(matchId);
-
-        }while(!response);
-        iRequest = true;
+    public boolean waitOpponent() throws RemoteException{
+        return ttt.waitingOpponent(matchId);
     }
 
     // create a game request
     public void sendMatchRequest() throws RemoteException{
-        char mycard; 
-        if(myCard==1)
-            mycard = 'O';
+        char card;
+        if(this.myCard==1)
+            card = 'O';
         else
-            mycard = 'X';
+            card = 'X';
     
-        matchId =  ttt.createRequest(userId, Integer.parseInt(enimyInfo[0]),mycard);
-        if(matchId>0){
+        this.matchId =  ttt.createRequest(this.userId, Integer.parseInt(this.enimyInfo[0]),card);
+        if(this.matchId>=0){
             System.out.println("[UPDATE] Request created");
-            iRequest = true;
+            this.iRequest = true;
             this.multiPlayer = 2;
         }
         else{
             System.out.println("[ERROR] Request already exist");
         }
-        System.out.println("Board: "+userBoardReference);
-        System.out.println("Match: "+matchId);
-
+        System.out.println("Board: "+this.userBoardReference);
+        System.out.println("Match: "+this.matchId);
     }
     
     // to get all the request the user have
@@ -129,6 +122,10 @@ public class Game {
     // to get all User info
     public String getAllUserInfo(int id) throws RemoteException{
         return ttt.getUserInfo(id);
+    }
+
+    public int getMatchId(){
+        return this.matchId;
     }
 
     // to get all the active users
@@ -206,13 +203,13 @@ public class Game {
     public int addUser(String user, String passwd) throws RemoteException{
         userId = ttt.addUser(user, passwd);
         userBoardReference = ttt.getUserValue(userId, "boardReference");
+        System.out.println(userId+" "+userBoardReference);
         return userId;
     }
 
     // method to allow the user to chose what player he is.
     public void setcardChoice(int card)  throws RemoteException{
         this.myCard = card;
-        System.out.println(userId);
         ttt.updateUser(userId, "myCard",myCard);
     }
 
@@ -340,7 +337,7 @@ public class Game {
         ttt.restart(userBoardReference, userId);
 
         if (multiPlayer == 2){
-            ttt.endMatch(matchId); // ending the match
+            ttt.endMatch(matchId, this.userId); // ending the match
             iRequest = false;
             multiPlayer = 0;
             userBoardReference = ttt.getUserValue(userId, "boardReference");
@@ -383,8 +380,27 @@ public class Game {
     public String[] getUserInfo(){
         String userInfo[] = {user, passwd};
         return userInfo;
+
     }
+    public void setMultiplayerInfoToDefault() throws RemoteException{
+        ttt.endMatch(matchId, this.userId); // ending the match
+        iRequest = false;
+        multiPlayer = 0;
+        userBoardReference = ttt.getUserValue(userId, "boardReference");
+        matchId = -1; //
+    }
+
     public void levelChoice(int level){
         this.level = level;
+    }
+
+    public void setCounterWin() throws RemoteException{
+        ttt.updateUser(this.userId, "nrVitorias", ttt.getUserValue(this.userId, "nrVitorias")+1);
+    }
+    public void setCounterLose() throws RemoteException{
+        ttt.updateUser(this.userId, "nrDerrotas", ttt.getUserValue(this.userId, "nrDerrotas")+1);
+    }
+    public void setCounterTie() throws RemoteException{
+        ttt.updateUser(this.userId, "nrEmpates", ttt.getUserValue(this.userId, "nrEmpates")+1);
     }
 }

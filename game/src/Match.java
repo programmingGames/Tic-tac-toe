@@ -396,9 +396,16 @@ public class Match extends javax.swing.JFrame {
         else if (this.weHaveAWinner()){
             this.game.restartBoard();
             if(this.winner == 2){
-                /* tei class */
+                this.game.setCounterTie();
+                Tie tie = new Tie(this.game);
+                tie.setVisible(true);
+                tie.pack();
+                tie.setLocationRelativeTo(null);
+                tie.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                this.dispose();
             }
             else if(this.winner == this.game.getMyCard()){
+                this.game.setCounterWin();
                 Winner win = new Winner(this.game);
                 win.setVisible(true);
                 win.pack();
@@ -407,6 +414,7 @@ public class Match extends javax.swing.JFrame {
                 this.dispose();
             }
             else{
+                this.game.setCounterLose();
                 Lose ls = new Lose(this.game);
                 ls.setVisible(true);
                 ls.pack();

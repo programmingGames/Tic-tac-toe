@@ -215,7 +215,7 @@ public class ComputerLevel extends javax.swing.JFrame {
     private void LevelEasyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LevelEasyMouseClicked
         // TODO add your handling code here:
         this.game.levelChoice(1);
-        CardChoice cdc = new CardChoice(game);
+        CardChoice cdc = new CardChoice(game, "Match");
         cdc.setVisible(true);
         cdc.pack();
         cdc.setLocationRelativeTo(null);
@@ -226,7 +226,7 @@ public class ComputerLevel extends javax.swing.JFrame {
     private void LevelEasyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LevelEasyActionPerformed
         // TODO add your handling code here:
         this.game.levelChoice(2);
-        CardChoice cdc = new CardChoice(this.game);
+        CardChoice cdc = new CardChoice(this.game, "Match");
         cdc.setVisible(true);
         cdc.pack();
         cdc.setLocationRelativeTo(null);
@@ -237,7 +237,7 @@ public class ComputerLevel extends javax.swing.JFrame {
     private void LevelNormalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LevelNormalMouseClicked
         // TODO add your handling code here:
         this.game.levelChoice(3);
-        CardChoice cdc = new CardChoice(this.game);
+        CardChoice cdc = new CardChoice(this.game, "Match");
         cdc.setVisible(true);
         cdc.pack();
         cdc.setLocationRelativeTo(null);

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService{
     private LinkedList<TTT.play> Plays = new LinkedList<TTT.play>();
-    private int idBoard=1, idMatch=0;
+    private int idBoard=1, idMatch=0, userId=0;
     // list of all the board
     private LinkedList<TTT.Board> allBoard =new LinkedList<TTT.Board>();
     private ArrayList<Match> matches = new ArrayList<Match>();
@@ -234,10 +234,12 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
         }
 
         // Method to end the match
-        public void endMatch(int idMatch) {
+        public void endMatch(int idMatch, int id) {
             for (Match match : matches) {
-                if (match.getIdMatch() == idMatch)
+                if (match.getIdMatch() == idMatch){
                     match.setMatchIsFinished(true);
+                    System.out.println("   [MATCH_END] User: " + getUserInfo(id).split(" ")[0] + " end multiplayer match");
+                }
             }
         }
 
@@ -368,7 +370,6 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
 
     // Add new user to the json file
     public int addUser(String user, String passwd) throws RemoteException {
-        int id = 1;
         if(!thereIsAEqualUser(user)){
             JSONParser jsonParser = new JSONParser();
             JSONArray userList = new JSONArray();
@@ -382,14 +383,14 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
                 for(Object userObjs : usersList){
                     userObj = (JSONObject) userObjs ;
                     userList.add(userObj);
-                    id ++;
                 }
             }catch(Exception e){
                 System.out.println(e);
             }
+
             // adding the new user
             JSONObject newUser = new JSONObject();
-            newUser.put("id", (int)(id+getRandomNumber(id, 2000)*getRandomNumber(500, 2000)/getRandomNumber(1,3)));
+            newUser.put("id", this.userId);
             newUser.put("nome", user);
             newUser.put("passwd", passwd);
             newUser.put("nrVitorias", 0);
@@ -404,9 +405,10 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
             userList.add(newUser);
             try(FileWriter file = new FileWriter("users.json")){
                 file.write(userList.toString());
-                System.out.println("   [SIGN_UP] User: "+user+"; Id:"+id+1);
+                System.out.println("   [SIGN_UP] User: "+user+"; Id:"+(this.userId-1));
                 file.flush();
-                return id+1;
+                this.userId++;
+                return userId-1;
             }catch (Exception e){
                 System.out.println(e);
                 return -1;
@@ -439,6 +441,7 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
                     ((JSONObject) userObjs).put("boardReference", idBoard);
                     addingBoard();
                     userList.add(userObj);
+                    this.userId ++;
                 }
             }catch(Exception e){
                 System.out.println(e);
