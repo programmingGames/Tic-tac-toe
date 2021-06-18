@@ -3,18 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+
 /**
  *
  * @author rafael
  */
 public class Request extends javax.swing.JFrame {
-
+    private ArrayList<JButton> friends = new ArrayList<JButton>();
+    private ArrayList<String> friendsInfo = new ArrayList<String>();
+    private int remaining;
+    Game game;
     /**
      * Creates new form Request
      */
-    public Request() {
+    public Request(Game game) throws RemoteException {
+        this.game = game;
+        this.createAllButtons();
         initComponents();
+        System.out.println("[ADDRESS] Request");
+
         this.setLocationRelativeTo(null);
     }
 
@@ -77,8 +88,26 @@ public class Request extends javax.swing.JFrame {
                 jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGap(0, 43, Short.MAX_VALUE)
         );
+        int i=0;
+        for( JButton button: this.friends){
+            button.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+            button.setText(this.friendsInfo.get(i).split(" ")[0]);
+            //System.out.println(this.friendsInfo.get(i));
+            int finalI = i;
+            button.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    Request1MouseClicked(evt, finalI);
+                }
+            });
+            button.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    Request1ActionPerformed(evt);
+                }
+            });
+            i++;
+        }
 
-        Request1.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        /*Request1.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         Request1.setText("Request1");
         Request1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -89,7 +118,7 @@ public class Request extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Request1ActionPerformed(evt);
             }
-        });
+        });*/
 
         quit.setBackground(new java.awt.Color(255, 10, 10));
         quit.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
@@ -122,7 +151,12 @@ public class Request extends javax.swing.JFrame {
                         .addGroup(jPanel12Layout.createSequentialGroup()
                                 .addGap(66, 66, 66)
                                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(Request1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(this.friends.get(0), javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(this.friends.get(1), javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(this.friends.get(2), javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(this.friends.get(3), javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(this.friends.get(4), javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(this.friends.get(5), javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(quit, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))
                                 .addContainerGap(63, Short.MAX_VALUE))
         );
@@ -132,10 +166,21 @@ public class Request extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Request1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
+                                .addComponent(this.friends.get(0), javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(this.friends.get(1), javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(this.friends.get(2), javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(this.friends.get(3), javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(this.friends.get(4), javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addComponent(this.friends.get(5), javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                                 .addComponent(quit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)
+                                .addGap(10, 10, 10)
                                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -170,14 +215,36 @@ public class Request extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
-    private void Request1MouseClicked(java.awt.event.MouseEvent evt) {
+    private void createAllButtons() throws RemoteException {
+        String[] users = this.game.getAllActiveUser();
+        String userInfo[] = {"", ""};
+        for (String user: users){
+            userInfo = user.split(" ");
+            Request1 = new JButton();
+            this.friends.add(Request1);
+            this.friendsInfo.add(userInfo[1]+" "+userInfo[0]);
+        }
+        this.remaining = 6-this.friends.toArray().length;
+        for (int i=0; i<this.remaining; i++){
+            Request1 = new JButton();
+            this.friends.add(Request1);
+            this.friendsInfo.add("");
+        }
+    }
+
+    private void Request1MouseClicked(MouseEvent evt, int finalI) {
+        if (finalI < 6-this.remaining) {
+            String[] enemyInfo = {this.friendsInfo.get(finalI).split(" ")[1],this.friendsInfo.get(finalI).split(" ")[0]};
+            System.out.println("User " + enemyInfo[0]);
+        }
+
         // TODO add your handling code here:
-        CardNotification cnn = new CardNotification();
+        /*CardNotification cnn = new CardNotification();
         cnn.setVisible(true);
         cnn.pack();
         cnn.setLocationRelativeTo(null);
         cnn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
+        this.dispose();*/
     }
 
     private void Request1ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,10 +265,9 @@ public class Request extends javax.swing.JFrame {
         this.dispose();
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+
+    public void main(Game game) {
+        this.game = game;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -228,7 +294,11 @@ public class Request extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Request().setVisible(true);
+                try {
+                    new Request(game).setVisible(true);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 import javax.swing.JFrame;
+import java.rmi.RemoteException;
+
 /**
  *
  * @author rafael
@@ -77,7 +79,11 @@ public class PlayGame extends javax.swing.JFrame {
         Request.setText("REQUESTS");
         Request.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                RequestMouseClicked(evt);
+                try {
+                    RequestMouseClicked(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
         Request.addActionListener(new java.awt.event.ActionListener() {
@@ -196,9 +202,9 @@ public class PlayGame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
-    private void RequestMouseClicked(java.awt.event.MouseEvent evt) {
+    private void RequestMouseClicked(java.awt.event.MouseEvent evt) throws RemoteException {
         // TODO add your handling code here:
-        Request req = new Request();
+        Request req = new Request(this.game);
         req.setVisible(true);
         req.pack();
         req.setLocationRelativeTo(null);

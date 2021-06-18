@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 import javax.swing.JFrame;
+import java.rmi.RemoteException;
+
 /**
  *
  * @author rafael
@@ -13,8 +15,9 @@ public class ComputerLevel extends javax.swing.JFrame {
     /**
      * Creates new form ComputerLevel
      */
-    public ComputerLevel(Game game) {
+    public ComputerLevel(Game game) throws RemoteException {
         this.game = game;
+        this.game.setMyBoard();
         System.out.println("[ADDRESS] Computer Level");
         initComponents();
         this.setLocationRelativeTo(null);
@@ -299,7 +302,11 @@ public class ComputerLevel extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ComputerLevel(game).setVisible(true);
+                try {
+                    new ComputerLevel(game).setVisible(true);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

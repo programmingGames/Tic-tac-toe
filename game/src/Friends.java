@@ -13,7 +13,6 @@ import javax.swing.*;
  * @author rafael
  */
 public class Friends extends javax.swing.JFrame {
-    ButtonGroup friendActive = new ButtonGroup();
     Game game;
     private ArrayList<JButton> friends = new ArrayList<JButton>();
     private ArrayList<String> friendsInfo = new ArrayList<String>();
@@ -227,7 +226,6 @@ public class Friends extends javax.swing.JFrame {
             this.friends.add(Friend1Choose);
             this.friendsInfo.add("");
         }
-
     }
 
     private void Friend1ChooseMouseClicked(java.awt.event.MouseEvent evt, int i) throws RemoteException {
@@ -237,12 +235,14 @@ public class Friends extends javax.swing.JFrame {
             System.out.println("User " + enemyInfo[0]);
             this.game.setEnimyInfo(enemyInfo);
             this.game.sendMatchRequest();
-            WaitingOpponnent wot = new WaitingOpponnent(this.game);
-            wot.setVisible(true);
-            wot.pack();
-            wot.setLocationRelativeTo(null);
-            wot.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            this.dispose();
+            if(this.game.getMatchId() != -1){
+                WaitingOpponnent wot = new WaitingOpponnent(this.game);
+                wot.setVisible(true);
+                wot.pack();
+                wot.setLocationRelativeTo(null);
+                wot.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                this.dispose();
+            }
             //wot.waitOpponent();
         }
     }

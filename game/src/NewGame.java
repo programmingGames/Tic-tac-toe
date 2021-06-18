@@ -90,7 +90,11 @@ public class NewGame extends javax.swing.JFrame {
         COMPUTER.setText("COMPUTER");
         COMPUTER.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                COMPUTERMouseClicked(evt);
+                try {
+                    COMPUTERMouseClicked(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
         COMPUTER.addActionListener(new java.awt.event.ActionListener() {
@@ -201,7 +205,7 @@ public class NewGame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
-    private void COMPUTERMouseClicked(java.awt.event.MouseEvent evt) {
+    private void COMPUTERMouseClicked(java.awt.event.MouseEvent evt) throws RemoteException {
         // TODO add your handling code here:
         this.game.setMultiPlayer(1);
         ComputerLevel cdc = new ComputerLevel(this.game);

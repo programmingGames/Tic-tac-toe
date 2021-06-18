@@ -222,6 +222,7 @@ public class WaitingOpponnent extends javax.swing.JFrame {
     public void control() throws RemoteException {
         if(!this.response){
             this.waitOpponent();
+            this.quitMouseClicked(null);
         }
         else
             this.goToMatch();
@@ -261,7 +262,7 @@ public class WaitingOpponnent extends javax.swing.JFrame {
                 }
             }
         });
-        this.waitOpponent();
+        // this.waitOpponent();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
