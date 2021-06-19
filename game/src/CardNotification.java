@@ -224,6 +224,7 @@ public class CardNotification extends javax.swing.JFrame {
 
     private void ContinueMouseClicked(java.awt.event.MouseEvent evt) throws RemoteException {
         // TODO add your handling code here:
+        this.game.setMultiPlayer(2);
         Match mth = new Match(this.game);
         mth.setVisible(true);
         mth.pack();

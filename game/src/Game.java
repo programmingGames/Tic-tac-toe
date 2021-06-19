@@ -270,7 +270,12 @@ public class Game {
     public int getOpponentPlay() throws RemoteException {
         return ttt.waitingPlayerToPlay(this.matchId, this.userId);
     }
-    // 
+
+    public void makeMyPlay(int play) throws RemoteException{
+        ttt.makeMyPlay(this.matchId, play);
+    }
+
+    //
     public int readPlay() throws RemoteException{
         
         int play=0;

@@ -14,22 +14,23 @@ import java.rmi.RemoteException;
 public class Match extends javax.swing.JFrame {
     private Game game;
     private int winner;
-    private boolean isMe;
+    private boolean isMe, isOpponent;
     private boolean[] buttonPressed = {false, false, false, false, false, false, false, false, false};
     private String card;
 
 
     public class WaitPlay extends Thread {
         Game game;
-        int play;
+        int play=-1;
         public WaitPlay(Game game){
             this.game = game;
         }
         public void runWait() throws RemoteException, InterruptedException {
             do{
                 this.play = this.game.getOpponentPlay();
-            }while(this.play < 1);
-            opponentPlay(play);
+                System.out.println("[PLAY] waiting: "+this.play);
+            }while(this.play <= 0);
+            opponentPlay(this.play);
         }
         @Override
         public void run() {
@@ -51,8 +52,10 @@ public class Match extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
     public void setIsMe() throws RemoteException{
-        if(this.game.getMyCard()==this.game.getPlayer())
+        if(this.game.getMyCard()==this.game.getPlayer()) {
             this.isMe = true;
+            this.isOpponent = false;
+        }
         else
             this.isMe = false;
     }
@@ -412,8 +415,7 @@ public class Match extends javax.swing.JFrame {
     private void verifyNext() throws  RemoteException{
         this.game.setPlayer();
         this.setIsMe();
-        if((!this.isMe && !this.weHaveAWinner() && this.game.getMultiPlayer()==1) ||
-                (!this.weHaveAWinner() && this.game.getMultiPlayer()==2))
+        if(!this.isMe && !this.weHaveAWinner())
             matchControl();
         else if (this.weHaveAWinner()){
             this.game.restartBoard();
@@ -446,24 +448,27 @@ public class Match extends javax.swing.JFrame {
             }
         }
     }
+
     private boolean weHaveAWinner() throws RemoteException{
         this.winner = this.game.getWinner();
         if (this.winner==-1)
             return false;
         return true;
     }
+
     private void Button1MouseClicked(java.awt.event.MouseEvent evt) throws RemoteException{
         // TODO add your handling code here:
         boolean playAccepted;
-        if((!this.buttonPressed[0] && this.game.getMultiPlayer()==1) || (!this.buttonPressed[0] && this.game.getMultiPlayer()==2 && this.isMe)){
+        if(!this.buttonPressed[0]){
             playAccepted = this.game.play(1);
-            if (playAccepted){
                 this.setCardImageName();
                 Button1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
                 System.out.println("Button: 1");
                 this.buttonPressed[0]=true;
+                if(this.game.getMultiPlayer()==2 && !this.isOpponent){
+                    this.game.makeMyPlay(1);
+                }
                 this.verifyNext();
-            }
         }
     }
 
@@ -474,120 +479,128 @@ public class Match extends javax.swing.JFrame {
     private void Button2MouseClicked(java.awt.event.MouseEvent evt) throws RemoteException{
         // TODO add your handling code here:
         boolean playAccepted;
-        if((!this.buttonPressed[1] && this.game.getMultiPlayer()==1) || (!this.buttonPressed[1] && this.game.getMultiPlayer()==2 && this.isMe)){
+        if(!this.buttonPressed[1]){
             playAccepted = this.game.play(2);
-            if (playAccepted){
                 this.setCardImageName();
                 Button2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
                 System.out.println("Button: 2");
                 this.buttonPressed[1]=true;
+                if(this.game.getMultiPlayer()==2 && !this.isOpponent){
+                    this.game.makeMyPlay(2);
+                }
                 this.verifyNext();
-            }
         }
     }
 
     private void Button3MouseClicked(java.awt.event.MouseEvent evt) throws  RemoteException{
         // TODO add your handling code here:
         boolean playAccepted;
-        if((!this.buttonPressed[2] && this.game.getMultiPlayer()==1) || (!this.buttonPressed[2] && this.game.getMultiPlayer()==2 && this.isMe)){
+        if(!this.buttonPressed[2]){
             playAccepted = this.game.play(3);
-            if (playAccepted){
                 this.setCardImageName();
                 Button3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
                 System.out.println("Button: 3");
                 this.buttonPressed[2]=true;
+                if(this.game.getMultiPlayer()==2 && !this.isOpponent){
+                    this.game.makeMyPlay(3);
+                }
                 this.verifyNext();
-            }
         }
     }
 
     private void Button4MouseClicked(java.awt.event.MouseEvent evt) throws RemoteException{
         // TODO add your handling code here:
         boolean playAccepted;
-        if((!this.buttonPressed[3] && this.game.getMultiPlayer()==1) || (!this.buttonPressed[3] && this.game.getMultiPlayer()==2 && this.isMe)){
+        if(!this.buttonPressed[3]){
             playAccepted = this.game.play(4);
-            if (playAccepted){
                 this.setCardImageName();
                 Button4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
                 System.out.println("Button: 4");
                 this.buttonPressed[3]=true;
+                if(this.game.getMultiPlayer()==2 && !this.isOpponent){
+                    this.game.makeMyPlay(4);
+                }
                 this.verifyNext();
-            }
         }
     }
 
     private void Button5MouseClicked(java.awt.event.MouseEvent evt) throws RemoteException{
         // TODO add your handling code here:
         boolean playAccepted;
-        if((!this.buttonPressed[4] && this.game.getMultiPlayer()==1) || (!this.buttonPressed[4] && this.game.getMultiPlayer()==2 && this.isMe)){
+        if(!this.buttonPressed[4]){
             playAccepted = this.game.play(5);
-            if(playAccepted){
                 this.setCardImageName();
                 Button5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
                 System.out.println("Button: 5");
                 this.buttonPressed[4]=true;
+                if(this.game.getMultiPlayer()==2 && !this.isOpponent){
+                    this.game.makeMyPlay(5);
+                }
                 this.verifyNext();
-            }
         }
     }
 
     private void Button6MouseClicked(java.awt.event.MouseEvent evt) throws RemoteException{
         // TODO add your handling code here:
         boolean playAccepted;
-        if((!this.buttonPressed[5] && this.game.getMultiPlayer()==1) || (!this.buttonPressed[5] && this.game.getMultiPlayer()==2 && this.isMe)){
+        if(!this.buttonPressed[5]){
             playAccepted = this.game.play(6);
-            if(playAccepted){
                 this.setCardImageName();
                 Button6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
                 System.out.println("Button: 6");
                 this.buttonPressed[5]=true;
+                if(this.game.getMultiPlayer()==2 && !this.isOpponent){
+                    this.game.makeMyPlay(6);
+                }
                 this.verifyNext();
-            }
         }
     }
 
     private void Button7MouseClicked(java.awt.event.MouseEvent evt) throws RemoteException{
         // TODO add your handling code here:
         boolean playAccepted;
-        if((!this.buttonPressed[6] && this.game.getMultiPlayer()==1) || (!this.buttonPressed[6] && this.game.getMultiPlayer()==2 && this.isMe)){
+        if(!this.buttonPressed[6]){
             playAccepted = this.game.play(7);
-            if (playAccepted){
                 this.setCardImageName();
                 Button7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
                 System.out.println("Button: 7");
                 this.buttonPressed[6]=true;
+                if(this.game.getMultiPlayer()==2 && !this.isOpponent){
+                    this.game.makeMyPlay(7);
+                }
                 this.verifyNext();
-            }
         }
     }
 
     private void Button8MouseClicked(java.awt.event.MouseEvent evt) throws RemoteException{
         // TODO add your handling code here:
         boolean playAccepted;
-        if((!this.buttonPressed[7] && this.game.getMultiPlayer()==1) || (!this.buttonPressed[7] && this.game.getMultiPlayer()==2 && this.isMe)){
+        if(!this.buttonPressed[7]){
             playAccepted = this.game.play(8);
-            if (playAccepted){
                 this.setCardImageName();
                 Button8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
                 System.out.println("Button: 8");
                 this.buttonPressed[7]=true;
+                if(this.game.getMultiPlayer()==2 && !this.isOpponent){
+                    this.game.makeMyPlay(8);
+                }
                 this.verifyNext();
-            }
         }
     }
 
     private void Button9MouseClicked(java.awt.event.MouseEvent evt) throws  RemoteException{
         // TODO add your handling code here:
         boolean playAccepted;
-        if((!this.buttonPressed[8] && this.game.getMultiPlayer()==1) || (!this.buttonPressed[8] && this.game.getMultiPlayer()==2 && this.isMe)){
+        if(!this.buttonPressed[8]){
             playAccepted = this.game.play(9);
-            if(playAccepted){
                 this.setCardImageName();
                 Button9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
                 System.out.println("Button: 9");
                 this.buttonPressed[8]=true;
+                if(this.game.getMultiPlayer()==2 && !this.isOpponent){
+                    this.game.makeMyPlay(9);
+                }
                 this.verifyNext();
-            }
         }
     }
 
@@ -658,7 +671,9 @@ public class Match extends javax.swing.JFrame {
                 break;
         }
         System.out.println("Opponent Play: "+play);
-        this.game.setOpponentPlayToDefault();
+        if(this.game.getMultiPlayer() == 2)
+            this.game.setOpponentPlayToDefault();
+        this.isOpponent = true;
     }
 
     public void matchControl() throws RemoteException {
