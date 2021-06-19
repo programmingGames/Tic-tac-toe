@@ -3,21 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="97fb8d8d-2ef5-4103-ade2-01af40e430e6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game/Friends.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Friends.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game/Match$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Match$20.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game/Match.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Match.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/GlobalVals.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/game/WaitingOpponnent$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/WaitingOpponnent$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/game/WaitingOpponnent$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/WaitingOpponnent$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/game/WaitingOpponnent$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/WaitingOpponnent$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/WaitingOpponnent$Multi.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/game/WaitingOpponnent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/WaitingOpponnent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CardNotification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CardNotification.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Friends.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Friends.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Match.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Request.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TTTService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TTTService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TTTinterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TTTinterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/WaitingOpponnent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/WaitingOpponnent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cross/circle - Big.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/TTT.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/TTT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/TTTService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/TTTService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/src/TTTinterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/TTTinterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/../server/users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,7 +62,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
-  <component name="RunManager" selected="Application.TTTClient">
+  <component name="RunManager" selected="Application.TTTClient_1">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -130,7 +130,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Game.java</url>
-          <line>272</line>
+          <line>277</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

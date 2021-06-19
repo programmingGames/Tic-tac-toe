@@ -222,15 +222,27 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
                 }
             }
             if (!exist){
-                addingBoard();
-                Match match = new Match(idClient, idOpponent, idBoard-1, idMatch);
+                int board = addingBoard();
+                Match match = new Match(idClient, idOpponent, board, idMatch);
                 match.setCards(cards);
                 matches.add(match);
                 requestId = idMatch;
                 idMatch++;
-                System.out.println("   [MATCH_REQUEST] User: "+getUserInfo(idClient).split(" ")[0]+" challenge User: "+getUserInfo(idOpponent).split(" ")[0]+" to play");
+                System.out.println("   [MATCH_REQUEST] User: "+getUserInfo(idClient).split(" ")[0]+" challenge User: "+getUserInfo(idOpponent).split(" ")[0]+" to play"+
+                        "; matchId: "+requestId+"; boardId: "+board);
             }
             return requestId;
+        }
+
+        //
+        public int getMatchBoard(int matchId){
+            int board = -1;
+            for (Match match: matches){
+                if(match.getIdMatch()==matchId){
+                    return match.getIdBoardReference();
+                }
+            }
+            return board;
         }
 
         // Method to end the match
@@ -242,6 +254,16 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
                 }
             }
         }
+
+    // Method to end the match
+    public boolean isMatchEnded(int idMatch, int id) {
+        for (Match match : matches) {
+            if (match.getIdMatch() == idMatch  ){
+                return match.isMatchIsFinished();
+            }
+        }
+        return false;
+    }
 
         // to delete the match from the list of matches
         public void deleteMatch(int idMatch, int id){
@@ -276,7 +298,8 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
                 if(match.getIdMatch()==idMatch){
                     match.setAccepted(true);
                     System.out.println("   [MATCH_ACCEPT] User: "+getUserInfo(match.getIdOpponent()).split(" ")[0]+
-                            " has accepted to play whit User: "+getUserInfo(match.getIdClient()).split(" ")[0]
+                            " has accepted to play whit User: "+getUserInfo(match.getIdClient()).split(" ")[0]+
+                            "; boardId: "+match.getIdBoardReference()
                     );
                     return match.getCards()[1];
                 }
@@ -388,6 +411,7 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
                 System.out.println(e);
             }
 
+            int board = addingBoard();
             // adding the new user
             JSONObject newUser = new JSONObject();
             newUser.put("id", this.userId);
@@ -398,9 +422,8 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
             newUser.put("nrEmpates", 0);
             newUser.put("state", 1);
             newUser.put("myCard", "");
-            newUser.put("boardReference", idBoard);
+            newUser.put("boardReference", board);
 
-            addingBoard();// to add the respective board for this player
 
             userList.add(newUser);
             try(FileWriter file = new FileWriter("users.json")){
@@ -418,10 +441,11 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
     }
 
         // method to add a new board on the list of bord
-        public void addingBoard(){
+        public int addingBoard(){
             Board newBoard = new Board();// creating a new board to this user
             allBoard.add(newBoard);// adding the new board to the list of all the boards
             idBoard ++;// to increment the id to the next board
+            return idBoard-1;
         }
 
         // Method that will be called when some one try to log in the app
@@ -438,8 +462,8 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
             // to make all the board's for the existent player's/user's
                 for(Object userObjs : usersList){
                     userObj = (JSONObject) userObjs ;
-                    ((JSONObject) userObjs).put("boardReference", idBoard);
-                    addingBoard();
+                    int board = addingBoard();
+                    ((JSONObject) userObjs).put("boardReference", board);
                     userList.add(userObj);
                     this.userId ++;
                 }

@@ -227,6 +227,7 @@ public class Request extends javax.swing.JFrame {
                 match = request.split(" ");
                 Request1 = new JButton();
                 this.friends.add(Request1);
+                System.out.println(match[0]+" "+match[1]+" "+match[2]);
                 this.friendsInfo.add(match[0]+" "+match[1]+" "+match[2]);
             }
         }

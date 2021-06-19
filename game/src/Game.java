@@ -40,6 +40,10 @@ public class Game {
         return ttt.waitingOpponent(matchId);
     }
 
+    public void setOpponentPlayToDefault() throws RemoteException{
+        ttt.setPlayToDefault(this.matchId);
+    }
+
     // create a game request
     public void sendMatchRequest() throws RemoteException{
         char card;
@@ -52,6 +56,7 @@ public class Game {
         if(this.matchId>=0){
             System.out.println("[UPDATE] Request created");
             this.iRequest = true;
+            this.userBoardReference = ttt.getMatchBoard(this.matchId);
             this.multiPlayer = 2;
         }
         else{
@@ -249,11 +254,11 @@ public class Game {
         this.multiPlayer = multiPlayer;
     }
 
-
     // method to get the player.
     public int getPlayer()  throws RemoteException{
         return this.player ;
     }
+
     public void setPlayer(){
         this.player = ++this.player % 2;
     }
@@ -413,6 +418,7 @@ public class Game {
         return userInfo;
 
     }
+
     public void setMultiplayerInfoToDefault() throws RemoteException{
         ttt.endMatch(matchId, this.userId); // ending the match
         iRequest = false;
@@ -428,10 +434,17 @@ public class Game {
     public void setCounterWin() throws RemoteException{
         ttt.updateUser(this.userId, "nrVitorias", ttt.getUserValue(this.userId, "nrVitorias")+1);
     }
+
     public void setCounterLose() throws RemoteException{
         ttt.updateUser(this.userId, "nrDerrotas", ttt.getUserValue(this.userId, "nrDerrotas")+1);
     }
+
     public void setCounterTie() throws RemoteException{
         ttt.updateUser(this.userId, "nrEmpates", ttt.getUserValue(this.userId, "nrEmpates")+1);
     }
+
+    public boolean isMatchFinished(int matchId) throws RemoteException{
+        return ttt.isMatchEnded(matchId, this.userId);
+    }
+
 }

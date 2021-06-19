@@ -6,31 +6,32 @@
 import javax.swing.JFrame;
 import java.rmi.RemoteException;
 
-class GlobalVals{
-    static boolean response=false;
-}
 /**
  *
  * @author rafael
  */
 public class WaitingOpponnent extends javax.swing.JFrame  {
     Game game;
-    protected boolean response;
+    public static boolean response;
 
-    static class Multi extends Thread {
+    public class Wait extends Thread {
         Game game;
-        public Multi(Game game){
+        boolean accept;
+        int matchId;
+        public Wait(Game game){
             this.game = game;
         }
         public void runWait() throws RemoteException, InterruptedException {
-            boolean accept = false;
+            this.matchId=this.game.getMatchId();
+            response = true;
             do{
-                System.out.println("Waiting");
-                accept = this.game.waitOpponent();
-            }while(!accept);
-            GlobalVals.response = true;
+                this.accept = this.game.waitOpponent();
+                if(this.game.isMatchFinished(this.matchId)){
+                    break;
+                }
+            }while(!this.accept);
+            goToMatch();
         }
-
         @Override
         public void run() {
             try {
@@ -46,22 +47,14 @@ public class WaitingOpponnent extends javax.swing.JFrame  {
     public WaitingOpponnent(Game game) throws RemoteException, InterruptedException {
         this.game = game;
         this.initComponents();
-        this.response = false;
         System.out.println("[ADDRESS] Waiting Opponent");
         this.setLocationRelativeTo(null);
+        this.dispose();
         this.control();
     }
 
-    public void waitOpponent() throws RemoteException {
-        //boolean response=false;
-        // System.out.println("[STATUS] waiting for opponent");
-        //do{
-            this.response = game.waitOpponent();
-
-        //}while(!response);
-
-    }
-    private  void goToMatch() throws RemoteException {
+    public void goToMatch() throws RemoteException {
+        System.out.println("ok match");
         Match mth = new Match(this.game);
         mth.setVisible(true);
         mth.pack();
@@ -236,6 +229,7 @@ public class WaitingOpponnent extends javax.swing.JFrame  {
 
     private void quitActionPerformed(java.awt.event.ActionEvent evt) throws RemoteException {//GEN-FIRST:event_quitActionPerformed
         // TODO add your handling code here:
+
         this.game.setMultiplayerInfoToDefault();
         PlayGame qg = new PlayGame(this.game);
         qg.setVisible(true);
@@ -246,14 +240,9 @@ public class WaitingOpponnent extends javax.swing.JFrame  {
     }//GEN-LAST:event_quitActionPerformed
 
     public void control() throws RemoteException, InterruptedException {
-        Multi waitPlayer = new Multi(this.game);
+        Wait waitPlayer = new Wait(this.game);
         Thread t1 = new Thread(waitPlayer);
         t1.start();
-        //this.response = waitPlayer.run();
-        if(GlobalVals.response)
-            this.goToMatch();
-        else
-            control();
     }
     public void main(Game game) throws RemoteException {
         this.game = game;
