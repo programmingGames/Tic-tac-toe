@@ -3,8 +3,7 @@ import java.rmi.RemoteException;
 
 public class Game {
     private TTTService ttt;
-    private Computer computer = new Computer();
-    private Scanner keyboardSc= new Scanner(System.in);
+    private Scanner keyboardSc = new Scanner(System.in);
     private int winner = 0;
     private int player = 1; 
     private int userId = -1;
@@ -15,11 +14,12 @@ public class Game {
     private String enimyInfo[] = {"", ""};// to store the current enimy info 
     private int multiPlayer = 0; // is the user wants to play whit pc or whit someone (pc = 1, someone=2)
     private boolean iRequest = false;
-    private int level = 1; // the difficulty by playing with the computer
+    private int level; // the difficulty by playing with the computer
     private int myCard; // myCard = 1 -> means that the user will use "X",
-                        //  and myCard = 2 means that the player will use "O"
-    public Game(TTTService _ttt) throws RemoteException {
+                        //  and myCard = 0 means that the player will use "O"
+    private Computer computer;
 
+    public Game(TTTService _ttt) throws RemoteException {
         ttt = _ttt;
         keyboardSc = new Scanner(System.in);
         ttt.initializingApp();
@@ -211,6 +211,8 @@ public class Game {
     public void setcardChoice(int card)  throws RemoteException{
         this.myCard = card;
         ttt.updateUser(userId, "myCard",myCard);
+        if (this.multiPlayer == 1)
+            this.computer = new Computer(myCard);
     }
 
     public int getMultiPlayer() {
@@ -221,11 +223,11 @@ public class Game {
         this.multiPlayer = multiPlayer;
     }
 
-
     // method to get the player.
     public int getPlayer()  throws RemoteException{
         return this.player ;
     }
+
     public void setPlayer(){
         this.player = ++this.player % 2;
     }
@@ -234,7 +236,6 @@ public class Game {
         return this.myCard;
     }
 
-    // 
     public int readPlay() throws RemoteException{
         
         int play=0;
@@ -260,7 +261,7 @@ public class Game {
             }
             else{
                 if (multiPlayer==1){
-                    possibleMoves = ttt.getPossibleMoves(userBoardReference);
+                    possibleMoves = ttt.getBoard(userBoardReference);
                     play = computer.makePlay(level, possibleMoves);
                     System.out.println(play);
                     if(play == 11){
@@ -296,8 +297,8 @@ public class Game {
     }
 
     public int getComputerPlay() throws  RemoteException{
-        char possibleMoves[] = {1, 2, 3, 4, 5 ,6 , 7, 8, 9};
-        possibleMoves = ttt.getPossibleMoves(userBoardReference);
+        char possibleMoves[];
+        possibleMoves = ttt.getBoard(userBoardReference);
         return computer.makePlay(level, possibleMoves);
     }
 

@@ -1,31 +1,24 @@
 import java.rmi.RemoteException;
 
 public class Computer {
+    private MoveChooser movechooser;
+    private char mycard;
 
-    public int randomRange(int min, int max){
-        return (int) ((Math.random() * (max - min)) + min);
-    }
-
-    public int getBestMoves(char[] possibleMoves) throws RemoteException{
-        return 0;
-    }
-
-    public int RandomMove(char[] possibleMoves){
-        boolean go = true;
-        int option = 100;
-        while(go){
-            option = randomRange(1, 9);
-            Character c1 = possibleMoves[option-1];
-            Character c2 = 'O'; Character c3 = 'X';
-            go = c1.equals(c2) || c1.equals(c3);
+    public Computer(int mycard){
+        char[] cards = {'X', 'O'}; //inverted order because my card is the opposite card of the player.
+        this.mycard = cards[mycard];
+        this.movechooser = new MoveChooser(this.mycard);
         }
-        return option;
-    }
 
     public int makePlay(int level, char[] possibleMoves) throws RemoteException{
-        //if (level==1) {
-        return randomRange(1,10);
-        //}
-        //return getBestMoves(possibleMoves);
+        if (level==1) {
+            return movechooser.randomMove(possibleMoves);
+        }
+        else if (level==2){
+            if (movechooser.randomRange(1,10) > 5){
+                return movechooser.randomMove(possibleMoves);
+            }
+        }
+        return movechooser.getBestMove(possibleMoves);
     }
 }

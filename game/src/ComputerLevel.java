@@ -225,7 +225,7 @@ public class ComputerLevel extends javax.swing.JFrame {
 
     private void LevelEasyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LevelEasyActionPerformed
         // TODO add your handling code here:
-        this.game.levelChoice(2);
+        this.game.levelChoice(1);
         CardChoice cdc = new CardChoice(this.game, "Match");
         cdc.setVisible(true);
         cdc.pack();
@@ -236,7 +236,7 @@ public class ComputerLevel extends javax.swing.JFrame {
 
     private void LevelNormalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LevelNormalMouseClicked
         // TODO add your handling code here:
-        this.game.levelChoice(3);
+        this.game.levelChoice(2);
         CardChoice cdc = new CardChoice(this.game, "Match");
         cdc.setVisible(true);
         cdc.pack();
@@ -247,6 +247,13 @@ public class ComputerLevel extends javax.swing.JFrame {
 
     private void LevelNormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LevelNormalActionPerformed
         // TODO add your handling code here:
+        this.game.levelChoice(2);
+        CardChoice cdc = new CardChoice(this.game, "Match");
+        cdc.setVisible(true);
+        cdc.pack();
+        cdc.setLocationRelativeTo(null);
+        cdc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
     }//GEN-LAST:event_LevelNormalActionPerformed
 
     private void quitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quitMouseClicked
@@ -265,10 +272,24 @@ public class ComputerLevel extends javax.swing.JFrame {
 
     private void LevelHardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LevelHardMouseClicked
         // TODO add your handling code here:
+        this.game.levelChoice(3);
+        CardChoice cdc = new CardChoice(this.game, "Match");
+        cdc.setVisible(true);
+        cdc.pack();
+        cdc.setLocationRelativeTo(null);
+        cdc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
     }//GEN-LAST:event_LevelHardMouseClicked
 
     private void LevelHardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LevelHardActionPerformed
         // TODO add your handling code here:
+        this.game.levelChoice(3);
+        CardChoice cdc = new CardChoice(this.game, "Match");
+        cdc.setVisible(true);
+        cdc.pack();
+        cdc.setLocationRelativeTo(null);
+        cdc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
     }//GEN-LAST:event_LevelHardActionPerformed
 
     public void startComputerLevel(Game game ) {
