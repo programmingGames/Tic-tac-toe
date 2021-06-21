@@ -107,7 +107,6 @@ public class Request extends javax.swing.JFrame {
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 43, Short.MAX_VALUE)
         );
-
         int i=0;
         for( JButton button: this.friends){
             button.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N

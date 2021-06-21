@@ -108,25 +108,29 @@ public class Friends extends javax.swing.JFrame {
             .addGap(0, 43, Short.MAX_VALUE)
         );
 
-        Friend1Choose.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
-        Friend1Choose.setText("Friends1");
-        Friend1Choose.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                int i =0;
-                try {
-                    Friend1ChooseMouseClicked(evt, i);
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+        int i=0;
+        for( JButton button: this.friends){
+            button.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+            button.setText(this.friendsInfo.get(i).split(" ")[0]);
+            //System.out.println(this.friendsInfo.get(i));
+            int finalI = i;
+            button.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    try {
+                        Friend1ChooseMouseClicked(evt, finalI);
+                    } catch (RemoteException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        });
-        Friend1Choose.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Friend1ChooseActionPerformed(evt);
-            }
-        });
+            });
+            button.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    Friend1ChooseActionPerformed(evt);
+                }
+            });
+
+            i++;
+        }
 
         quit.setBackground(new java.awt.Color(255, 10, 10));
         quit.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
