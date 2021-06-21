@@ -559,7 +559,7 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
             return activeUser;
         }
 
-    public char[] getPossibleMoves(int boardReference){
+    public char[] getBoard(int boardReference){
             char auxiliarBoard[][] = allBoard.get(boardReference - 1).board;
         char m1 = auxiliarBoard[0][0]; char m2 = auxiliarBoard[0][1]; char m3 = auxiliarBoard[0][2];
         char m4 = auxiliarBoard[1][0]; char m5 = auxiliarBoard[1][1]; char m6 = auxiliarBoard[1][2];

@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 
 public class Game {
     private TTTService ttt;
-    private Computer computer = new Computer();
+    private Computer computer;
     private Scanner keyboardSc= new Scanner(System.in);
     private int winner = 0;
     private int player = 1; 
@@ -243,6 +243,8 @@ public class Game {
     // method to allow the user to chose what player he is.
     public void setcardChoice(int card)  throws RemoteException{
         this.myCard = card;
+        if (this.multiPlayer==1)
+            this.computer = new Computer(this.myCard);
         ttt.updateUser(userId, "myCard",myCard);
     }
 
@@ -301,7 +303,7 @@ public class Game {
             }
             else{
                 if (multiPlayer==1){
-                    possibleMoves = ttt.getPossibleMoves(userBoardReference);
+                    possibleMoves = ttt.getBoard(userBoardReference);
                     play = computer.makePlay(level, possibleMoves);
                     System.out.println(play);
                     if(play == 11){
@@ -338,7 +340,7 @@ public class Game {
 
     public int getComputerPlay() throws  RemoteException{
         char possibleMoves[] = {1, 2, 3, 4, 5 ,6 , 7, 8, 9};
-        possibleMoves = ttt.getPossibleMoves(userBoardReference);
+        possibleMoves = ttt.getBoard(userBoardReference);
         return computer.makePlay(level, possibleMoves);
     }
 
