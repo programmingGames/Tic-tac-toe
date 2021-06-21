@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 import javax.swing.JFrame;
+import java.rmi.RemoteException;
+
 /**
  *
  * @author rafael
@@ -83,7 +85,7 @@ public class Tie extends javax.swing.JFrame {
         quit.setBackground(new java.awt.Color(255, 10, 10));
         quit.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         quit.setForeground(new java.awt.Color(0, 0, 0));
-        quit.setText("QUIT");
+        quit.setText("Main Menu");
         quit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 quitMouseClicked(evt);
@@ -107,7 +109,11 @@ public class Tie extends javax.swing.JFrame {
         PlauAgain.setText("PLAY AGAIN");
         PlauAgain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PlauAgainActionPerformed(evt);
+                try {
+                    PlayAgainActionPerformed(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -181,6 +187,12 @@ public class Tie extends javax.swing.JFrame {
 
     private void quitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quitMouseClicked
         // TODO add your handling code here:
+        PlayGame qg = new PlayGame(this.game);
+        qg.setVisible(true);
+        qg.pack();
+        qg.setLocationRelativeTo(null);
+        qg.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
     }//GEN-LAST:event_quitMouseClicked
 
     private void quitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitActionPerformed
@@ -193,8 +205,15 @@ public class Tie extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_quitActionPerformed
 
-    private void PlauAgainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlauAgainActionPerformed
+    private void PlayAgainActionPerformed(java.awt.event.ActionEvent evt) throws RemoteException {//GEN-FIRST:event_PlauAgainActionPerformed
         // TODO add your handling code here:
+        this.game.restartBoard();
+        CardChoice cdc = new CardChoice(this.game, "Match");
+        cdc.setVisible(true);
+        cdc.pack();
+        cdc.setLocationRelativeTo(null);
+        cdc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
     }//GEN-LAST:event_PlauAgainActionPerformed
 
 

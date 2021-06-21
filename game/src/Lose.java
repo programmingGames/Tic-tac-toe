@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 import javax.swing.JFrame;
+import java.rmi.RemoteException;
+
 /**
  *
  * @author rafael
@@ -71,7 +73,7 @@ public class Lose extends javax.swing.JFrame {
         quit.setBackground(new java.awt.Color(255, 10, 10));
         quit.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         quit.setForeground(new java.awt.Color(0, 0, 0));
-        quit.setText("QUIT");
+        quit.setText("Main Menu");
         quit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 quitMouseClicked(evt);
@@ -108,7 +110,11 @@ public class Lose extends javax.swing.JFrame {
         PlayAgain.setText("PLAY AGAIN");
         PlayAgain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PlayAgainActionPerformed(evt);
+                try {
+                    PlayAgainActionPerformed(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -184,7 +190,7 @@ public class Lose extends javax.swing.JFrame {
 
     private void quitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitActionPerformed
         // TODO add your handling code here:
-        QuitGame qg = new QuitGame();
+        PlayGame qg = new PlayGame(this.game);
         qg.setVisible(true);
         qg.pack();
         qg.setLocationRelativeTo(null);
@@ -192,8 +198,15 @@ public class Lose extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_quitActionPerformed
 
-    private void PlayAgainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlayAgainActionPerformed
+    private void PlayAgainActionPerformed(java.awt.event.ActionEvent evt) throws RemoteException {//GEN-FIRST:event_PlayAgainActionPerformed
         // TODO add your handling code here:
+        this.game.restartBoard();
+        CardChoice cdc = new CardChoice(this.game, "Match");
+        cdc.setVisible(true);
+        cdc.pack();
+        cdc.setLocationRelativeTo(null);
+        cdc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
     }//GEN-LAST:event_PlayAgainActionPerformed
 
 

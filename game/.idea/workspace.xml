@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="97fb8d8d-2ef5-4103-ade2-01af40e430e6" name="Default Changelist" comment="" />
+    <list default="true" id="97fb8d8d-2ef5-4103-ade2-01af40e430e6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Lose.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lose.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Winner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Winner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/../server/users.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,7 +48,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
-  <component name="RunManager" selected="Application.TTTClient">
+  <component name="RunManager" selected="Application.TTTClient_1">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -70,6 +76,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TTTClient_1" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="TTTClient" />
+      <module name="game" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.TTTClient_1" />
+      <item itemvalue="Application.MainMenu" />
+      <item itemvalue="Application.TTTClient" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.TTTClient" />
