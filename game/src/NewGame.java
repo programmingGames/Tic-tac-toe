@@ -222,7 +222,7 @@ public class NewGame extends javax.swing.JFrame {
 
     private void FRIENDSMouseClicked(java.awt.event.MouseEvent evt) throws RemoteException {
         // TODO add your handling code here:
-        CardChoice fes = new CardChoice(this.game, "Friends");
+        Friends fes = new Friends(this.game);
         fes.setVisible(true);
         fes.pack();
         fes.setLocationRelativeTo(null);

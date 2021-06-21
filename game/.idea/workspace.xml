@@ -3,14 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="97fb8d8d-2ef5-4103-ade2-01af40e430e6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Computer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Computer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ComputerLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ComputerLevel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TTTService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TTTService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TTTinterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TTTinterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/TTT.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/TTT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/TTTService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/TTTService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../server/src/TTTinterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/../server/src/TTTinterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Friends.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Friends.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Lose.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lose.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NewGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NewGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Request.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Winner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Winner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/../server/users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

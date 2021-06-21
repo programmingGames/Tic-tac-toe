@@ -10,6 +10,7 @@ import javax.swing.JFrame;
  */
 public class Lose extends javax.swing.JFrame {
     Game game;
+
     /**
      * Creates new form Lose
      */
@@ -36,6 +37,7 @@ public class Lose extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        PlayAgain = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -69,7 +71,7 @@ public class Lose extends javax.swing.JFrame {
         quit.setBackground(new java.awt.Color(255, 10, 10));
         quit.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         quit.setForeground(new java.awt.Color(0, 0, 0));
-        quit.setText("Continue");
+        quit.setText("QUIT");
         quit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 quitMouseClicked(evt);
@@ -100,6 +102,16 @@ public class Lose extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/fogo4.gif"))); // NOI18N
 
+        PlayAgain.setBackground(new java.awt.Color(5, 90, 255));
+        PlayAgain.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        PlayAgain.setForeground(new java.awt.Color(0, 0, 0));
+        PlayAgain.setText("PLAY AGAIN");
+        PlayAgain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PlayAgainActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -113,7 +125,8 @@ public class Lose extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(quit, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2)
+                        .addComponent(PlayAgain, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(55, 55, 55))
         );
         jPanel3Layout.setVerticalGroup(
@@ -123,7 +136,9 @@ public class Lose extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(34, 34, 34)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(PlayAgain)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(quit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -169,7 +184,7 @@ public class Lose extends javax.swing.JFrame {
 
     private void quitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitActionPerformed
         // TODO add your handling code here:
-        PlayGame qg = new PlayGame(this.game);
+        QuitGame qg = new QuitGame();
         qg.setVisible(true);
         qg.pack();
         qg.setLocationRelativeTo(null);
@@ -177,8 +192,12 @@ public class Lose extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_quitActionPerformed
 
+    private void PlayAgainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlayAgainActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PlayAgainActionPerformed
 
-    public void lose(Game game) {
+
+    public void main(Game game) {
         this.game = game;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -213,6 +232,7 @@ public class Lose extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelLogin;
+    private javax.swing.JButton PlayAgain;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
