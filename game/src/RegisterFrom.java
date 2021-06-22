@@ -255,7 +255,7 @@ public class RegisterFrom extends javax.swing.JFrame {
         if(passWd1.equals(passWd2)){
             id = this.game.addUser(jTextField1.getText(),passWd1);
             if (id!=-1){
-                PlayGame home = new PlayGame(this.game);
+                PlayGame home = new PlayGame(this.game, "");
                 home.setVisible(true);
                 home.pack();
                 home.setLocationRelativeTo(null);

@@ -239,7 +239,7 @@ public class login extends javax.swing.JFrame {
 
         id = this.game.validate(jTextField1.getText(),passWd);
         if (id != -1){
-            PlayGame home = new PlayGame(this.game);
+            PlayGame home = new PlayGame(this.game, "");
             home.setVisible(true);
             home.pack();
             home.setLocationRelativeTo(null);

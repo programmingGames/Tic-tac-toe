@@ -252,7 +252,7 @@ public class Winner extends javax.swing.JFrame {
 
     private void quitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitActionPerformed
         // TODO add your handling code here:
-        PlayGame qg = new PlayGame(this.game);
+        PlayGame qg = new PlayGame(this.game, "");
         qg.setVisible(true);
         qg.pack();
         qg.setLocationRelativeTo(null);

@@ -29,8 +29,9 @@ public class Request extends javax.swing.JFrame {
 
     private void createAllButtons() throws RemoteException {
         String[] requests = this.game.getAllMatchRequest();
+        //System.out.println(requests);
         String match[] = {"", "", "", "", ""};
-        if(requests.length > 1){
+        if(requests.length > 0){
             for (String request: requests){
                 match = request.split(" ");
                 Request1 = new JButton();

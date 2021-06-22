@@ -12,6 +12,7 @@ import java.rmi.RemoteException;
  */
 public class WaitingOpponnent extends javax.swing.JFrame  {
     Game game;
+    boolean quitPress;
     public static boolean response;
 
     public class Wait extends Thread {
@@ -30,7 +31,8 @@ public class WaitingOpponnent extends javax.swing.JFrame  {
                     break;
                 }
             }while(!this.accept);
-            goToMatch();
+            if(!quitPress)
+                goToMatch();
         }
         @Override
         public void run() {
@@ -229,9 +231,9 @@ public class WaitingOpponnent extends javax.swing.JFrame  {
 
     private void quitActionPerformed(java.awt.event.ActionEvent evt) throws RemoteException {//GEN-FIRST:event_quitActionPerformed
         // TODO add your handling code here:
-
+        this.quitPress = true;
         this.game.setMultiplayerInfoToDefault();
-        PlayGame qg = new PlayGame(this.game);
+        PlayGame qg = new PlayGame(this.game,"");
         qg.setVisible(true);
         qg.pack();
         qg.setLocationRelativeTo(null);

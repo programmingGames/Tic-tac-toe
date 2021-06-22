@@ -187,7 +187,7 @@ public class Tie extends javax.swing.JFrame {
 
     private void quitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quitMouseClicked
         // TODO add your handling code here:
-        PlayGame qg = new PlayGame(this.game);
+        PlayGame qg = new PlayGame(this.game, "");
         qg.setVisible(true);
         qg.pack();
         qg.setLocationRelativeTo(null);

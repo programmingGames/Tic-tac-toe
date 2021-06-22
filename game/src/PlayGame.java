@@ -12,10 +12,12 @@ import java.rmi.RemoteException;
  */
 public class PlayGame extends javax.swing.JFrame {
     Game game;
+    String goTo;
     /**
      * Creates new form Play
      */
-    public PlayGame(Game game) {
+    public PlayGame(Game game, String goTo) {
+        this.goTo = goTo;
         this.game = game;
         System.out.println("[ADDRESS] Home");
         initComponents();
@@ -263,7 +265,7 @@ public class PlayGame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PlayGame(game).setVisible(true);
+                new PlayGame(game, "").setVisible(true);
             }
         });
     }

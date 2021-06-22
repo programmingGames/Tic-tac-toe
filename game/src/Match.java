@@ -15,6 +15,7 @@ public class Match extends javax.swing.JFrame {
     private Game game;
     private int winner;
     private boolean isMe, isOpponent;
+    private  int counter =1;
     private boolean[] buttonPressed = {false, false, false, false, false, false, false, false, false};
     private String card;
 
@@ -28,9 +29,11 @@ public class Match extends javax.swing.JFrame {
         public void runWait() throws RemoteException, InterruptedException {
             do{
                 this.play = this.game.getOpponentPlay();
-                System.out.println("[PLAY] waiting: "+this.play);
+                //System.out.println("[PLAY] waiting: "+this.play);
             }while(this.play <= 0);
-            opponentPlay(this.play);
+            int store = play;
+            this.play = -1;
+            opponentPlay(store);
         }
         @Override
         public void run() {
@@ -54,7 +57,7 @@ public class Match extends javax.swing.JFrame {
     public void setIsMe() throws RemoteException{
         if(this.game.getMyCard()==this.game.getPlayer()) {
             this.isMe = true;
-            this.isOpponent = false;
+            System.out.println("is me to play");
         }
         else
             this.isMe = false;
@@ -465,10 +468,11 @@ public class Match extends javax.swing.JFrame {
                 Button1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
                 System.out.println("Button: 1");
                 this.buttonPressed[0]=true;
-                if(this.game.getMultiPlayer()==2 && !this.isOpponent){
+                if(this.game.getMultiPlayer()==2){
                     this.game.makeMyPlay(1);
                 }
-                this.verifyNext();
+                if(this.game.getMultiPlayer()==1)
+                    this.verifyNext();
         }
     }
 
@@ -485,7 +489,7 @@ public class Match extends javax.swing.JFrame {
                 Button2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
                 System.out.println("Button: 2");
                 this.buttonPressed[1]=true;
-                if(this.game.getMultiPlayer()==2 && !this.isOpponent){
+                if(this.game.getMultiPlayer()==2){
                     this.game.makeMyPlay(2);
                 }
                 this.verifyNext();
@@ -501,7 +505,7 @@ public class Match extends javax.swing.JFrame {
                 Button3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
                 System.out.println("Button: 3");
                 this.buttonPressed[2]=true;
-                if(this.game.getMultiPlayer()==2 && !this.isOpponent){
+                if(this.game.getMultiPlayer()==2){
                     this.game.makeMyPlay(3);
                 }
                 this.verifyNext();
@@ -517,7 +521,7 @@ public class Match extends javax.swing.JFrame {
                 Button4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
                 System.out.println("Button: 4");
                 this.buttonPressed[3]=true;
-                if(this.game.getMultiPlayer()==2 && !this.isOpponent){
+                if(this.game.getMultiPlayer()==2){
                     this.game.makeMyPlay(4);
                 }
                 this.verifyNext();
@@ -533,7 +537,7 @@ public class Match extends javax.swing.JFrame {
                 Button5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
                 System.out.println("Button: 5");
                 this.buttonPressed[4]=true;
-                if(this.game.getMultiPlayer()==2 && !this.isOpponent){
+                if(this.game.getMultiPlayer()==2){
                     this.game.makeMyPlay(5);
                 }
                 this.verifyNext();
@@ -549,7 +553,7 @@ public class Match extends javax.swing.JFrame {
                 Button6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
                 System.out.println("Button: 6");
                 this.buttonPressed[5]=true;
-                if(this.game.getMultiPlayer()==2 && !this.isOpponent){
+                if(this.game.getMultiPlayer()==2){
                     this.game.makeMyPlay(6);
                 }
                 this.verifyNext();
@@ -565,7 +569,7 @@ public class Match extends javax.swing.JFrame {
                 Button7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
                 System.out.println("Button: 7");
                 this.buttonPressed[6]=true;
-                if(this.game.getMultiPlayer()==2 && !this.isOpponent){
+                if(this.game.getMultiPlayer()==2){
                     this.game.makeMyPlay(7);
                 }
                 this.verifyNext();
@@ -581,7 +585,7 @@ public class Match extends javax.swing.JFrame {
                 Button8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
                 System.out.println("Button: 8");
                 this.buttonPressed[7]=true;
-                if(this.game.getMultiPlayer()==2 && !this.isOpponent){
+                if(this.game.getMultiPlayer()==2){
                     this.game.makeMyPlay(8);
                 }
                 this.verifyNext();
@@ -597,7 +601,7 @@ public class Match extends javax.swing.JFrame {
                 Button9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross/"+this.card)));
                 System.out.println("Button: 9");
                 this.buttonPressed[8]=true;
-                if(this.game.getMultiPlayer()==2 && !this.isOpponent){
+                if(this.game.getMultiPlayer()==2){
                     this.game.makeMyPlay(9);
                 }
                 this.verifyNext();
@@ -671,13 +675,15 @@ public class Match extends javax.swing.JFrame {
                 break;
         }
         System.out.println("Opponent Play: "+play);
-        if(this.game.getMultiPlayer() == 2)
+        if(this.game.getMultiPlayer() == 2) {
             this.game.setOpponentPlayToDefault();
+            this.verifyNext();
+        }
         this.isOpponent = true;
     }
 
     public void matchControl() throws RemoteException {
-        int computerPlay=0,opponentPlay=0;boolean valid;
+        int computerPlay=0;boolean valid;
         if(this.game.getMultiPlayer()==1){
             do{
                 valid=true;
@@ -694,9 +700,9 @@ public class Match extends javax.swing.JFrame {
             this.opponentPlay(computerPlay);
         }
         else if (this.game.getMultiPlayer()==2){
-            WaitPlay wait = new WaitPlay(this.game);
-            Thread t1 = new Thread(wait);
-            t1.start();
+                WaitPlay wait = new WaitPlay(this.game);
+                Thread t1 = new Thread(wait);
+                t1.start();
         }
         System.out.println(this.isMe);
 
