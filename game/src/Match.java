@@ -473,7 +473,8 @@ public class Match extends javax.swing.JFrame {
                 if(this.game.getMultiPlayer()==2){
                     this.game.makeMyPlay(1);
                 }
-                this.verifyNext();
+                if (this.isMe)
+                    this.verifyNext();
         }
     }
 
@@ -493,6 +494,7 @@ public class Match extends javax.swing.JFrame {
                 if(this.game.getMultiPlayer()==2){
                     this.game.makeMyPlay(2);
                 }
+            if (this.isMe)
                 this.verifyNext();
         }
     }
@@ -509,6 +511,7 @@ public class Match extends javax.swing.JFrame {
                 if(this.game.getMultiPlayer()==2){
                     this.game.makeMyPlay(3);
                 }
+            if (this.isMe)
                 this.verifyNext();
         }
     }
@@ -525,6 +528,7 @@ public class Match extends javax.swing.JFrame {
                 if(this.game.getMultiPlayer()==2){
                     this.game.makeMyPlay(4);
                 }
+            if (this.isMe)
                 this.verifyNext();
         }
     }
@@ -541,6 +545,7 @@ public class Match extends javax.swing.JFrame {
                 if(this.game.getMultiPlayer()==2){
                     this.game.makeMyPlay(5);
                 }
+            if (this.isMe)
                 this.verifyNext();
         }
     }
@@ -557,6 +562,7 @@ public class Match extends javax.swing.JFrame {
                 if(this.game.getMultiPlayer()==2){
                     this.game.makeMyPlay(6);
                 }
+            if (this.isMe)
                 this.verifyNext();
         }
     }
@@ -573,6 +579,7 @@ public class Match extends javax.swing.JFrame {
                 if(this.game.getMultiPlayer()==2){
                     this.game.makeMyPlay(7);
                 }
+            if (this.isMe)
                 this.verifyNext();
         }
     }
@@ -589,6 +596,7 @@ public class Match extends javax.swing.JFrame {
                 if(this.game.getMultiPlayer()==2){
                     this.game.makeMyPlay(8);
                 }
+            if (this.isMe)
                 this.verifyNext();
         }
     }
@@ -605,6 +613,7 @@ public class Match extends javax.swing.JFrame {
                 if(this.game.getMultiPlayer()==2){
                     this.game.makeMyPlay(9);
                 }
+            if (this.isMe)
                 this.verifyNext();
         }
     }
@@ -679,6 +688,7 @@ public class Match extends javax.swing.JFrame {
         if(this.game.getMultiPlayer() == 2) {
             this.game.setOpponentPlayToDefault();
         }
+        this.verifyNext();
         this.isOpponent = true;
     }
 
