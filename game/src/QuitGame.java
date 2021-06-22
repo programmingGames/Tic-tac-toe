@@ -9,11 +9,14 @@ import javax.swing.JFrame;
  * @author rafael
  */
 public class QuitGame extends javax.swing.JFrame {
-
+    String returnTO;
+    Game game;
     /**
      * Creates new form QuitGame
      */
-    public QuitGame() {
+    public QuitGame(String returnTO, Game game) {
+        this.returnTO = returnTO;
+        this.game = game;
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -193,49 +196,23 @@ public class QuitGame extends javax.swing.JFrame {
 
     private void quitNOActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        /*MainMenu mm = new MainMenu();
-        mm.setVisible(true);
-        mm.pack();
-        mm.setLocationRelativeTo(null);
-        mm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
-        */
-
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QuitGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QuitGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QuitGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QuitGame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        if(this.returnTO.equals("Main Menu")){
+            MainMenu mm = new MainMenu(this.game);
+            mm.setVisible(true);
+            mm.pack();
+            mm.setLocationRelativeTo(null);
+            mm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();
         }
-        //</editor-fold>
+        else if(this.returnTO.equals("Play Game")){
+            PlayGame mm = new PlayGame(this.game);
+            mm.setVisible(true);
+            mm.pack();
+            mm.setLocationRelativeTo(null);
+            mm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();
+        }
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new QuitGame().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify

@@ -98,7 +98,7 @@ public class login extends javax.swing.JFrame {
         QUITGAME.setBackground(new java.awt.Color(255, 10, 10));
         QUITGAME.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         QUITGAME.setForeground(new java.awt.Color(0, 0, 0));
-        QUITGAME.setText("QUIT");
+        QUITGAME.setText("Back");
         QUITGAME.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 QUITGAMEMouseClicked(evt);
@@ -239,7 +239,7 @@ public class login extends javax.swing.JFrame {
 
         id = this.game.validate(jTextField1.getText(),passWd);
         if (id != -1){
-            PlayGame home = new PlayGame(this.game, "");
+            PlayGame home = new PlayGame(this.game);
             home.setVisible(true);
             home.pack();
             home.setLocationRelativeTo(null);
@@ -251,7 +251,7 @@ public class login extends javax.swing.JFrame {
 
     private void QUITGAMEActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        QuitGame qg = new QuitGame();
+        MainMenu qg = new MainMenu(this.game);
         qg.setVisible(true);
         qg.pack();
         qg.setLocationRelativeTo(null);
@@ -273,7 +273,7 @@ public class login extends javax.swing.JFrame {
 
     private void QUITGAMEMouseClicked(java.awt.event.MouseEvent evt) {
         // Craido sem querer
-        QuitGame qg = new QuitGame();
+        MainMenu qg = new MainMenu(this.game);
         qg.setVisible(true);
         qg.pack();
         qg.setLocationRelativeTo(null);

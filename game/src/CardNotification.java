@@ -94,7 +94,7 @@ public class CardNotification extends javax.swing.JFrame {
         quit.setBackground(new java.awt.Color(255, 10, 10));
         quit.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         quit.setForeground(new java.awt.Color(0, 0, 0));
-        quit.setText("QUIT");
+        quit.setText("Back");
         quit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 quitMouseClicked(evt);
@@ -102,7 +102,11 @@ public class CardNotification extends javax.swing.JFrame {
         });
         quit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quitActionPerformed(evt);
+                try {
+                    quitActionPerformed(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -208,9 +212,9 @@ public class CardNotification extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
-    private void quitActionPerformed(java.awt.event.ActionEvent evt) {
+    private void quitActionPerformed(java.awt.event.ActionEvent evt) throws RemoteException {
         // TODO add your handling code here:
-        QuitGame qg = new QuitGame();
+        Request qg = new Request(this.game);
         qg.setVisible(true);
         qg.pack();
         qg.setLocationRelativeTo(null);

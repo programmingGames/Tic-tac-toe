@@ -12,12 +12,10 @@ import java.rmi.RemoteException;
  */
 public class PlayGame extends javax.swing.JFrame {
     Game game;
-    String goTo;
     /**
      * Creates new form Play
      */
-    public PlayGame(Game game, String goTo) {
-        this.goTo = goTo;
+    public PlayGame(Game game) {
         this.game = game;
         System.out.println("[ADDRESS] Home");
         initComponents();
@@ -224,7 +222,7 @@ public class PlayGame extends javax.swing.JFrame {
 
     private void quitActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        QuitGame qg = new QuitGame();
+        QuitGame qg = new QuitGame("Play Game", this.game);
         qg.setVisible(true);
         qg.pack();
         qg.setLocationRelativeTo(null);
@@ -265,7 +263,7 @@ public class PlayGame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PlayGame(game, "").setVisible(true);
+                new PlayGame(game).setVisible(true);
             }
         });
     }

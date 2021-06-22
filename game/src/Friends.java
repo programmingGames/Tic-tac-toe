@@ -32,11 +32,13 @@ public class Friends extends javax.swing.JFrame {
     private void createAllButtons() throws RuntimeException, RemoteException {
         String[] users = this.game.getAllActiveUser();
         String userInfo[] = {"", ""};
-        for (String user: users){
-            userInfo = user.split(" ");
-            Friend1Choose = new JButton();
-            this.friends.add(Friend1Choose);
-            this.friendsInfo.add(userInfo[1]+" "+userInfo[0]);
+        if(!users[0].equals("")){
+            for (String user: users){
+                userInfo = user.split(" ");
+                Friend1Choose = new JButton();
+                this.friends.add(Friend1Choose);
+                this.friendsInfo.add(userInfo[1]+" "+userInfo[0]);
+            }
         }
         this.remaining = 6-this.friends.toArray().length;
         for (int i=0; i<this.remaining; i++){
@@ -135,7 +137,7 @@ public class Friends extends javax.swing.JFrame {
         quit.setBackground(new java.awt.Color(255, 10, 10));
         quit.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         quit.setForeground(new java.awt.Color(0, 0, 0));
-        quit.setText("QUIT");
+        quit.setText("Back");
         quit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 quitMouseClicked(evt);
@@ -282,7 +284,7 @@ public class Friends extends javax.swing.JFrame {
 
     private void quitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitActionPerformed
         // TODO add your handling code here:
-        QuitGame qg = new QuitGame();
+        NewGame qg = new NewGame(this.game);
         qg.setVisible(true);
         qg.pack();
         qg.setLocationRelativeTo(null);

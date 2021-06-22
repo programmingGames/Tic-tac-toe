@@ -215,7 +215,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void quitActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        QuitGame qg = new QuitGame();
+        QuitGame qg = new QuitGame("Main Menu", this.game);
         qg.setVisible(true);
         qg.pack();
         qg.setLocationRelativeTo(null);

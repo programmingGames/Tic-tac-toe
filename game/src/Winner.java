@@ -12,11 +12,13 @@ import java.rmi.RemoteException;
  */
 public class Winner extends javax.swing.JFrame {
     Game game;
+    String goTo="Play Again";
     /**
      * Creates new form Winner
      */
-    public Winner(Game game) {
+    public Winner(Game game, String goTo) {
         this.game = game;
+        this.goTo = goTo;
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -127,7 +129,7 @@ public class Winner extends javax.swing.JFrame {
         PlayAgain.setBackground(new java.awt.Color(5, 90, 255));
         PlayAgain.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         PlayAgain.setForeground(new java.awt.Color(0, 0, 0));
-        PlayAgain.setText("PLAY AGAIN");
+        PlayAgain.setText(this.goTo);
         PlayAgain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
@@ -252,7 +254,7 @@ public class Winner extends javax.swing.JFrame {
 
     private void quitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitActionPerformed
         // TODO add your handling code here:
-        PlayGame qg = new PlayGame(this.game, "");
+        PlayGame qg = new PlayGame(this.game);
         qg.setVisible(true);
         qg.pack();
         qg.setLocationRelativeTo(null);
@@ -262,13 +264,24 @@ public class Winner extends javax.swing.JFrame {
 
     private void PlayAgainActionPerformed(java.awt.event.ActionEvent evt) throws RemoteException {//GEN-FIRST:event_PlayAgainActionPerformed
         // TODO add your handling code here:
-        this.game.restartBoard();
-        CardChoice cdc = new CardChoice(this.game, "Match");
-        cdc.setVisible(true);
-        cdc.pack();
-        cdc.setLocationRelativeTo(null);
-        cdc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
+
+        if(this.goTo.equals("Play Again")){
+            this.game.restartBoard();
+            CardChoice cdc = new CardChoice(this.game, "Match");
+            cdc.setVisible(true);
+            cdc.pack();
+            cdc.setLocationRelativeTo(null);
+            cdc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();
+        }
+        else if (this.goTo.equals("New Game")){
+            NewGame cdc = new NewGame(this.game);
+            cdc.setVisible(true);
+            cdc.pack();
+            cdc.setLocationRelativeTo(null);
+            cdc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();
+        }
     }//GEN-LAST:event_PlayAgainActionPerformed
 
 
@@ -300,7 +313,7 @@ public class Winner extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Winner(game).setVisible(true);
+                new Winner(game, "").setVisible(true);
             }
         });
     }

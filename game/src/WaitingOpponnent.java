@@ -56,7 +56,6 @@ public class WaitingOpponnent extends javax.swing.JFrame  {
     }
 
     public void goToMatch() throws RemoteException {
-        System.out.println("ok match");
         Match mth = new Match(this.game);
         mth.setVisible(true);
         mth.pack();
@@ -233,7 +232,7 @@ public class WaitingOpponnent extends javax.swing.JFrame  {
         // TODO add your handling code here:
         this.quitPress = true;
         this.game.setMultiplayerInfoToDefault();
-        PlayGame qg = new PlayGame(this.game,"");
+        PlayGame qg = new PlayGame(this.game);
         qg.setVisible(true);
         qg.pack();
         qg.setLocationRelativeTo(null);
