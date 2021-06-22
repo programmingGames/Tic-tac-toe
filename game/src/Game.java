@@ -62,8 +62,6 @@ public class Game {
         else{
             System.out.println("[ERROR] Request already exist");
         }
-        System.out.println("Board: "+this.userBoardReference);
-        System.out.println("Match: "+this.matchId);
     }
 
     public String[] getAllMatchRequest() throws RemoteException{
@@ -73,13 +71,11 @@ public class Game {
     public void acceptRequest(String enemy) throws RemoteException{
         matchInfo = enemy.split(" ");// to take the enimy chosen.
         userBoardReference = Integer.parseInt(matchInfo[1]);
-        System.out.println(enemy);
         matchId = Integer.parseInt(matchInfo[2]);
 
         char card = ttt.acceptRequest(matchId);
 
         // setting the player card
-        System.out.println(card);
         if(Character.compare(card, 'X') == 0){
             this.myCard = 0;
         }
@@ -89,15 +85,11 @@ public class Game {
 
         multiPlayer=2;
         iRequest = false;
-        System.out.println("\nEnimy chosen: "+matchInfo[0]+"\n");
-        System.out.println("Board: "+userBoardReference);
-        System.out.println("Match: "+matchId);
     }
     // to get all the request the user have
     public boolean getRequest() throws RemoteException{
         
         String requests = ttt.getRequests(userId);
-        System.out.println(requests);
         String allRequest[] = requests.split("\n");
         
         if (!requests.equals("")){
@@ -125,7 +117,6 @@ public class Game {
             }while(choice< 0 || choice > nrActiveUsers);
             matchInfo = allRequest[choice-1].split(" ");// to take the enimy chosen.
             userBoardReference = Integer.parseInt(matchInfo[1]);
-            System.out.println(allRequest[choice-1]);
             matchId = Integer.parseInt(matchInfo[2]);
 
             char card = ttt.acceptRequest( matchId);
@@ -236,7 +227,6 @@ public class Game {
     public int addUser(String user, String passwd) throws RemoteException{
         userId = ttt.addUser(user, passwd);
         userBoardReference = ttt.getUserValue(userId, "boardReference");
-        System.out.println(userId+" "+userBoardReference);
         return userId;
     }
 

@@ -21,19 +21,49 @@ public class Match extends javax.swing.JFrame {
 
 
     public class WaitPlay extends Thread {
-        Game game;
+        Game game_1;
         int play=-1;
         public WaitPlay(Game game){
-            this.game = game;
+            this.game_1 = game;
         }
         public void runWait() throws RemoteException, InterruptedException {
             do{
-                this.play = this.game.getOpponentPlay();
+                this.play = this.game_1.getOpponentPlay();
                 //System.out.println("[PLAY] waiting: "+this.play);
             }while(this.play <= 0);
-            int store = play;
-            this.play = -1;
-            opponentPlay(store);
+            switch(play) {
+                case 1:
+                    Button1MouseClicked(null);
+                    break;
+                case 2:
+                    Button2MouseClicked(null);
+                    break;
+                case 3:
+                    Button3MouseClicked(null);
+                    break;
+                case 4:
+                    Button4MouseClicked(null);
+                    break;
+                case 5:
+                    Button5MouseClicked(null);
+                    break;
+                case 6:
+                    Button6MouseClicked(null);
+                    break;
+                case 7:
+                    Button7MouseClicked(null);
+                    break;
+                case 8:
+                    Button8MouseClicked(null);
+                    break;
+                case 9:
+                    Button9MouseClicked(null);
+                    break;
+            }
+            opponentPlay(this.play);
+            System.out.println("Opponent Play: "+this.play);
+            game.setOpponentPlayToDefault();
+            verifyNext();
         }
         @Override
         public void run() {
@@ -419,6 +449,7 @@ public class Match extends javax.swing.JFrame {
 
     private void verifyNext() throws  RemoteException{
         this.game.setPlayer();
+        this.setCardImageName();
         this.setIsMe();
         if(!this.isMe && !this.weHaveAWinner())
             matchControl();
@@ -714,8 +745,6 @@ public class Match extends javax.swing.JFrame {
                 Thread t1 = new Thread(wait);
                 t1.start();
         }
-        System.out.println(this.isMe);
-
     }
 
     public void startMatch(Game game)  {
