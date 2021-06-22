@@ -44,6 +44,7 @@ public class Match extends javax.swing.JFrame {
             }
         }
     }
+
     /**
      * Creates new form Match
      */
@@ -54,6 +55,7 @@ public class Match extends javax.swing.JFrame {
         this.verifyNext();
         this.setLocationRelativeTo(null);
     }
+
     public void setIsMe() throws RemoteException{
         if(this.game.getMyCard()==this.game.getPlayer()) {
             this.isMe = true;
@@ -471,8 +473,7 @@ public class Match extends javax.swing.JFrame {
                 if(this.game.getMultiPlayer()==2){
                     this.game.makeMyPlay(1);
                 }
-                if(this.game.getMultiPlayer()==1)
-                    this.verifyNext();
+                this.verifyNext();
         }
     }
 
@@ -677,7 +678,6 @@ public class Match extends javax.swing.JFrame {
         System.out.println("Opponent Play: "+play);
         if(this.game.getMultiPlayer() == 2) {
             this.game.setOpponentPlayToDefault();
-            this.verifyNext();
         }
         this.isOpponent = true;
     }
