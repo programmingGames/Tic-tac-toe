@@ -13,11 +13,13 @@ import java.rmi.RemoteException;
 public class CardNotification extends javax.swing.JFrame {
     Game game;
     String card;
+    String opponent;
     /**
      * Creates new form CardNotification
      */
-    public CardNotification(Game game) {
+    public CardNotification(Game game,String opponent) {
         this.game = game;
+        this.opponent = opponent;
         this.getMyCard();
         initComponents();
         this.setLocationRelativeTo(null);
@@ -229,7 +231,7 @@ public class CardNotification extends javax.swing.JFrame {
     private void ContinueMouseClicked(java.awt.event.MouseEvent evt) throws RemoteException {
         // TODO add your handling code here:
         this.game.setMultiPlayer(2);
-        Match mth = new Match(this.game);
+        Match mth = new Match(this.game, this.opponent);
         mth.setVisible(true);
         mth.pack();
         mth.setLocationRelativeTo(null);
@@ -239,46 +241,12 @@ public class CardNotification extends javax.swing.JFrame {
 
     private void ContinueActionPerformed(java.awt.event.ActionEvent evt) throws RemoteException{
         // TODO add your handling code here:
-        Match mth = new Match(this.game);
+        Match mth = new Match(this.game, "");
         mth.setVisible(true);
         mth.pack();
         mth.setLocationRelativeTo(null);
         mth.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
-    }
-
-
-    public void main(Game game) {
-        this.game = game;
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CardNotification.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CardNotification.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CardNotification.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CardNotification.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CardNotification(game).setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify

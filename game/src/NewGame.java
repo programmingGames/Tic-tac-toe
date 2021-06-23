@@ -133,7 +133,11 @@ public class NewGame extends javax.swing.JFrame {
         });
         quit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quitActionPerformed(evt);
+                try {
+                    quitActionPerformed(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -238,7 +242,7 @@ public class NewGame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
-    private void quitActionPerformed(java.awt.event.ActionEvent evt) {
+    private void quitActionPerformed(java.awt.event.ActionEvent evt) throws RemoteException {
         // TODO add your handling code here:
         PlayGame qg = new PlayGame(this.game);
         qg.setVisible(true);

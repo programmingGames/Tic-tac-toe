@@ -83,7 +83,11 @@ public class Lose extends javax.swing.JFrame {
         });
         quit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quitActionPerformed(evt);
+                try {
+                    quitActionPerformed(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -190,8 +194,9 @@ public class Lose extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_quitMouseClicked
 
-    private void quitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitActionPerformed
+    private void quitActionPerformed(java.awt.event.ActionEvent evt) throws RemoteException {//GEN-FIRST:event_quitActionPerformed
         // TODO add your handling code here:
+        this.game.restartBoard();
         PlayGame qg = new PlayGame(this.game);
         qg.setVisible(true);
         qg.pack();
@@ -213,6 +218,7 @@ public class Lose extends javax.swing.JFrame {
             this.dispose();
         }
         else if (this.goTo.equals("New Game")){
+            this.game.restartBoard();
             NewGame cdc = new NewGame(this.game);
             cdc.setVisible(true);
             cdc.pack();

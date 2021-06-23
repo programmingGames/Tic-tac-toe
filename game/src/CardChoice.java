@@ -224,7 +224,7 @@ public class CardChoice extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.game.setcardChoice(1);
         if(this.goTo.equals("Match")){
-            Match mth = new Match(this.game);
+            Match mth = new Match(this.game, "Computer");
             mth.setVisible(true);
             mth.pack();
             mth.setLocationRelativeTo(null);
@@ -245,7 +245,7 @@ public class CardChoice extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.game.setcardChoice(0);
         if(this.goTo.equals("Match")){
-            Match mth = new Match(this.game);
+            Match mth = new Match(this.game, "Computer");
             mth.setVisible(true);
             mth.pack();
             mth.setLocationRelativeTo(null);

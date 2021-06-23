@@ -144,8 +144,8 @@ public class Game {
     }
 
     // to get all User info
-    public String getAllUserInfo(int id) throws RemoteException{
-        return ttt.getUserInfo(id);
+    public String getAllUserInfo() throws RemoteException{
+        return ttt.getUserInfo(this.userId);
     }
 
     public int getMatchId(){

@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 import javax.swing.JFrame;
+import java.rmi.RemoteException;
+
 /**
  *
  * @author rafael
@@ -107,7 +109,11 @@ public class QuitGame extends javax.swing.JFrame {
         });
         quitNO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quitNOActionPerformed(evt);
+                try {
+                    quitNOActionPerformed(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -194,7 +200,7 @@ public class QuitGame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
 
-    private void quitNOActionPerformed(java.awt.event.ActionEvent evt) {
+    private void quitNOActionPerformed(java.awt.event.ActionEvent evt) throws RemoteException {
         // TODO add your handling code here:
         if(this.returnTO.equals("Main Menu")){
             MainMenu mm = new MainMenu(this.game);
@@ -212,6 +218,15 @@ public class QuitGame extends javax.swing.JFrame {
             mm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.dispose();
         }
+        else if (this.returnTO.equals("Request")){
+            Request mm = new Request(this.game);
+            mm.setVisible(true);
+            mm.pack();
+            mm.setLocationRelativeTo(null);
+            mm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();
+        }
+
 
     }
 

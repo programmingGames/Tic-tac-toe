@@ -14,10 +14,11 @@ import java.rmi.RemoteException;
 public class Match extends javax.swing.JFrame {
     private Game game;
     private int winner;
-    private boolean isMe, isWaiting = false;
+    private boolean isMe, isWaiting = false, weHaveWinner=false;
     private  int counter =1;
     private boolean[] buttonPressed = {false, false, false, false, false, false, false, false, false};
     private String card;
+    String[] playerNames;
     Thread t1;
 
     public class WaitPlay extends Thread {
@@ -54,8 +55,9 @@ public class Match extends javax.swing.JFrame {
     /**
      * Creates new form Match
      */
-    public Match(Game game) throws RemoteException{
+    public Match(Game game, String opponentName) throws RemoteException{
         this.game = game;
+        this.playerNames = new String[]{this.game.getAllUserInfo().split(" ")[0], opponentName};
         this.setCardImageName();
         initComponents();
         this.verifyNext();
@@ -288,7 +290,7 @@ public class Match extends javax.swing.JFrame {
         player1.setBackground(new java.awt.Color(255, 255, 255));
         player1.setFont(new java.awt.Font("Ubuntu", 1, 26)); // NOI18N
         player1.setForeground(new java.awt.Color(255, 255, 255));
-        player1.setText("Player1");
+        player1.setText(this.playerNames[0]);
         player1.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 player1AncestorAdded(evt);
@@ -302,7 +304,7 @@ public class Match extends javax.swing.JFrame {
         Player2.setBackground(new java.awt.Color(255, 255, 255));
         Player2.setFont(new java.awt.Font("Ubuntu", 1, 26)); // NOI18N
         Player2.setForeground(new java.awt.Color(255, 255, 255));
-        Player2.setText("Player2");
+        Player2.setText(this.playerNames[1]);
         Player2.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 Player2AncestorAdded(evt);
@@ -439,7 +441,7 @@ public class Match extends javax.swing.JFrame {
                 goTo = "New Game";
             }
 
-            if(this.winner == 2){
+            if(this.winner == 2 && !this.weHaveWinner){
                 this.game.setCounterTie();
                 Tie tie = new Tie(this.game, goTo);
                 tie.setVisible(true);
@@ -447,8 +449,9 @@ public class Match extends javax.swing.JFrame {
                 tie.setLocationRelativeTo(null);
                 tie.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 this.dispose();
+                this.weHaveWinner = true;
             }
-            else if(this.winner == this.game.getMyCard()){
+            else if(this.winner == this.game.getMyCard() && !this.weHaveWinner){
                 this.game.setCounterWin();
                 Winner win = new Winner(this.game, goTo);
                 win.setVisible(true);
@@ -456,15 +459,19 @@ public class Match extends javax.swing.JFrame {
                 win.setLocationRelativeTo(null);
                 win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 this.dispose();
+                this.weHaveWinner = true;
             }
             else{
-                this.game.setCounterLose();
-                Lose ls = new Lose(this.game, goTo);
-                ls.setVisible(true);
-                ls.pack();
-                ls.setLocationRelativeTo(null);
-                ls.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                this.dispose();
+                if(!this.weHaveWinner){
+                    this.game.setCounterLose();
+                    Lose ls = new Lose(this.game, goTo);
+                    ls.setVisible(true);
+                    ls.pack();
+                    ls.setLocationRelativeTo(null);
+                    ls.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    this.dispose();
+                    this.weHaveWinner = true;
+                }
             }
         }
     }
@@ -746,44 +753,6 @@ public class Match extends javax.swing.JFrame {
                 this.t1.start();
                 this.isWaiting = true;
         }
-    }
-
-    public void startMatch(Game game)  {
-        this.game = game;
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Match.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Match.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Match.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Match.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    new Match(game).setVisible(true);
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 
     // Variables declaration - do not modify

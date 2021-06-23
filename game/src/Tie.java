@@ -90,7 +90,11 @@ public class Tie extends javax.swing.JFrame {
         quit.setText("Main Menu");
         quit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                quitMouseClicked(evt);
+                try {
+                    quitMouseClicked(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
         quit.addActionListener(new java.awt.event.ActionListener() {
@@ -187,8 +191,9 @@ public class Tie extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void quitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_quitMouseClicked
+    private void quitMouseClicked(java.awt.event.MouseEvent evt) throws RemoteException {//GEN-FIRST:event_quitMouseClicked
         // TODO add your handling code here:
+        this.game.restartBoard();
         PlayGame qg = new PlayGame(this.game);
         qg.setVisible(true);
         qg.pack();
@@ -213,6 +218,7 @@ public class Tie extends javax.swing.JFrame {
             this.dispose();
         }
         else if (this.goTo.equals("New Game")){
+            this.game.restartBoard();
             NewGame cdc = new NewGame(this.game);
             cdc.setVisible(true);
             cdc.pack();

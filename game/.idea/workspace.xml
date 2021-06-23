@@ -2,7 +2,37 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97fb8d8d-2ef5-4103-ade2-01af40e430e6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../server/.idea/libraries/json_simple_1_13.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/Friends$7.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/Friends.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Friends.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/QuitGame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/QuitGame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/QuitGame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/QuitGame$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/QuitGame$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/QuitGame$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/QuitGame$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/QuitGame$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/QuitGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/QuitGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/Request$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Request$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/Request$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Request$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/Request$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Request$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/Request$7.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/game/Request.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game/Request.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CardChoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CardChoice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CardNotification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CardNotification.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Friends.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Friends.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Lose.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lose.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Match.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NewGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NewGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PlayGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PlayGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/QuitGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/QuitGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Request.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WaitingOpponnent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/WaitingOpponnent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Winner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Winner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cross/circle -Big.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cross/cross -Big.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cross/cross.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/cross/cross.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../server/server.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/../server/users.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -108,5 +138,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

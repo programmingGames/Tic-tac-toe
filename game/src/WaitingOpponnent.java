@@ -12,6 +12,7 @@ import java.rmi.RemoteException;
  */
 public class WaitingOpponnent extends javax.swing.JFrame  {
     Game game;
+    String op;
     boolean quitPress;
     public static boolean response;
 
@@ -46,8 +47,9 @@ public class WaitingOpponnent extends javax.swing.JFrame  {
     /**
      * Creates new form WaitingOpponnent
      */
-    public WaitingOpponnent(Game game) throws RemoteException, InterruptedException {
+    public WaitingOpponnent(Game game, String opponent) throws RemoteException, InterruptedException {
         this.game = game;
+        this.op = opponent;
         this.initComponents();
         System.out.println("[ADDRESS] Waiting Opponent");
         this.setLocationRelativeTo(null);
@@ -56,7 +58,7 @@ public class WaitingOpponnent extends javax.swing.JFrame  {
     }
 
     public void goToMatch() throws RemoteException {
-        Match mth = new Match(this.game);
+        Match mth = new Match(this.game, this.op);
         mth.setVisible(true);
         mth.pack();
         mth.setLocationRelativeTo(null);
@@ -244,43 +246,6 @@ public class WaitingOpponnent extends javax.swing.JFrame  {
         Wait waitPlayer = new Wait(this.game);
         Thread t1 = new Thread(waitPlayer);
         t1.start();
-    }
-    public void main(Game game) throws RemoteException {
-        this.game = game;
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(WaitingOpponnent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(WaitingOpponnent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(WaitingOpponnent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(WaitingOpponnent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new WaitingOpponnent(game).setVisible(true);
-                } catch (RemoteException | InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        // this.waitOpponent();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
