@@ -263,7 +263,7 @@ public class Friends extends javax.swing.JFrame {
             this.game.setEnimyInfo(enemyInfo);
             this.game.sendMatchRequest();
             if(this.game.getMatchId() != -1){
-                WaitingOpponnent wot = new WaitingOpponnent(this.game,enemyInfo[0] );
+                WaitingOpponnent wot = new WaitingOpponnent(this.game,enemyInfo[1] );
                 wot.setVisible(true);
                 wot.pack();
                 wot.setLocationRelativeTo(null);

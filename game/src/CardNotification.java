@@ -241,7 +241,7 @@ public class CardNotification extends javax.swing.JFrame {
 
     private void ContinueActionPerformed(java.awt.event.ActionEvent evt) throws RemoteException{
         // TODO add your handling code here:
-        Match mth = new Match(this.game, "");
+        Match mth = new Match(this.game, this.opponent);
         mth.setVisible(true);
         mth.pack();
         mth.setLocationRelativeTo(null);
