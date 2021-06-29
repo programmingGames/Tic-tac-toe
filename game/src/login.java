@@ -18,7 +18,6 @@ public class login extends javax.swing.JFrame {
      */
     public login(Game game) {
         this.game = game;
-        System.out.println("[ADDRESS] Login");
         initComponents();
         this.setLocationRelativeTo(null); //coloca a janela no meio da tela
     }

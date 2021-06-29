@@ -18,7 +18,6 @@ public class NewGame extends javax.swing.JFrame {
      */
     public NewGame(Game game) {
         this.game = game;
-        System.out.println("[ADDRESS] New Game");
         initComponents();
         this.setLocationRelativeTo(null);
     }

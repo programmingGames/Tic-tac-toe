@@ -51,7 +51,6 @@ public class WaitingOpponnent extends javax.swing.JFrame  {
         this.game = game;
         this.op = opponent;
         this.initComponents();
-        System.out.println("[ADDRESS] Waiting Opponent");
         this.setLocationRelativeTo(null);
         this.dispose();
         this.control();

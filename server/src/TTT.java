@@ -460,6 +460,7 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
                     userObj = (JSONObject) userObjs ;
                     int board = addingBoard();
                     ((JSONObject) userObjs).put("boardReference", board);
+                    ((JSONObject) userObjs).put("state", 0);
                     userList.add(userObj);
                     this.userId ++;
                 }
@@ -473,7 +474,6 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
         }catch (Exception e){
             System.out.println(e);
         }
-        System.out.println("   [REFRESH] All user data set up to date.");
     }
 
         // to update user info

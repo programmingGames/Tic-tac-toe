@@ -18,7 +18,7 @@ public class ComputerLevel extends javax.swing.JFrame {
     public ComputerLevel(Game game) throws RemoteException {
         this.game = game;
         this.game.setMyBoard();
-        System.out.println("[ADDRESS] Computer Level");
+
         initComponents();
         this.setLocationRelativeTo(null);
     }

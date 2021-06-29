@@ -11,7 +11,7 @@ public class TTTServer {
         try {
             TTTService tttGame =  new TTT();
             System.out.println("After create");
-            //tttGame.initializingApp();
+            tttGame.initializingApp();
             Registry reg = LocateRegistry.createRegistry(registryPort);
             System.out.println("Local Registry OK");
             reg.rebind("TTTService", tttGame);
@@ -22,5 +22,6 @@ public class TTTServer {
         }
 
         System.out.println("Activity Details: \n");
+        System.out.println("   [REFRESH] All user data set up to date.");
     }
 }

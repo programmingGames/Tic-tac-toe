@@ -24,7 +24,6 @@ public class Friends extends javax.swing.JFrame {
     public Friends(Game game) throws RemoteException {
         this.game = game;
         this.createAllButtons();
-        System.out.println("[ADDRESS] Friends");
         initComponents();
         this.setLocationRelativeTo(null);
     }

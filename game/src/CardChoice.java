@@ -18,7 +18,7 @@ public class CardChoice extends javax.swing.JFrame {
     public CardChoice(Game game, String go) {
         this.game = game;
         this.goTo = go;
-        System.out.println("[ADDRESS] Card Choice");
+
         initComponents();
         this.setLocationRelativeTo(null);
     }

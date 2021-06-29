@@ -18,7 +18,6 @@ public class RegisterFrom extends javax.swing.JFrame {
      */
     public RegisterFrom(Game game) {
         this.game = game;
-        System.out.println("[ADDRESS] Register Form");
         initComponents();
         this.setLocationRelativeTo(null);
     }
