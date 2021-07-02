@@ -4,7 +4,7 @@ import java.rmi.registry.Registry;
 
 //
 public class TTTServer {
-    public static void main(String args[]) throws IOException {
+    public static void main(String[] args) throws IOException {
         int registryPort = 3001;
         System.out.println(ConsoleColors.CYAN_BOLD_BRIGHT+"Server initiation: ");
         System.out.print(ConsoleColors.WHITE_BOLD_BRIGHT+"   Main");
