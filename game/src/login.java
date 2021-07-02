@@ -97,7 +97,7 @@ public class login extends javax.swing.JFrame {
         QUITGAME.setBackground(new java.awt.Color(255, 10, 10));
         QUITGAME.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         QUITGAME.setForeground(new java.awt.Color(0, 0, 0));
-        QUITGAME.setText("Back");
+        QUITGAME.setText("BACK");
         QUITGAME.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 QUITGAMEMouseClicked(evt);
@@ -261,12 +261,12 @@ public class login extends javax.swing.JFrame {
 
     private void LabelRegisterMouseClicked(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-       /* RegisterFrom rgf = new RegisterFrom();
+       RegisterFrom rgf = new RegisterFrom(this.game);
         rgf.setVisible(true);
         rgf.pack();
         rgf.setLocationRelativeTo(null);
         rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();*/
+        this.dispose();
 
     }
 

@@ -12,6 +12,8 @@ public interface TTTService extends Remote {
     boolean updateUser(int id,String campo, int value) throws RemoteException;
     String allActiveUser(int id) throws RemoteException;
     void initializingApp() throws  RemoteException;
+    void newAppStart() throws  RemoteException;
+    void logOutNotification(int id) throws  RemoteException;
     char[] getBoard(int boardReference) throws  RemoteException;
     int createRequest(int idClient, int idOpponent, char myCard) throws RemoteException;
     int getMatchBoard(int matchId) throws  RemoteException;

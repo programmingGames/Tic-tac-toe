@@ -94,7 +94,11 @@ public class QuitGame extends javax.swing.JFrame {
         });
         QUITYES.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                QUITYESActionPerformed(evt);
+                try {
+                    QUITYESActionPerformed(evt);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -191,8 +195,9 @@ public class QuitGame extends javax.swing.JFrame {
 
     }
 
-    private void QUITYESActionPerformed(java.awt.event.ActionEvent evt) {
+    private void QUITYESActionPerformed(java.awt.event.ActionEvent evt) throws RemoteException {
         // TODO add your handling code here:
+        this.game.logOut();
         System.exit(0);
     }
 

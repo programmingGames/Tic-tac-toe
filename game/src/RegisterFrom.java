@@ -86,7 +86,7 @@ public class RegisterFrom extends javax.swing.JFrame {
         QUITGAME.setBackground(new java.awt.Color(255, 10, 10));
         QUITGAME.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         QUITGAME.setForeground(new java.awt.Color(0, 0, 0));
-        QUITGAME.setText("Back");
+        QUITGAME.setText("BACK");
         QUITGAME.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 QUITGAMEMouseClicked(evt);
@@ -251,7 +251,7 @@ public class RegisterFrom extends javax.swing.JFrame {
             passWd2=passWd2+pass2[i];
         }
 
-        if(passWd1.equals(passWd2)){
+        if(passWd1.equals(passWd2) && !passWd1.equals("") && !passWd2.equals("") && !jTextField1.getText().equals("")){
             id = this.game.addUser(jTextField1.getText(),passWd1);
             if (id!=-1){
                 PlayGame home = new PlayGame(this.game);

@@ -17,6 +17,7 @@ public class Game {
                         //  and myCard = 2 means that the player will use "O"
     public Game(TTTService _ttt) throws RemoteException {
         ttt = _ttt;
+        ttt.newAppStart();
     }
 
     public void setMyBoard() throws RemoteException{
@@ -104,6 +105,11 @@ public class Game {
         userId = ttt.addUser(user, passwd);
         userBoardReference = ttt.getUserValue(userId, "boardReference");
         return userId;
+    }
+
+    public void logOut() throws RemoteException {
+        ttt.updateUser(this.userId, "state", 0);
+        ttt.logOutNotification(this.userId);
     }
 
     // method to allow the user to chose what player he is.

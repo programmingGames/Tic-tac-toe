@@ -102,6 +102,9 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
         public int checkWinner(int boardReference) {
             int i;
             /* Check for a winning line - diagonals first */
+            if(boardReference < 0 ){
+                return 0;
+            }
             if((allBoard.get(boardReference - 1).board[0][0] == allBoard.get(boardReference - 1).board[1][1] &&
                     allBoard.get(boardReference - 1).board[0][0] == allBoard.get(boardReference - 1).board[2][2]) ||
                     (allBoard.get(boardReference - 1).board[0][2] == allBoard.get(boardReference - 1).board[1][1] &&
@@ -141,7 +144,8 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
                 {'4','5','6'}, /* used to select a vacant square for */
                 {'7','8','9'} /* a turn. */
            };
-           System.out.println("   [BOARD_RESET] User: "+getUserInfo(id).split(" ")[0]+"; Id: "+id+"; Board Reference: "+boardReference);
+           System.out.print(ConsoleColors.BLUE_BOLD_BRIGHT+"   [BOARD_RESET] ");
+           System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT+"User: "+getUserInfo(id).split(" ")[0]+"; Id: "+id+"; Board Reference: "+boardReference);
            allBoard.get(boardReference - 1).board = boardReset;
             allBoard.get(boardReference - 1).nextPlayer = 0;
             allBoard.get(boardReference - 1).numPlays = 0;
@@ -224,7 +228,8 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
                 matches.add(match);
                 requestId = idMatch;
                 idMatch++;
-                System.out.println("   [MATCH_REQUEST] User: "+getUserInfo(idClient).split(" ")[0]+" challenge User: "+getUserInfo(idOpponent).split(" ")[0]+" to play"+
+                System.out.print(ConsoleColors.PURPLE_BOLD_BRIGHT+"   [MATCH_REQUEST] ");
+                System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT+"User: "+getUserInfo(idClient).split(" ")[0]+" challenge User: "+getUserInfo(idOpponent).split(" ")[0]+" to play"+
                         "; matchId: "+requestId+"; boardId: "+board);
             }
             return requestId;
@@ -243,12 +248,15 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
 
         // Method to end the match
         public void endMatch(int idMatch, int id) {
+            String name = "";
             for (Match match : matches) {
                 if (match.getIdMatch() == idMatch){
                     match.setMatchIsFinished(true);
-                    System.out.println("   [MATCH_END] User: " + getUserInfo(id).split(" ")[0] + " end multiplayer match");
+                    name = getUserInfo(id).split(" ")[0];
                 }
             }
+            System.out.print(ConsoleColors.PURPLE_BOLD_BRIGHT+"   [MATCH_END] ");
+            System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT+"User: " + name + " end multiplayer match");
         }
 
     // Method to end the match
@@ -271,9 +279,6 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
                     if(!inList)
                         index++;
                 }
-                //System.out.println(index);
-                if (inList)
-                    System.out.println("   [MATCH_END] User: " + getUserInfo(id).split(" ")[0] + " end multiplayer match");
                 matches.remove(index);
             }
         }
@@ -293,7 +298,8 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
             for (Match match: matches){
                 if(match.getIdMatch()==idMatch){
                     match.setAccepted(true);
-                    System.out.println("   [MATCH_ACCEPT] User: "+getUserInfo(match.getIdOpponent()).split(" ")[0]+
+                    System.out.print(ConsoleColors.PURPLE_BOLD_BRIGHT+"   [MATCH_ACCEPT] ");
+                    System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT+"User: "+getUserInfo(match.getIdOpponent()).split(" ")[0]+
                             " has accepted to play whit User: "+getUserInfo(match.getIdClient()).split(" ")[0]+
                             "; boardId: "+match.getIdBoardReference()
                     );
@@ -328,8 +334,9 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
                 for(Object user : usersList){
                     userObj = (JSONObject) user ;
 
-                    if(userName.equals(userObj.get("nome"))&&userPasswd.equals(userObj.get("passwd"))){
-                        System.out.println("   [LOGIN] User: "+userObj.get("nome")+"; Id: "+Integer.parseInt(userObj.get("id").toString()));
+                    if(userName.equals(userObj.get("nome")) && userPasswd.equals(userObj.get("passwd")) && Integer.parseInt(userObj.get("state").toString())==0){
+                        System.out.print(ConsoleColors.GREEN_BOLD_BRIGHT+"   [LOGIN] ");
+                        System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT+"User: "+userObj.get("nome")+"; Id: "+Integer.parseInt(userObj.get("id").toString()));
                         updateUser(Integer.parseInt(userObj.get("id").toString()), "state", 1);
                         return Integer.parseInt(userObj.get("id").toString());
                     }
@@ -361,10 +368,6 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
             return "";
         }
 
-        // Method to get a random number in a interval
-        public int getRandomNumber(int min, int max) throws RemoteException{
-            return (int) ((Math.random() * (max - min)) + min);
-        }
 
     // Method that will check if the user already exist
     public boolean thereIsAEqualUser(String username){
@@ -409,8 +412,9 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
 
             int board = addingBoard();
             // adding the new user
+
             JSONObject newUser = new JSONObject();
-            newUser.put("id", this.userId);
+            newUser.put("id", this.userId+1);
             newUser.put("nome", user);
             newUser.put("passwd", passwd);
             newUser.put("nrVitorias", 0);
@@ -424,10 +428,11 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
             userList.add(newUser);
             try(FileWriter file = new FileWriter("users.json")){
                 file.write(userList.toString());
-                System.out.println("   [SIGN_UP] User: "+user+"; Id:"+(this.userId-1));
+                System.out.print(ConsoleColors.GREEN_BOLD_BRIGHT+"   [SIGN_UP] ");
+                System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT+"User: "+user+"; Id:"+(this.userId));
                 file.flush();
                 this.userId++;
-                return userId-1;
+                return userId;
             }catch (Exception e){
                 System.out.println(e);
                 return -1;
@@ -502,6 +507,9 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
         try(FileWriter file = new FileWriter("users.json")){
             file.write(userList.toString());
             file.flush();
+            System.out.print(ConsoleColors.BLUE_BOLD_BRIGHT+"   [UPDATE] ");
+            System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT+"User "+this.getUserInfo(id).split(" ")[0]+
+                    "; Id: "+id+" has updated his data.");
             return true;
         }catch (Exception e){
             System.out.println(e);
@@ -561,5 +569,14 @@ public class TTT extends UnicastRemoteObject implements TTTinterface, TTTService
         char m4 = auxiliarBoard[1][0]; char m5 = auxiliarBoard[1][1]; char m6 = auxiliarBoard[1][2];
         char m7 = auxiliarBoard[2][0]; char m8 = auxiliarBoard[2][1]; char m9 = auxiliarBoard[2][2];
         return new char[]{m1, m2, m3, m4, m5, m6, m7, m8, m9};
+    }
+
+    public void newAppStart() {
+        System.out.print(ConsoleColors.BLUE_BOLD_BRIGHT+"   [NEW_START] ");
+        System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT+"A new instance off the app was been open.");
+    }
+    public void logOutNotification(int id){
+        System.out.print(ConsoleColors.GREEN_BOLD_BRIGHT+"   [LOG_OUT] ");
+        System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT+"User: "+this.getUserInfo(id).split(" ")[0]+"; Id: "+id);
     }
 }
